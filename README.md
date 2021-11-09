@@ -10,6 +10,7 @@ Výukový **N**emocenský **I**nformační **S**ystém pro Krajskou zdravotní a
     + [Back-end](#back-end)
 * [Setup](#setup)
     + [Core](#core)
+    * [Web API](#web-api)
 
 ---
 
@@ -45,3 +46,17 @@ Výukový **N**emocenský **I**nformační **S**ystém pro Krajskou zdravotní a
    # Preview database schema in SQLite
    sqlite> .open nis_development.db
    ```
+
+### Web API
+
+1. Listen for changes on https://localhost:5001
+
+    ```bash
+    Nis.Api> dotnet watch run
+    ```
+
+2. Inspect Swagger Open API Specification
+
+    ```bash
+    https://localhost:5001/swagger
+    ```

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nis.Core", "src\Nis.Core\Ni
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{522C28AD-872E-47EB-B92A-EB2168B22D16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nis.Api", "src\Nis.Api\Nis.Api.csproj", "{5860B59C-4056-44B5-92CE-DC3BC88C555D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{15F85EBB-D152-4FFE-95DF-3968F1ADCA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15F85EBB-D152-4FFE-95DF-3968F1ADCA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15F85EBB-D152-4FFE-95DF-3968F1ADCA24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5860B59C-4056-44B5-92CE-DC3BC88C555D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5860B59C-4056-44B5-92CE-DC3BC88C555D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5860B59C-4056-44B5-92CE-DC3BC88C555D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5860B59C-4056-44B5-92CE-DC3BC88C555D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -26,5 +32,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{15F85EBB-D152-4FFE-95DF-3968F1ADCA24} = {522C28AD-872E-47EB-B92A-EB2168B22D16}
+		{5860B59C-4056-44B5-92CE-DC3BC88C555D} = {522C28AD-872E-47EB-B92A-EB2168B22D16}
 	EndGlobalSection
 EndGlobal
