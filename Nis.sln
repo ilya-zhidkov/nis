@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nis.Core", "src\Nis.Core\Nis.Core.csproj", "{15F85EBB-D152-4FFE-95DF-3968F1ADCA24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nis.Core", "src\Nis.Core\Nis.Core.csproj", "{15F85EBB-D152-4FFE-95DF-3968F1ADCA24}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{522C28AD-872E-47EB-B92A-EB2168B22D16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nis.Api", "src\Nis.Api\Nis.Api.csproj", "{5860B59C-4056-44B5-92CE-DC3BC88C555D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nis.Api", "src\Nis.Api\Nis.Api.csproj", "{5860B59C-4056-44B5-92CE-DC3BC88C555D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nis.WpfApp", "src\Nis.WpfApp\Nis.WpfApp.csproj", "{7CC1DAC1-0B35-40C8-BA6B-8AA441868F46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,15 +25,20 @@ Global
 		{5860B59C-4056-44B5-92CE-DC3BC88C555D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5860B59C-4056-44B5-92CE-DC3BC88C555D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5860B59C-4056-44B5-92CE-DC3BC88C555D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CC1DAC1-0B35-40C8-BA6B-8AA441868F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CC1DAC1-0B35-40C8-BA6B-8AA441868F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CC1DAC1-0B35-40C8-BA6B-8AA441868F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CC1DAC1-0B35-40C8-BA6B-8AA441868F46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0664B8FF-50C0-4E4B-A69F-4177F256075F}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{15F85EBB-D152-4FFE-95DF-3968F1ADCA24} = {522C28AD-872E-47EB-B92A-EB2168B22D16}
 		{5860B59C-4056-44B5-92CE-DC3BC88C555D} = {522C28AD-872E-47EB-B92A-EB2168B22D16}
+		{7CC1DAC1-0B35-40C8-BA6B-8AA441868F46} = {522C28AD-872E-47EB-B92A-EB2168B22D16}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0664B8FF-50C0-4E4B-A69F-4177F256075F}
 	EndGlobalSection
 EndGlobal
