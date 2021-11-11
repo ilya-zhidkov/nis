@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using System.Linq;
+using Bogus.DataSets;
 using Nis.Core.Models;
 
 namespace Nis.Core.Factories
@@ -8,8 +9,10 @@ namespace Nis.Core.Factories
     {
         protected override Faker<Patient> Rules => Faker.Rules((faker, patient) =>
         {
-            patient.FirstName = faker.Name.FirstName();
-            patient.LastName = faker.Name.LastName();
+            var gender = faker.PickRandom<Name.Gender>();
+
+            patient.FirstName = faker.Name.FirstName(gender);
+            patient.LastName = faker.Name.LastName(gender);
         });
 
         public override Patient[] Create(short count = 1) => Enumerable
