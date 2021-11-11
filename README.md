@@ -1,6 +1,6 @@
 # NIS
 
-Výukový **N**emocenský **I**nformační **S**ystém pro Krajskou zdravotní a.s. v Ústí nad Labem.
+Výukový **N**emocniční **I**nformační **S**ystém pro fakultu zdravotnických studií v Ústí nad Labem.
 
 ---
 
@@ -13,6 +13,7 @@ Výukový **N**emocenský **I**nformační **S**ystém pro Krajskou zdravotní a
     + [Core](#core)
     + [Web API](#web-api)
     + [WPF](#wpf)
+    + [Tests](#tests)
 
 ---
 
@@ -71,3 +72,15 @@ Výukový **N**emocenský **I**nformační **S**ystém pro Krajskou zdravotní a
 
 1. Set **Nis.WpfApp** as a startup project (if not already).
 2. Press `F5` to run in debug mode or `Ctrl + F5` to start without debugging.
+
+### Tests
+
+   ```bash
+   # Switch to test environment
+   tests> setx ASPNETCORE_ENVIRONMENT "Test"
+   
+   # IMPORTANT! Reload the command-line window.
+   
+   # Check if the environment variable has been set.
+   tests> set ASPNETCORE_ENVIRONMENT
+   ```
