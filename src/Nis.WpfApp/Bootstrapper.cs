@@ -1,9 +1,12 @@
 ﻿using System;
-using System.Linq;
-using System.Windows;
 using Caliburn.Micro;
+using System.Windows;
+using Nis.Core.Extensions;
+using Nis.Core.Persistence;
+using Nis.WpfApp.Extensions;
 using Nis.WpfApp.ViewModels;
 using System.Collections.Generic;
+using Nis.Core.Persistence.Seeders;
 
 namespace Nis.WpfApp
 {
@@ -19,17 +22,11 @@ namespace Nis.WpfApp
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .AddViewModels()
+                .AddDatabase(DatabaseExtensions.ConnectionString);
 
-            GetType().Assembly.GetTypes()
-                .Where(type => type.IsClass)
-                .Where(type => type.Name.EndsWith("ViewModel"))
-                .ToList()
-                .ForEach(vm => _container.RegisterPerRequest(
-                    service: vm,
-                    key: vm.ToString(),
-                    implementation: vm
-                ));
+            SeedDatabase();
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e) => DisplayRootViewFor<ShellViewModel>();
@@ -39,5 +36,13 @@ namespace Nis.WpfApp
         protected override IEnumerable<object> GetAllInstances(Type service) => _container.GetAllInstances(service);
 
         protected override void BuildUp(object instance) => _container.BuildUp(instance);
+
+        private void SeedDatabase()
+        {
+            var context = _container.GetInstance<DataContext>();
+            context.Database.EnsureCreated();
+            new PatientSeeder().Seed(context);
+            context.SaveChanges();
+        }
     }
 }
