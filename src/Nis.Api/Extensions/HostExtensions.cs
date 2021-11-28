@@ -3,7 +3,6 @@ using Nis.Core.Persistence;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using Nis.Core.Persistence.Seeders;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Nis.Api.Extensions
@@ -18,7 +17,7 @@ namespace Nis.Api.Extensions
             try
             {
                 var context = services.GetRequiredService<DataContext>();
-                context.Database.Migrate();
+                context.Database.EnsureCreated();
                 new PatientSeeder().Seed(context);
                 context.SaveChanges();
             }

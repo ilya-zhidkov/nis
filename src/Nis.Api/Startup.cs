@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using Nis.Api.Extensions;
 using Nis.Core.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -19,14 +17,11 @@ namespace Nis.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .Configure<RouteOptions>(options => options.LowercaseUrls = true)
-                .ConnectToDatabase(
-                    $"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "nis_development.db")}");
-
             services.AddControllers();
 
             services
+                .Configure<RouteOptions>(options => options.LowercaseUrls = true)
+                .ConnectToDatabase(DatabaseExtensions.ConnectionString)
                 .AddSwaggerServices(_configuration);
         }
 
@@ -34,7 +29,6 @@ namespace Nis.Api
         {
             if (env.IsDevelopment())
                 app
-                    .UseStaticFiles()
                     .UseDeveloperExceptionPage()
                     .UseSwaggerDocumentation();
 
