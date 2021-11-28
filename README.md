@@ -38,7 +38,8 @@ Výukový **N**emocniční **I**nformační **S**ystém pro fakultu zdravotnick�
 1. Apply existing database migrations
 
     ```bash
-    Nis.Core> dotnet ef database update
+    # Default project: src\Nis.Core
+    PM> Update-Database
     ```
 
 2. Find database on disk
