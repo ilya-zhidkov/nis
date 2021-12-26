@@ -6,6 +6,7 @@ using Nis.Core.Persistence;
 using Nis.WpfApp.Extensions;
 using Nis.WpfApp.ViewModels;
 using System.Collections.Generic;
+using Nis.Application;
 using Nis.Core.Persistence.Seeders;
 
 namespace Nis.WpfApp
@@ -19,8 +20,9 @@ namespace Nis.WpfApp
         protected override void Configure()
         {
             _container.Instance(_container);
-
+            
             _container
+                .AddMappings()
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
                 .AddViewModels()

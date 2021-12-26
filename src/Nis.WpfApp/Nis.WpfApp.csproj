@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
     </Reference>
@@ -216,6 +219,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Nis.Application\Nis.Application.csproj">
+      <Project>{5435cad1-cbfc-4071-b954-8ffc5870046a}</Project>
+      <Name>Nis.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nis.Core\Nis.Core.csproj">
       <Project>{15F85EBB-D152-4FFE-95DF-3968F1ADCA24}</Project>
       <Name>Nis.Core</Name>

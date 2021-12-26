@@ -13,7 +13,14 @@
         <ListBox x:Name="Patients">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding FirstName}" />
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding  StringFormat="{}{0} {1}">
+                                <Binding Path="FirstName" />
+                                <Binding Path="LastName" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
