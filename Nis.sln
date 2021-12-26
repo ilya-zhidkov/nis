@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31829.152
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nis.Core", "src\Nis.Core\Nis.Core.csproj", "{15F85EBB-D152-4FFE-95DF-3968F1ADCA24}"
 EndProject
@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nis.WpfApp", "src\Nis.WpfAp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3B12B006-56B0-418D-A2C8-DC8A90CBB0BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nis.Core.UnitTests", "tests\Nis.Core.UnitTests\Nis.Core.UnitTests.csproj", "{0C589E98-3B36-4D83-A14B-4A079256940E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nis.Core.UnitTests", "tests\Nis.Core.UnitTests\Nis.Core.UnitTests.csproj", "{0C589E98-3B36-4D83-A14B-4A079256940E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nis.Application", "src\Nis.Application\Nis.Application.csproj", "{212EDE85-7D81-4D96-92FE-47910F505ADD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{0C589E98-3B36-4D83-A14B-4A079256940E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C589E98-3B36-4D83-A14B-4A079256940E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C589E98-3B36-4D83-A14B-4A079256940E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212EDE85-7D81-4D96-92FE-47910F505ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212EDE85-7D81-4D96-92FE-47910F505ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212EDE85-7D81-4D96-92FE-47910F505ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212EDE85-7D81-4D96-92FE-47910F505ADD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{5860B59C-4056-44B5-92CE-DC3BC88C555D} = {522C28AD-872E-47EB-B92A-EB2168B22D16}
 		{7CC1DAC1-0B35-40C8-BA6B-8AA441868F46} = {522C28AD-872E-47EB-B92A-EB2168B22D16}
 		{0C589E98-3B36-4D83-A14B-4A079256940E} = {3B12B006-56B0-418D-A2C8-DC8A90CBB0BD}
+		{212EDE85-7D81-4D96-92FE-47910F505ADD} = {522C28AD-872E-47EB-B92A-EB2168B22D16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0664B8FF-50C0-4E4B-A69F-4177F256075F}
