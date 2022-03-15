@@ -1,5 +1,6 @@
 ﻿using Nis.Core.Models;
 using Nis.Core.Extensions;
+using Nis.Core.Models.Diagnosis;
 using Microsoft.EntityFrameworkCore;
 using Nis.Core.Persistence.EntityConfigurations;
 
@@ -8,6 +9,8 @@ namespace Nis.Core.Persistence
     public class DataContext : DbContext
     {
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Diagnose> Diagnoses { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
         public DataContext() : base() { /*..*/ }
 
