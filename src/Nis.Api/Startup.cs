@@ -18,6 +18,7 @@ namespace Nis.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddHttpClient();
 
             services
                 .Configure<RouteOptions>(options => options.LowercaseUrls = true)
