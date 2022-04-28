@@ -14,7 +14,7 @@ namespace Nis.WpfApp.Views
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            ShellView shl = new ShellView();
+            TestingView shl = new TestingView();
             shl.Show();
         }
     }
