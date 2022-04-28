@@ -1,14 +1,33 @@
-﻿<Window x:Class="Nis.WpfApp.Views.ShellView"
+﻿<Window x:Name="Win" x:Class="Nis.WpfApp.Views.ShellView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nis.WpfApp.Views"
         mc:Ignorable="d"
-        Title="ShellView"
-        Height="450"
-        Width="800">
+        Title="NIS"
+        Height="510"
+        Width="830" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" HorizontalAlignment="Center" VerticalAlignment="Center">
+
     <Grid>
-        <ContentControl x:Name="ActiveItem" />
+        <ComboBox Name="ComboBox1" Width="200" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" SelectedValuePath="Content" SelectionChanged="ComboBox1_SelectionChanged">
+            <ComboBoxItem Content="Spatna odpoved!"></ComboBoxItem>
+            <ComboBoxItem Content="Spatna odpoved!"></ComboBoxItem>
+            <ComboBoxItem Content="Spatna odpoved!"></ComboBoxItem>
+            <ComboBoxItem Content="Spravna odpoved!"></ComboBoxItem>
+            <ComboBoxItem Content="Spatna odpoved!"></ComboBoxItem>
+            <ComboBoxItem Content="Spatna odpoved!"></ComboBoxItem>
+        </ComboBox>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="263,10,0,0" VerticalAlignment="Top" Width="183" IsEnabled="False" SelectedValuePath="Content"  SelectionChanged="comboBox_SelectionChanged" Height="30" Visibility="Hidden">
+            <ComboBoxItem Content="Spatna odpoved!"></ComboBoxItem>
+            <ComboBoxItem Content="Spravna odpoved!"></ComboBoxItem>
+            <ComboBoxItem Content="Spatna odpoved!"></ComboBoxItem>
+        </ComboBox>
+        <Label x:Name="mistn" Content="Počet chyb: 0" HorizontalAlignment="Left" Margin="635,428,0,0" VerticalAlignment="Top" Width="136" Grid.ColumnSpan="3" FontFamily="Arial Black" FontSize="14"/>
+        <Button x:Name="button" Content="Odeslat" HorizontalAlignment="Left" Margin="635,358,0,0" VerticalAlignment="Top" Width="114" Height="46" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="3" IsEnabled="True" Click="button_Click"/>
+        <TextBox x:Name="textBox" IsEnabled="False" Visibility="Hidden" HorizontalAlignment="Left" Height="154" Margin="96,278,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="" VerticalAlignment="Top" Width="301"/>
+        <Label x:Name="label" Content="Doplňující informace" IsEnabled="False" Visibility="Hidden" HorizontalAlignment="Left" Margin="96,239,0,0" VerticalAlignment="Top" Width="190" FontSize="18"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="59" Margin="90,250,0,0" TextWrapping="Wrap" Text="{Binding tst0,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="267" FontSize="18"/>
+        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="460,250,0,0" VerticalAlignment="Top" Width="76" Click="button1_Click"/>
     </Grid>
 </Window>
