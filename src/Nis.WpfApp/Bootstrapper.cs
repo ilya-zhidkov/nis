@@ -20,7 +20,7 @@ namespace Nis.WpfApp
         protected override void Configure()
         {
             _container.Instance(_container);
-            
+
             _container
                 .AddMappings()
                 .Singleton<IWindowManager, WindowManager>()
@@ -31,7 +31,7 @@ namespace Nis.WpfApp
             SeedDatabase();
         }
 
-        protected override void OnStartup(object sender, StartupEventArgs e) => DisplayRootViewFor<ShellViewModel>();
+        protected override void OnStartup(object sender, StartupEventArgs e) => DisplayRootViewFor<MainViewModel>();
 
         protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);
 
