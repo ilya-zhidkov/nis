@@ -35,6 +35,7 @@ namespace Nis.Api
 
             app
                 .UseHttpsRedirection()
+                .UseStaticFiles()
                 .UseRouting()
                 .UseEndpoints(endpoints => endpoints.MapControllers());
         }
