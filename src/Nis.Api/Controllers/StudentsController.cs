@@ -17,7 +17,7 @@ namespace Nis.Api.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        [HttpPost, Route("/students")]
+        [HttpPost, Route("info")]
         [Produces("application/json")]
         public async Task<IActionResult> GetStudents([FromBody] StudentsRequest studentsRequest)
         {
@@ -25,15 +25,15 @@ namespace Nis.Api.Controllers
             var moodleUrl = moodleSection["Url"];
             var moodleRestFormat = moodleSection["MoodleWsRestFormat"];
             
-            var httpRequestMessage = new HttpRequestMessage(
+            var http = new HttpRequestMessage(
                 HttpMethod.Get,
                 $"{moodleUrl}/webservice/rest/server.php?wstoken={studentsRequest.Token}&moodlewsrestformat={moodleRestFormat}&wsfunction=core_enrol_get_enrolled_users&courseid={studentsRequest.CourseId}");
 
             var httpClient = _httpClientFactory.CreateClient();
-            var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+            var httpResponseMessage = await httpClient.SendAsync(http);
 
             if (!httpResponseMessage.IsSuccessStatusCode) 
-                return BadRequest(httpRequestMessage);
+                return BadRequest(http);
 
             return Ok(await  httpResponseMessage.Content.ReadAsStreamAsync());
         } 

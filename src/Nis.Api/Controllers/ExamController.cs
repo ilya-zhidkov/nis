@@ -12,15 +12,18 @@ namespace Nis.Api.Controllers
 
         public ExamController(IHostEnvironment env) => _env = env;
 
-        [HttpPost, Route("/pdf")]
-        public IActionResult QuizResult([FromBody] QuizResult quizResult)
+        [HttpPost, Route("pdf")]
+        public IActionResult ExamResult([FromBody] ExamResult examResult)
         {
-            var rootPath = _env.ContentRootPath;
+            var pdfPath =
+                $"{_env.ContentRootPath}/wwwroot/pdf/{examResult.Student.FirstName}-{examResult.Student.LastName}.pdf";
 
-            var document = new QuizResultDocument(quizResult);
-            document.GeneratePdf($"{rootPath}/wwwroot/pdf/{quizResult.StudentFirstName}-{quizResult.StudentLastName}.pdf");
+            var document = new ExamResultDocument(examResult);
+            document.GeneratePdf($"{pdfPath}");
 
-            return Ok(rootPath);
+            return System.IO.File.Exists($"{pdfPath}")
+                ? Ok(new { message = "Pdf úspěšně vytvořeno" })
+                : BadRequest(new { message = "Pdf nebylo vytvořené" });
         }
     }
 }

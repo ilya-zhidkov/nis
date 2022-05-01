@@ -17,7 +17,7 @@ namespace Nis.Api.Controllers
             _httpClientFactory = httpClientFactory;
         }
         
-        [HttpGet, Route("/login")]
+        [HttpGet, Route("login")]
         [Produces("application/json")]
         public async Task<IActionResult> Login([FromQuery] LoginRequest loginRequest)
         {
