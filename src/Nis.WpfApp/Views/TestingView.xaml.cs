@@ -19,23 +19,31 @@ namespace Nis.WpfApp.Views
     /// </summary>
     public partial class TestingView : Window
     {
+        int mist;
+
         public TestingView()
         {
             InitializeComponent();
-            button1.Visibility = Visibility.Hidden;
-            textBox1.Visibility = Visibility.Hidden;
+            cmb_diet.Visibility = Visibility.Hidden;
+            cmb_diet.IsEnabled = false;
+            lbL_diet.Visibility = Visibility.Hidden;
+            cmb_odd.Visibility = Visibility.Hidden;
+            cmb_odd.IsEnabled = false;
+            lbL_odd.Visibility = Visibility.Hidden;
+            int mist = 0;
         }
-
-
-
-
-        int mist = 0;
-
+        
 
         private void mist_check(int mst)
         {
             if (mist >= 3)
+            {
                 MessageBox.Show("Neúspěšné ukončení testu!");
+                button.IsEnabled = false;
+                cmb_diag.IsEnabled = false;
+                cmb_odd.IsEnabled = false;
+                cmb_diet.IsEnabled = false;
+            }
         }
 
         private void mist_add()
@@ -50,13 +58,14 @@ namespace Nis.WpfApp.Views
 
 
 
-        private void ComboBox1_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void cmb_diag_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (ComboBox1.SelectedValue.ToString() == "Spravna odpoved!")
+            if (cmb_diag.SelectedValue.ToString() == "Spravna odpoved!")
             {
-                comboBox.IsEnabled = true;
-                comboBox.Visibility = Visibility.Visible;
-
+                cmb_odd.IsEnabled = true;
+                cmb_odd.Visibility = Visibility.Visible;
+                lbL_odd.Visibility = Visibility.Visible;
+                cmb_diag.IsEnabled = false;
             }
             else
             {
@@ -66,14 +75,14 @@ namespace Nis.WpfApp.Views
 
         }
 
-        private void comboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void cmb_odd_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (comboBox.SelectedValue.ToString() == "Spravna odpoved!")
+           if (cmb_odd.SelectedValue.ToString() == "Spravna odpoved!")
             {
-                textBox.IsEnabled = true;
-                textBox.Visibility = Visibility.Visible; //odkomentovat a zneviditelnit prislusne prvky az budu mit hotovo
-                label.IsEnabled = true;
-                label.Visibility = Visibility.Visible;
+                cmb_diet.IsEnabled = true;
+                cmb_diet.Visibility = Visibility.Visible; //odkomentovat a zneviditelnit prislusne prvky az budu mit hotovo
+                lbL_diet.Visibility = Visibility.Visible;
+                cmb_odd.IsEnabled = false;
             }
             else
             {
@@ -81,28 +90,28 @@ namespace Nis.WpfApp.Views
             }
         }
 
-        private void textBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void cmb_diet_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-
+            if (cmb_diet.SelectedValue.ToString() == "Spravna odpoved!")
+            {
+                button.IsEnabled = true;
+                cmb_diet.IsEnabled = false;
+            }
+            else
+            {
+                mist_add();
+            }
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            if (textBox.Text != "")
-            {
-                MessageBox.Show("Odesláno!");
-            }
-            else
-            {
-                MessageBox.Show("Vyplňte všchna pole!");
-            }
+            MessageBox.Show("Odesláno!");
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             ShellView shl = new ShellView();
             shl.ShowDialog();
-
         }
 
     }

@@ -11,11 +11,11 @@ namespace Nis.WpfApp.Views
         {
             InitializeComponent();
             MessageBox.Show("Prihlaseni");
-            this.shl = new TestingView();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            this.shl = new TestingView();
             shl.ShowDialog();
         }
     }
