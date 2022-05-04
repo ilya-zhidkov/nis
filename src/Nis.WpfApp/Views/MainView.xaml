@@ -5,18 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nis.WpfApp.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
-
+        Title="MainlView"
+        Height="450"
+        Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="52*" ></RowDefinition>
-            <RowDefinition Height="367*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Rectangle Grid.Row="1" Fill="AliceBlue"></Rectangle>
-        <Rectangle Grid.Row="0" Fill="Gray"></Rectangle>
-        <Button x:Name="button" Content="Vypis Pacinty" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="86" Height="32"/>
-        <Button x:Name="button1" Content="Testovani" HorizontalAlignment="Left" Margin="118,10,0,0" VerticalAlignment="Top" Width="96" Height="32" Click="button1_Click"/>
-
+        <ContentControl x:Name="ActiveItem" />
     </Grid>
-
 </Window>
