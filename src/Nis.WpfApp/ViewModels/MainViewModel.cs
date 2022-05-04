@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 
 namespace Nis.WpfApp.ViewModels
 {
@@ -11,8 +6,6 @@ namespace Nis.WpfApp.ViewModels
     {
 
         private readonly SimpleContainer _container;
-
-        public string tst0 { get; set; }
 
         public MainViewModel(SimpleContainer container)
         {

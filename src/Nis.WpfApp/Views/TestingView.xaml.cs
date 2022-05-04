@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace Nis.WpfApp.Views
 {
     /// <summary>
-    /// Interakční logika pro TestingView.xaml
+    /// Okno, které se otevře po stisknutí tlačítka "Testovani".
     /// </summary>
     public partial class TestingView : Window
     {

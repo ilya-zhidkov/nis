@@ -31,7 +31,7 @@ namespace Nis.WpfApp
             SeedDatabase();
         }
 
-        protected override void OnStartup(object sender, StartupEventArgs e) => DisplayRootViewFor<MainViewModel>();
+        protected override void OnStartup(object sender, StartupEventArgs e) => DisplayRootViewFor<ShellViewModel>();
 
         protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);
 
