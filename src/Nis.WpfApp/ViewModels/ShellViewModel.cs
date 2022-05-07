@@ -1,4 +1,6 @@
 ﻿using Caliburn.Micro;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Nis.WpfApp.ViewModels
 {
@@ -9,7 +11,16 @@ namespace Nis.WpfApp.ViewModels
         public ShellViewModel(SimpleContainer container)
         {
             _container = container;
+        }
+
+        public void btn_tst() {
+            ActivateItem(_container.GetInstance<TestComboViewModel>());
+        }
+
+        public void btn_pac()
+        {
             ActivateItem(_container.GetInstance<PatientViewModel>());
         }
+
     }
 }

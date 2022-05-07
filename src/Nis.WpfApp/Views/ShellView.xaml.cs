@@ -18,5 +18,6 @@ namespace Nis.WpfApp.Views
             this.shl = new TestingView();
             shl.ShowDialog();
         }
+
     }
 }
