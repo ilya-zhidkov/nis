@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>disable</Nullable>
+        <UseWPF>true</UseWPF>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="11.0.1" />
+      <PackageReference Include="Caliburn.Micro" Version="4.0.173" />
+      <PackageReference Include="Caliburn.Micro.Core" Version="4.0.173" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\server\src\Nis.Core\Nis.Core.csproj" />
+    </ItemGroup>
+
+</Project>

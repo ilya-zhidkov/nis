@@ -1,3 +1,6 @@
+# Media
+server/src/Nis.Api/wwwroot/pdf/*
+
 # NuGet
 packages/
 
@@ -40,3 +43,6 @@ msbuild.wrn
 
 # Visual Studio
 .vs/
+
+# Leave the empty directories
+!/**/.gitkeep

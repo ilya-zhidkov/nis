@@ -7,8 +7,8 @@ Výukový **N**emocniční **I**nformační **S**ystém pro fakultu zdravotnick�
 ## TABLE OF CONTENTS
 
 * [Requirements](#requirements)
-    + [Back-end](#back-end)
-    + [Front-end](#front-end)
+    + [Back End](#back-end)
+    + [Front End](#front-end)
 * [Setup](#setup)
     + [Core](#core)
     + [Web API](#web-api)
@@ -19,15 +19,15 @@ Výukový **N**emocniční **I**nformační **S**ystém pro fakultu zdravotnick�
 
 ## Requirements
 
-### Back-end
+### Back End
 
-- .NET 5.0 SDK (https://dotnet.microsoft.com/download/dotnet-core/5.0)
+- .NET 6.0 SDK (https://dotnet.microsoft.com/download/dotnet-core/6.0)
 - SQLite (https://www.sqlite.org/download.html)
 - _(optional)_ dotnet-ef (https://docs.microsoft.com/en-us/ef/core/cli/dotnet)
 
-### Front-end
+### Front End
 
-- .NET Framework 4.7.2 (https://dotnet.microsoft.com/download/dotnet-framework/net472)
+- .NET 6.0 SDK (https://dotnet.microsoft.com/download/dotnet-core/6.0)
 
 ---
 
@@ -38,11 +38,10 @@ Výukový **N**emocniční **I**nformační **S**ystém pro fakultu zdravotnick�
 1. Apply existing database migrations
 
     ```bash
-    # Default project: src\Nis.Core
-    PM> Update-Database
+    Nis.Core> dotnet ef database update
     ```
 
-2. Find database on disk
+2. Locate database on disk
 
     ```bash
    # Change directory to user's folder
@@ -52,7 +51,7 @@ Výukový **N**emocniční **I**nformační **S**ystém pro fakultu zdravotnick�
    > C:\Users\<username>\AppData\Roaming sqlite3
    
    # Preview database schema in SQLite
-   sqlite> .open nis_development.db
+   sqlite> .open nis.db
    ```
 
 ### Web API
