@@ -9,6 +9,8 @@ namespace Nis.WpfApp.ViewModels
         public TestingViewModel(SimpleContainer container)
         {
             _container = container;
+            ActivateItem(_container.GetInstance<TestComboViewModel>());
         }
+
     }
 }

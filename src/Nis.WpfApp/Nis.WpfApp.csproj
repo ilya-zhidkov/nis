@@ -172,18 +172,22 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Extensions\SimpleContainerExtensions.cs" />
     <Compile Include="Models\Patient.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PatientViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\TestCheckViewModel.cs" />
+    <Compile Include="ViewModels\TestComboViewModel.cs" />
     <Compile Include="ViewModels\TestingViewModel.cs" />
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PatientView.xaml.cs">
       <DependentUpon>PatientView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestCheckView.xaml.cs">
+      <DependentUpon>TestCheckView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestComboView.xaml.cs">
+      <DependentUpon>TestComboView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TestingView.xaml.cs">
       <DependentUpon>TestingView.xaml</DependentUpon>
@@ -217,15 +221,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\PatientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TestCheckView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TestComboView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
