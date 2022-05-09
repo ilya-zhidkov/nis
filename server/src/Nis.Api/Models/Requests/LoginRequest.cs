@@ -4,8 +4,14 @@ namespace Nis.Api.Models.Requests;
 
 public class LoginRequest
 {
-    public string UserName { get; set; }
+    public string Username { get; set; }
 
     [DataType(DataType.Password)]
     public string Password { get; set; }
+
+    public void Deconstruct(out string username, out string password)
+    {
+        username = Username;
+        password = Password;
+    }
 }
