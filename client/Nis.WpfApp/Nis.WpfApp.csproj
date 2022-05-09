@@ -12,10 +12,32 @@
       <PackageReference Include="AutoMapper" Version="11.0.1" />
       <PackageReference Include="Caliburn.Micro" Version="4.0.173" />
       <PackageReference Include="Caliburn.Micro.Core" Version="4.0.173" />
+      <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\server\src\Nis.Core\Nis.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Assets\Icons" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\Icons\moodle.png" />
+      <Resource Include="Assets\Icons\moodle.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="appsettings.json" />
+      <Content Include="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="appsettings.Development.json" />
+      <Content Include="appsettings.Development.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

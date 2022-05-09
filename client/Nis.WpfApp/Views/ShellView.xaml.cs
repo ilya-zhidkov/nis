@@ -6,11 +6,7 @@ public partial class ShellView
 {
     TestingView shl;
 
-    public ShellView()
-    {
-        InitializeComponent();
-        MessageBox.Show("Prihlaseni");
-    }
+    public ShellView() => InitializeComponent();
 
     private void button1_Click(object sender, RoutedEventArgs e)
     {

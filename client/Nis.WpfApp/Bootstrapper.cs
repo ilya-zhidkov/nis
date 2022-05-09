@@ -3,6 +3,8 @@ using System.Windows;
 using Nis.Core.Persistence;
 using Nis.WpfApp.Extensions;
 using Nis.WpfApp.ViewModels;
+using Nis.WpfApp.Conventions;
+using System.Windows.Controls;
 using Nis.Core.Persistence.Seeders;
 
 namespace Nis.WpfApp;
@@ -11,7 +13,16 @@ public class Bootstrapper : BootstrapperBase
 {
     private readonly SimpleContainer _container = new();
 
-    public Bootstrapper() => Initialize();
+    public Bootstrapper()
+    {
+        Initialize();
+
+        ConventionManager.AddElementConvention<PasswordBox>(
+            bindableProperty: PasswordBoxConvention.BoundPasswordProperty,
+            parameterProperty: "Password",
+            eventName: "PasswordChanged"
+        );
+    }
 
     protected override void Configure()
     {
@@ -20,6 +31,7 @@ public class Bootstrapper : BootstrapperBase
         _container
             .Singleton<IWindowManager, WindowManager>()
             .Singleton<IEventAggregator, EventAggregator>()
+            .RegisterRequests()
             .RegisterViewModels()
             .RegisterMappings()
             .RegisterDatabase();
@@ -27,7 +39,7 @@ public class Bootstrapper : BootstrapperBase
         SeedDatabase();
     }
 
-    protected override void OnStartup(object sender, StartupEventArgs e) => DisplayRootViewFor<ShellViewModel>();
+    protected override void OnStartup(object sender, StartupEventArgs e) => DisplayRootViewFor<LoginViewModel>();
 
     protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);
 

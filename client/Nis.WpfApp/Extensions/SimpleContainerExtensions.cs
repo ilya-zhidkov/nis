@@ -3,11 +3,30 @@ using Caliburn.Micro;
 using Nis.WpfApp.Mappings;
 using Nis.Core.Extensions;
 using Nis.Core.Persistence;
+using Nis.WpfApp.Requests;
 
 namespace Nis.WpfApp.Extensions;
 
 public static class SimpleContainerExtensions
 {
+    public static SimpleContainer RegisterRequests(this SimpleContainer container)
+    {
+        typeof(BaseRequest).Assembly
+            .GetTypes()
+            .Where(type => !type.IsAbstract && type.Name.EndsWith("Request"))
+            .ToList()
+            .ForEach(request =>
+            {
+                container.RegisterPerRequest(
+                    service: request,
+                    key: request.ToString(),
+                    implementation: request
+                );
+            });
+
+        return container;
+    }
+
     public static SimpleContainer RegisterMappings(this SimpleContainer container)
     {
         container.Instance(
