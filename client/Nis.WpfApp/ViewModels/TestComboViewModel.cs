@@ -6,25 +6,22 @@ namespace Nis.WpfApp.ViewModels;
 
 public class TestComboViewModel : Screen
 {
+    private readonly SimpleContainer _container;
     private readonly DataContext _context;
     private readonly IMapper _mapper;
+    private readonly IWindowManager _window;
 
-    public TestComboViewModel(DataContext context, IMapper mapper)
+    public TestComboViewModel(IWindowManager window, SimpleContainer container, DataContext context, IMapper mapper)
     {
+        _window = window;
+        _container = container;
         _context = context;
         _mapper = mapper;
     }
 
-    protected override async void OnViewLoaded(object view)
+
+    public void ShowComboBox()
     {
-        base.OnViewLoaded(view);
+        _window.ShowWindowAsync(new TestCheckViewModel());
     }
-
-    IWindowManager manager = new WindowManager();
-
-    public void btn_check()
-    {
-        manager.ShowWindowAsync(new TestCheckViewModel(), null, null);
-    }
-
 }

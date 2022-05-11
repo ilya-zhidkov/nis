@@ -4,7 +4,7 @@ using System.Windows.Threading;
 
 namespace Nis.WpfApp.Views;
 
-public partial class TestComboView
+public partial class TestComboView 
 {
     int mist;
     DispatcherTimer timer = new();
@@ -32,7 +32,7 @@ public partial class TestComboView
         {
             MessageBox.Show("Cas vyprsel!");
             timer.Stop();
-            btn_check.IsEnabled = false;
+            ShowComboBox.IsEnabled = false;
         }
 
         lb_timer.Content = stopwatch;
@@ -43,7 +43,7 @@ public partial class TestComboView
         if (mist >= 3)
         {
             MessageBox.Show("Neúspěšné ukončení testu!");
-            btn_check.IsEnabled = false;
+            ShowComboBox.IsEnabled = false;
             cmb_diag.IsEnabled = false;
             cmb_odd.IsEnabled = false;
             cmb_diet.IsEnabled = false;
@@ -53,7 +53,7 @@ public partial class TestComboView
     private void mist_add()
     {
         mist++;
-        mistn.Content = "Počet chyb: " + mist.ToString();
+        mistn.Content = $"Počet chyb: {mist.ToString()}/3";
         mist_check(mist);
     }
 
@@ -92,7 +92,7 @@ public partial class TestComboView
     {
         if (cmb_diet.SelectedValue.ToString() == "Spravna odpoved!")
         {
-            btn_check.IsEnabled = true;
+            ShowComboBox.IsEnabled = true;
             cmb_diet.IsEnabled = false;
             timer.Stop();
         }
@@ -102,14 +102,14 @@ public partial class TestComboView
         }
     }
 
-    private void button_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("Odesláno!");
-    }
+    //private void button_Click(object sender, RoutedEventArgs e)
+    //{
+    //    MessageBox.Show("Odesláno!");
+    //}
 
-    private void button1_Click(object sender, RoutedEventArgs e)
-    {
-        ShellView shl = new ShellView();
-        shl.ShowDialog();
-    }
+    //private void button1_Click(object sender, RoutedEventArgs e)
+    //{
+    //    ShellView shl = new ShellView();
+    //    shl.ShowDialog();
+    //}
 }

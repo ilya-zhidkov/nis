@@ -2,7 +2,7 @@
 
 namespace Nis.WpfApp.ViewModels;
 
-public class TestCheckViewModel : Conductor<object>
+public class TestCheckViewModel : Screen
 {
     private readonly SimpleContainer _container;
 

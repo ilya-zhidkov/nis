@@ -2,7 +2,7 @@
 
 namespace Nis.WpfApp.ViewModels;
 
-public class TestingViewModel : Conductor<object>
+public class TestingViewModel : Screen
 {
     private readonly SimpleContainer _container;
 
@@ -10,6 +10,6 @@ public class TestingViewModel : Conductor<object>
     {
         _container = container;
 
-        Task.Run(async () => await ActivateItemAsync(_container.GetInstance<TestComboViewModel>()));
+        //Task.Run(async () => await ActivateItemAsync(_container.GetInstance<TestComboViewModel>()));
     }
 }

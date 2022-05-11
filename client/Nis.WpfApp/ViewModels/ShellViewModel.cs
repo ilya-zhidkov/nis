@@ -3,7 +3,7 @@ using Nis.WpfApp.Models;
 
 namespace Nis.WpfApp.ViewModels;
 
-public class ShellViewModel : Conductor<object>
+public class ShellViewModel : Conductor<Screen>
 {
     private string _username;
     private readonly Student _student;
@@ -28,7 +28,9 @@ public class ShellViewModel : Conductor<object>
         }
     }
 
-    public void btn_tst() => ActivateItemAsync(_container.GetInstance<TestComboViewModel>());
+    public void StartExam() => ActivateItemAsync(_container.GetInstance<TestComboViewModel>());
+
+    public void ShowExam() => ActivateItemAsync(_container.GetInstance<TestCheckViewModel>());
 
     public void btn_pac() => ActivateItemAsync(_container.GetInstance<PatientViewModel>());
 }

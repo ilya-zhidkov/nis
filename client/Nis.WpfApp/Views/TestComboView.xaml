@@ -27,8 +27,12 @@
             <ComboBoxItem Content="Spravna odpoved!"></ComboBoxItem>
             <ComboBoxItem Content="Spatna odpoved!"></ComboBoxItem>
         </ComboBox>
-        <Label x:Name="mistn" Content="Počet chyb: 0" HorizontalAlignment="Left" Margin="621,381,0,0" VerticalAlignment="Top" Width="136" FontFamily="Arial Black" FontSize="14"/>
-        <Button x:Name="btn_check" Content="Odeslat" HorizontalAlignment="Left" Margin="621,304,0,0" VerticalAlignment="Top" Width="136" Height="53" FontSize="18" IsEnabled="False" Click="button_Click" FontWeight="Bold"/>
+        <Label x:Name="mistn" Content="Počet chyb: 0/3" HorizontalAlignment="Left" Margin="621,381,0,0" VerticalAlignment="Top" Width="136" FontFamily="Arial Black" FontSize="14"/>
+        <Button x:Name="ShowComboBox" Content="Odeslat" HorizontalAlignment="Left" Margin="621,304,0,0" VerticalAlignment="Top" Width="136" Height="53" FontSize="18" IsEnabled="False" FontWeight="Bold" Foreground="White">
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}"/>
+            </Button.Background>
+        </Button>
         <Label x:Name="label" Content="Doplňující informace" IsEnabled="False" Visibility="Hidden" HorizontalAlignment="Left" Margin="96,239,0,0" VerticalAlignment="Top" Width="190" FontSize="18"/>
         <Label x:Name="lbL_diag" Content="Diagnóza" HorizontalAlignment="Left" Margin="26,27,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" RenderTransformOrigin="0.958,0.49"/>
         <Label x:Name="lbL_odd" Content="Oddělení" HorizontalAlignment="Left" Margin="286,27,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
