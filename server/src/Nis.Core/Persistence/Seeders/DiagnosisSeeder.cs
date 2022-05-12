@@ -11,373 +11,373 @@ public class DiagnosisSeeder : BaseSeeder
 
         context.Diagnoses.AddRange(
             // Infekční oddělení
-            new Diagnose
+            new Diagnosis
             {
                 Name = "Infekce způsobené salmonelami",
                 DepartmentId = 1
             },
-             new Diagnose
+             new Diagnosis
              {
                  Name = "Shigelóza",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Bakteriální intoxikace – otravy, přenesené potravou",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Střevní infekce viry a jinými určenými mikroorganismy",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Gastroenteritida a kolitida infekčního a NS původu",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Tuberkulóza",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Tetanus",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Listerióza",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Meningokoková infekce",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Streptokoková sepse",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Pohlavním stykem přenášené nemoci",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Encefalitida",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Meningitida",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Infekce virem Herpes Simplex",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Virová hepatitida",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Infekční mononukleóza",
                  DepartmentId = 1
-             }, new Diagnose
+             }, new Diagnosis
              {
                  Name = "Svrab – scabies",
                  DepartmentId = 1
              }
              // Oddělení hematologie
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Leidenská mutace",
                  DepartmentId = 2
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Leukemie",
                  DepartmentId = 2
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Diseminovaná intravaskulární koagulace ",
                  DepartmentId = 2
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Agranulocytóza",
                  DepartmentId = 2
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Anemie",
                  DepartmentId = 2
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Koagulopathie",
                  DepartmentId = 2
              }
              //Oddělení endokrinologie a diabetologie
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Hypertyreóza",
                  DepartmentId = 3
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Hypotyreóza",
                  DepartmentId = 3
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Diabetes mellitus",
                  DepartmentId = 3
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Hypoparatyreóza",
                  DepartmentId = 3
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Hyperparatyreóza a jiné nemoci příštítných tělísek ",
                  DepartmentId = 3
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Hyperfunkce hypofýzy – glandulae pituitariae – podvěsku mozkového",
                  DepartmentId = 3
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Hypofunkce a jiné poruchy hypofýzy",
                  DepartmentId = 3
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Cushingův syndrom",
                  DepartmentId = 3
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Hyperaldosteronismus",
                  DepartmentId = 3
              }
              // Oddělení lékařské genetiky
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Cystická fibróza",
                  DepartmentId = 4
              }
              // Neurologické oddělení
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Alzheimerova nemoc",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Demence",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Schizofrenie",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Poruchy chování",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Roztroušená skleróza – sclerosis multiplex",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Migrena",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Epilepsie",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Sclerosis multiplex",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Parkinsonismus",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Hydrocefalus",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Encefalopatie",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Mozková obrna",
                  DepartmentId = 5
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Cévní mozková příhoda",
                  DepartmentId = 5
              }
              // Kardiologie
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Hypertenze",
                  DepartmentId = 6
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Angina pectoris",
                  DepartmentId = 6
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Infarkt myokardu",
                  DepartmentId = 6
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Ischemická choroba srdeční",
                  DepartmentId = 6
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Ateroskleróza",
                  DepartmentId = 6
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Srdeční selhání",
                  DepartmentId = 6
              }
 
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Ischemická choroba dolních končetin",
                  DepartmentId = 6
              }
              // Plicní oddělení
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Pneumonie",
                  DepartmentId = 7
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Plicní embolie",
                  DepartmentId = 7
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Asthma bronchiale",
                  DepartmentId = 7
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Chronická obštrukční plicní nemoc",
                  DepartmentId = 7
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Respirační insuficience",
                  DepartmentId = 7
              }
              // Gastroenterologie
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Gastritida",
                  DepartmentId = 8
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Vředová choroba gastroduodena",
                  DepartmentId = 8
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Pankreatitida",
                  DepartmentId = 8
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Obezita",
                  DepartmentId = 8
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Malnutrice",
                  DepartmentId = 8
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Ulcerózní kolitida",
                  DepartmentId = 8
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Crohnova nemoc",
                  DepartmentId = 8
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Enteritida",
                  DepartmentId = 8
              }
              // Ortopedie
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Artróza",
                  DepartmentId = 9
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Revmatoidní artritida",
                  DepartmentId = 9
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Kolagenózy",
                  DepartmentId = 9
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Osteoporóza",
                  DepartmentId = 9
              }
              // Onkologie                
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Novotvary",
                  DepartmentId = 10
              }
              // Nefrologie a urologie
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Nefrologie a urologie",
                  DepartmentId = 11
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Cystitida",
                  DepartmentId = 11
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Renální selhání",
                  DepartmentId = 11
              }
-             , new Diagnose
+             , new Diagnosis
              {
                  Name = "Glomerulonefritída",
                  DepartmentId = 11
