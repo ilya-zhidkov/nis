@@ -1,8 +1,7 @@
 ﻿namespace Nis.Core.Models;
 
-public class Department
+public class Department : BaseEntity
 {
-    public int Id { get; set; }
     public string Name { get; set; }
-    public IEnumerable<Diagnose> Diagnoses { get; set; } = new List<Diagnose>();
+    public IEnumerable<Diagnosis> Diagnoses { get; set; } = new List<Diagnosis>();
 }
