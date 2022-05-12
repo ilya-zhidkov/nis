@@ -7,8 +7,10 @@ namespace Nis.Core.Persistence;
 
 public class DataContext : DbContext
 {
+    public DbSet<Exam> Exams { get; set; }
+    public DbSet<Diet> Diets { get; set; }
     public DbSet<Patient> Patients { get; set; }
-    public DbSet<Diagnose> Diagnoses { get; set; }
+    public DbSet<Diagnosis> Diagnoses { get; set; }
     public DbSet<Department> Departments { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options) : base(options) { /* ... */ }
