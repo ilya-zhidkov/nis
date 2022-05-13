@@ -10,20 +10,20 @@ public class DietSeeder : BaseSeeder
             return;
 
         context.Diets.AddRange(
-            new Diet { Id = 1, Name = "Tekutá" },
-            new Diet { Id = 4, Name = "Šetřicí" },
-            new Diet { Id = 5, Name = "Racionální" },
-            new Diet { Id = 6, Name = "S omezením tuků" },
-            new Diet { Id = 7, Name = "Bezezbytková" },
-            new Diet { Id = 8, Name = "Nízkobílkovinná" },
-            new Diet { Id = 9, Name = "Nízkocholesterolová" },
-            new Diet { Id = 10, Name = "Redukční" },
-            new Diet { Id = 10, Name = "Diabetická" },
-            new Diet { Id = 11, Name = "Neslaná šetřící" },
-            new Diet { Id = 12, Name = "Výživná" },
-            new Diet { Id = 13, Name = "Strava batolat" },
-            new Diet { Id = 14, Name = "Strava větších dětí" },
-            new Diet { Id = 15, Name = "Výběrová" }
+            new Diet { Name = "Tekutá" },
+            new Diet { Name = "Šetřicí" },
+            new Diet { Name = "Racionální" },
+            new Diet { Name = "S omezením tuků" },
+            new Diet { Name = "Bezezbytková" },
+            new Diet { Name = "Nízkobílkovinná" },
+            new Diet { Name = "Nízkocholesterolová" },
+            new Diet { Name = "Redukční" },
+            new Diet { Name = "Diabetická" },
+            new Diet { Name = "Neslaná šetřící" },
+            new Diet { Name = "Výživná" },
+            new Diet { Name = "Strava batolat" },
+            new Diet { Name = "Strava větších dětí" },
+            new Diet { Name = "Výběrová" }
         );
     }
 }
