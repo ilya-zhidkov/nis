@@ -27,7 +27,11 @@
 
     <ItemGroup>
       <None Remove="Assets\Icons\moodle.png" />
+      <None Remove="Assets\Logo\fzs-logo.png" />
       <Resource Include="Assets\Icons\moodle.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Assets\Logo\fzs-logo.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <None Remove="appsettings.json" />

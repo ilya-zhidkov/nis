@@ -8,10 +8,10 @@
     mc:Ignorable="d"
     Title="Výukový Nemocniční Informační Systém"
     Height="510"
-    Width="1024"
+    Width="1200"
       xmlns:cm="http://caliburnmicro.com"
     MinHeight="510"
-    MinWidth="1024"
+    MinWidth="1200"
     ResizeMode="CanResize"
     WindowStartupLocation="CenterScreen"
     HorizontalAlignment="Center"
@@ -106,22 +106,28 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="*"  />
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"  />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.ColumnSpan="4" Margin="25,0,0,0" Text="Výukový Nemocniční Informační Systém" FontWeight="Bold" FontSize="20" Foreground="#3DD0FB" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock Grid.ColumnSpan="2" Text="Výukový Nemocniční Informační Systém" FontWeight="Bold" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 20 0 0" Grid.Column="1">
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="{DynamicResource Accent100Foreground}"/>
+            </TextBlock.Foreground>
+        </TextBlock>
+        <Image Source="/Assets/Logo/fzs-logo.png" Grid.Row="0" Grid.Column="3" Width="200" Height="70" Stretch="Fill" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0 0 20 20" />
 
-        <StackPanel  Grid.Column="3" Margin="0,10,0,10" Orientation="Horizontal" HorizontalAlignment="Right">
+
+        <StackPanel  Grid.Column="3"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0 0 35 5">
             <!--JMENO UZIVATELE-->
             <TextBlock
                         Grid.Row="0"
-                        Margin="0 0 20 0"
-                        FontSize="16"
+                        FontSize="14"
                         x:Name="Username"
-                        Text="{Binding Username, StringFormat='{}Přihlášen {0}!'}"
-                        FontWeight="Medium"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
+                
+                        Text="{Binding Username, StringFormat='{}Ahoj, {0}!'}"
+                        FontWeight="Regular"
+                VerticalAlignment="Top"
         >
                 <TextBlock.Foreground>
                     <SolidColorBrush Color="{DynamicResource Accent700Foreground}"/>
@@ -129,27 +135,33 @@
             </TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Background="{DynamicResource MaterialDesignBackground}" Grid.ColumnSpan="2">
-            <Button x:Name="StartExam" Margin="0 15 0 0" Width="152" Height="40" Content="Začít test" Background="#3DD0FB" BorderBrush="#3DD0FB"  Foreground="White" FontSize="16"/>
-            
+        <StackPanel Grid.Row="1" Background="{DynamicResource MaterialDesignBackground}" Grid.ColumnSpan="2" Margin="0 50 0 0">
+            <Button  x:Name="StartExam" Margin="0 0 0 0" Width="152" Height="40" Content="Začít test" BorderBrush="#99FFFFFF"  Foreground="White" FontSize="16" HorizontalAlignment="Left">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}"/>
+                </Button.Background>
+            </Button>
         </StackPanel>
 
-        <Grid Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Background="#FFE6EAF9">
+        <Grid Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Background="#0CCACACA">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
 
             <Grid Grid.Row="1" Margin="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="571*"/>
+                    <ColumnDefinition Width="278*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <ContentControl x:Name="ActiveItem"  />
+                <ContentControl x:Name="ActiveItem" Grid.ColumnSpan="2"  />
 
             </Grid>
 
         </Grid>
-
     </Grid>
 </Window>
