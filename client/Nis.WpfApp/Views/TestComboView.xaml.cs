@@ -8,6 +8,7 @@ public partial class TestComboView
 {
     int mist;
     DispatcherTimer timer = new();
+    int timeLimit = 600;
     int stopwatch = 0;
 
     public TestComboView()
@@ -35,7 +36,7 @@ public partial class TestComboView
             ShowComboBox.IsEnabled = false;
         }
 
-        lb_timer.Content = stopwatch;
+        lb_timer.Content = $"{timeLimit - stopwatch} sekund";
     }
 
     private void mist_check(int mst)
