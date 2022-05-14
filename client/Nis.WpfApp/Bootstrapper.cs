@@ -56,6 +56,7 @@ public class Bootstrapper : BootstrapperBase
         new DiagnosisSeeder().Seed(context);
         new DietSeeder().Seed(context);
         new ExamSeeder().Seed(context);
+        new MedicalScalesSeeder().Seed(context);
         context.SaveChanges();
     }
 }
