@@ -1,6 +1,7 @@
 ﻿using Nis.Core.Models;
 using Nis.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Nis.Core.Models.MedicalScales;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace Nis.Core.Persistence;
@@ -12,6 +13,8 @@ public class DataContext : DbContext
     public DbSet<Patient> Patients { get; set; }
     public DbSet<Diagnosis> Diagnoses { get; set; }
     public DbSet<Department> Departments { get; set; }
+    public DbSet<MedicalScale> MedicalScales { get; set; }
+    public DbSet<MedicalScaleActivity> MedicalScaleActivities { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options) : base(options) { /* ... */ }
 
