@@ -1,5 +1,5 @@
-﻿using System.Text.Json;
-using Nis.Core.Models;
+﻿using Nis.Core.Models;
+using System.Text.Json;
 
 namespace Nis.Core.Persistence.Seeders;
 
@@ -10,17 +10,18 @@ public class ExamSeeder : BaseSeeder
         if (context.Exams.Any())
             return;
 
-        var filePath = Path.Combine(Environment.CurrentDirectory, "../../../../../server/src/Nis.Core/Persistence/Seeders/Data/Exam.json"); //TODO: change path and check for existence of exam.json
-        var examSeedData = JsonSerializer.Deserialize<Exam>(File.ReadAllText(filePath));
-        
+        var path = Path.Combine(AppContext.BaseDirectory, "Persistence/Seeders/Data/Exam.json");
+        var exam = JsonSerializer.Deserialize<Exam>(File.ReadAllText(path))!;
+
         context.Exams.Add(
             new Exam
             {
-                Anamnesis = examSeedData.Anamnesis,
-                DietId = examSeedData.DietId,
-                DiagnosisId = examSeedData.DiagnosisId,
-                DepartmentId = examSeedData.DepartmentId,
+                Anamnesis = exam.Anamnesis,
+                DietId = exam.DietId,
+                DiagnosisId = exam.DiagnosisId,
+                DepartmentId = exam.DepartmentId,
             }
         );
     }
 }
+
