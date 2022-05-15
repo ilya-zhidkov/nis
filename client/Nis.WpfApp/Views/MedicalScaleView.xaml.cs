@@ -2,9 +2,9 @@
 
 namespace Nis.WpfApp.Views;
 
-public partial class TestCheckView
+public partial class MedicalScaleView
 {
-    public TestCheckView() => InitializeComponent();
+    public MedicalScaleView() => InitializeComponent();
 
     private void btn_end(object sender, RoutedEventArgs e)
     {

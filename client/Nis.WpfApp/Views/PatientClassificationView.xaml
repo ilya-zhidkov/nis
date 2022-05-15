@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:Nis.WpfApp.Views"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:converters="clr-namespace:Nis.WpfApp.Converters"
-    x:Class="Nis.WpfApp.Views.TestComboView"
+    x:Class="Nis.WpfApp.Views.PatientClassificationView"
     mc:Ignorable="d"
     d:DesignHeight="442.5"
     d:DesignWidth="800"

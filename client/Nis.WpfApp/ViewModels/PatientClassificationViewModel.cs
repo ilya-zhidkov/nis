@@ -3,14 +3,15 @@ using Nis.WpfApp.Models;
 using Nis.Core.Persistence;
 using System.Windows.Threading;
 using Microsoft.EntityFrameworkCore;
+using Nis.WpfApp.Messages;
 
 namespace Nis.WpfApp.ViewModels;
 
-public class TestComboViewModel : Screen
+public class PatientClassificationViewModel : Screen
 {
     private readonly DataContext _context;
-    private readonly IWindowManager _window;
     private readonly SimpleContainer _container;
+    private readonly IEventAggregator _eventAggregator;
     private byte _attempts;
     private double _timeLeft;
     private Diet _selectedDiet;
@@ -124,16 +125,16 @@ public class TestComboViewModel : Screen
         }
     }
 
-    public TestComboViewModel(DataContext context, SimpleContainer container, IWindowManager window)
+    public PatientClassificationViewModel(DataContext context, SimpleContainer container, IEventAggregator eventAggregator)
     {
-        _window = window;
         _context = context;
         _container = container;
+        _eventAggregator = eventAggregator;
     }
 
     public async Task SubmitAsync()
     {
-        await _window.ShowWindowAsync(_container.GetInstance<TestCheckViewModel>());
+         await _eventAggregator.PublishOnUIThreadAsync(new MedicalScaleMessage());
 
         _timer.Stop();
     }
