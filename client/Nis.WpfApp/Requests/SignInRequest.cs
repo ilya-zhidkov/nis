@@ -28,7 +28,8 @@ public class SignInRequest : BaseRequest
         var students = response.Select(student => new Student
         {
             FirstName = student["firstname"].ToString(),
-            LastName = student["lastname"].ToString()
+            LastName = student["lastname"].ToString(),
+            ProfileImage = student["profileimageurl"].ToString()
         });
 
         return await Task.FromResult(new AuthenticationResponse

@@ -7,161 +7,108 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Výukový Nemocniční Informační Systém"
-    Height="510"
-    Width="1200"
-      xmlns:cm="http://caliburnmicro.com"
-    MinHeight="510"
-    MinWidth="1200"
-    ResizeMode="CanResize"
+    xmlns:cm="http://caliburnmicro.com"
+    Height="900"
+    Width="1438"
     WindowStartupLocation="CenterScreen"
-    HorizontalAlignment="Center"
-    VerticalAlignment="Center"
->
+    Background="Transparent"
+    AllowsTransparency="True"
+    WindowStyle="None"
+    ResizeMode="NoResize">
 
-    <Window.Resources>
-        <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
-            <Setter Property="FocusVisualStyle">
-                <Setter.Value>
-                    <Style>
-                        <Setter Property="Control.Template">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Foreground" Value="#959595"/>
-            <Setter Property="FontSize" Value="26"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#959595"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
-                            <Border x:Name="border" BorderBrush="Red" BorderThickness="0" CornerRadius="10"  SnapsToDevicePixels="True"/>
-                            <Border x:Name="bd2"/>
-                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Content="{TemplateBinding Content}" Grid.Column="1" 
-                                              ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" 
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="HasContent" Value="True">
-                                <Setter Property="FocusVisualStyle">
-                                    <Setter.Value>
-                                        <Style>
-                                            <Setter Property="Control.Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate>
-                                                        <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="Padding" Value="4,-1,0,0"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Transparent" TargetName="border"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Foreground" Value="#3DD0FB"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="{x:Null}"/>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="MinHeight" Value="50"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        </Style>
+    <Border CornerRadius="20" Background="White">
 
-        <Style x:Key="ContentStyle"  
-               TargetType="{x:Type TextBlock}">
-            <Setter Property="HorizontalAlignment"  
-                    Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="228" />
+            </Grid.ColumnDefinitions>
 
-    </Window.Resources>
+            <Grid>
+                <StackPanel Orientation="Vertical" Margin="0,80,0,0">
+
+                    <TextBlock Text="VNIS" Margin="65,0,0,0" HorizontalAlignment="Left"
+                               VerticalAlignment="Center" FontSize="21" FontFamily="{StaticResource Poppins-Bold}">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Primary100Foreground}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
 
 
-    <Grid Background="{DynamicResource MaterialDesignBackground}" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70" />
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"  />
-        </Grid.ColumnDefinitions>
-
-        <TextBlock Grid.ColumnSpan="2" Text="Výukový Nemocniční Informační Systém" FontWeight="Bold" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 20 0 0" Grid.Column="1">
-            <TextBlock.Foreground>
-                <SolidColorBrush Color="{DynamicResource Accent100Foreground}"/>
-            </TextBlock.Foreground>
-        </TextBlock>
-        <Image Source="/Assets/Logo/fzs-logo.png" Grid.Row="0" Grid.Column="3" Width="200" Height="70" Stretch="Fill" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="0 0 20 20" />
-
-
-        <StackPanel  Grid.Column="3"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0 0 35 5">
-            <!--JMENO UZIVATELE-->
-            <TextBlock
-                        Grid.Row="0"
-                        FontSize="14"
-                        x:Name="Username"
-                
-                        Text="{Binding Username, StringFormat='{}Ahoj, {0}!'}"
-                        FontWeight="Regular"
-                VerticalAlignment="Top"
-        >
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="{DynamicResource Accent700Foreground}"/>
-                </TextBlock.Foreground>
-            </TextBlock>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Background="{DynamicResource MaterialDesignBackground}" Grid.ColumnSpan="2" Margin="0 50 0 0">
-            <Button  x:Name="StartExam" Margin="0 0 0 0" Width="152" Height="40" Content="Začít test" BorderBrush="#99FFFFFF"  Foreground="White" FontSize="16" HorizontalAlignment="Left">
-                <Button.Background>
-                    <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}"/>
-                </Button.Background>
-            </Button>
-        </StackPanel>
-
-        <Grid Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Background="#0CCACACA">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-
-
-            <Grid Grid.Row="1" Margin="15">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="571*"/>
-                    <ColumnDefinition Width="278*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <ContentControl x:Name="ActiveItem" Grid.ColumnSpan="2"  />
+                    <StackPanel Orientation="Vertical" Margin="0,50,0,0">
+                        <Button x:Name="StartExam" Content="Začít test" FontFamily="{StaticResource Poppins-Regular}"
+                                FontSize="16" HorizontalAlignment="Center">
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
+                            </Button.BorderBrush>
+                            <Button.Foreground>
+                                <SolidColorBrush Color="{DynamicResource Accent200Foreground}" />
+                            </Button.Foreground>
+                            <Button.Background>
+                                <SolidColorBrush />
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
 
             </Grid>
 
+            <!-- Content  -->
+            <Grid Grid.Column="1" Background="#EFF2F8">
+                <ContentControl x:Name="ActiveItem" />
+            </Grid>
+
+            <StackPanel Grid.Column="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="ShutdownApplication" Grid.Column="1" VerticalAlignment="Center"
+                            HorizontalAlignment="Right" Margin="0 0 20 10"
+                            Height="25">
+                        <TextBlock Text="x" Margin="0,-3,0,0" />
+                    </Button>
+
+                    <!-- Logo of the university -->
+                    <Image Grid.Column="1" Grid.Row="1" Source="/Assets/Logo/fzs-logo.png" Width="200" Height="70"
+                           HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                    <!-- Avatar of the user  -->
+                    <Ellipse Grid.Column="0" Grid.Row="2" Height="36" Width="36" HorizontalAlignment="Center"
+                             Margin="20 0 0 0">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="ProfileIMage" ImageSource="{Binding ProfileImage}"
+                                        Stretch="UniformToFill" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        FontSize="14"
+                        x:Name="Username"
+                        Text="{Binding Username}"
+                        FontWeight="Regular"
+                        HorizontalAlignment="Left"
+                        Margin="10 0 0 0"
+                        FontFamily="{StaticResource Poppins-Regular}"
+                        VerticalAlignment="Center">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{DynamicResource Accent700Foreground}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </Grid>
+
+
+            </StackPanel>
         </Grid>
-    </Grid>
+    </Border>
 </Window>

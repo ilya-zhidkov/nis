@@ -8,6 +8,7 @@ public class ShellViewModel : Conductor<object>
     , IHandle<MedicalScaleMessage>
 {
     private string _username;
+    private string _profileImage;
     private readonly Student _student;
     private readonly IEventAggregator _eventAggregator;
     private readonly SimpleContainer _container;
@@ -30,6 +31,17 @@ public class ShellViewModel : Conductor<object>
         }
     }
 
+    public string ProfileImage
+    {
+        get => _student.ProfileImage;
+        set
+        {
+            _profileImage = value;
+            NotifyOfPropertyChange(() => ProfileImage);
+        }
+    }
+
+    public void ShutdownApplication() => TryCloseAsync();
     public void StartExam() => ActivateItemAsync(_container.GetInstance<PatientClassificationViewModel>());
 
     public Task HandleAsync(MedicalScaleMessage message, CancellationToken cancellationToken)

@@ -15,6 +15,8 @@
                     <local:Bootstrapper x:Key="Bootstrapper" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <FontFamily x:Key="Poppins-Regular">./Fonts/Poppins-Regular.ttf#Poppins</FontFamily>
+            <FontFamily x:Key="Poppins-Bold">./Fonts/Poppins-Bold.ttf#Poppins</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
