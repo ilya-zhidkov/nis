@@ -3,6 +3,7 @@ using Nis.WpfApp.Models;
 using Nis.Core.Persistence;
 using System.Windows.Threading;
 using Microsoft.EntityFrameworkCore;
+using System.Windows;
 
 namespace Nis.WpfApp.ViewModels;
 
@@ -11,6 +12,7 @@ public class TestComboViewModel : Screen
     private readonly DataContext _context;
     private readonly IWindowManager _window;
     private readonly SimpleContainer _container;
+    private readonly IEventAggregator _events;
     private byte _attempts;
     private double _timeLeft;
     private Diet _selectedDiet;
@@ -124,18 +126,21 @@ public class TestComboViewModel : Screen
         }
     }
 
-    public TestComboViewModel(DataContext context, SimpleContainer container, IWindowManager window)
+    public TestComboViewModel(DataContext context, SimpleContainer container, IWindowManager window, IEventAggregator events)
     {
         _window = window;
         _context = context;
         _container = container;
+        _events = events;
     }
 
     public async Task SubmitAsync()
     {
-        await _window.ShowWindowAsync(_container.GetInstance<TestCheckViewModel>());
-
+        //await _window.ShowWindowAsync(_container.GetInstance<TestingViewModel>());
         _timer.Stop();
+        await _events.PublishOnUIThreadAsync("ADL");
+        await this.TryCloseAsync();
+        //MessageBox.Show("Submit");
     }
 
     protected override async void OnViewLoaded(object view)

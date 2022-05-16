@@ -38,7 +38,6 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#959595"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -136,7 +135,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Background="{DynamicResource MaterialDesignBackground}" Grid.ColumnSpan="2" Margin="0 50 0 0">
-            <Button  x:Name="StartExam" Margin="0 0 0 0" Width="152" Height="40" Content="Začít test" BorderBrush="#99FFFFFF"  Foreground="White" FontSize="16" HorizontalAlignment="Left">
+            <Button  x:Name="StartExam" Margin="0 0 0 0" Width="152" Height="40" Content="Začít test" BorderBrush="#99FFFFFF"  Foreground="White" FontSize="16" HorizontalAlignment="Left" Cursor="Hand">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}"/>
                 </Button.Background>
@@ -158,7 +157,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <ContentControl x:Name="ActiveItem" Grid.ColumnSpan="2"  />
+                <ContentControl x:Name="ActiveItem" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
             </Grid>
 

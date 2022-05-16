@@ -9,6 +9,15 @@
         Height="510"
         Width="830" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-
-    <ContentControl x:Name="ActiveItem"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <ContentControl x:Name="ActiveItem" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button x:Name="btn1" Height="101" Width="138"></Button>
+            <Button x:Name="btn2" Cursor="Hand" Height="119" Width="131"/>
+        </StackPanel>
+    </Grid>
 </Window>
