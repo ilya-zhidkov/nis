@@ -1,16 +1,16 @@
-﻿using QuestPDF.Fluent;
+﻿using Nis.Api.Models;
+using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Drawing;
 using QuestPDF.Infrastructure;
-using Nis.Api.Models.Requests;
 
 namespace Nis.Api.Helpers.Pdf;
 
-public class ExamResultDocument : IDocument
+public class ExamDocument : IDocument
 {
-    private readonly ExamResult _examResult;
+    private readonly Exam _exam;
 
-    public ExamResultDocument(ExamResult examResult) => _examResult = examResult;
+    public ExamDocument(Exam exam) => _exam = exam;
 
     public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
 
@@ -40,12 +40,12 @@ public class ExamResultDocument : IDocument
         {
             row.RelativeItem().Column(column =>
             {
-                column.Item().Text($"Student: {_examResult.Student.FirstName} {_examResult.Student.LastName}")
+                column.Item().Text($"Student: {_exam.Student.FirstName} {_exam.Student.LastName}")
                     .Style(titleStyle);
 
                 column.Item().Text(text =>
                 {
-                    var passedInCzechLocale = _examResult.Passed ? "ano" : "ne";
+                    var passedInCzechLocale = _exam.Passed ? "ano" : "ne";
                     text.Span("Prospěl: ").SemiBold();
                     text.Span($"{passedInCzechLocale}");
                 });
@@ -64,13 +64,13 @@ public class ExamResultDocument : IDocument
             });
 
             table.Cell().Row(1).Column(1).Element(BlockTableKeyStyle).Text("Anamnéza");
-            table.Cell().Row(1).Column(2).Element(BlockTableValueStyle).Text($"{_examResult.Anamnesis}");
+            table.Cell().Row(1).Column(2).Element(BlockTableValueStyle).Text($"{_exam.Anamnesis}");
             table.Cell().Row(2).Column(1).Element(BlockTableKeyStyle).Text("Oddělení");
-            table.Cell().Row(2).Column(2).Element(BlockTableValueStyle).Text($"{_examResult.Department}");
+            table.Cell().Row(2).Column(2).Element(BlockTableValueStyle).Text($"{_exam.Department}");
             table.Cell().Row(3).Column(1).Element(BlockTableKeyStyle).Text("Diagnóza");
-            table.Cell().Row(3).Column(2).Element(BlockTableValueStyle).Text($"{_examResult.Diagnose}");
+            table.Cell().Row(3).Column(2).Element(BlockTableValueStyle).Text($"{_exam.Diagnosis}");
             table.Cell().Row(4).Column(1).Element(BlockTableKeyStyle).Text("Dieta");
-            table.Cell().Row(4).Column(2).Element(BlockTableValueStyle).Text($"{_examResult.Diet}");
+            table.Cell().Row(4).Column(2).Element(BlockTableValueStyle).Text($"{_exam.Diet}");
         });
     }
 
