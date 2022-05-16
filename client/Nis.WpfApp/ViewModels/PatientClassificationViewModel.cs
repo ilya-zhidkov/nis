@@ -1,15 +1,18 @@
 ﻿using Caliburn.Micro;
 using Nis.WpfApp.Models;
+using Nis.WpfApp.Messages;
+using Nis.WpfApp.Requests;
 using Nis.Core.Persistence;
 using System.Windows.Threading;
 using Microsoft.EntityFrameworkCore;
-using Nis.WpfApp.Messages;
 
 namespace Nis.WpfApp.ViewModels;
 
 public class PatientClassificationViewModel : Screen
 {
     private readonly DataContext _context;
+    private readonly IWindowManager _window;
+    private readonly UploadRequest _request;
     private readonly SimpleContainer _container;
     private readonly IEventAggregator _eventAggregator;
     private byte _attempts;
@@ -18,11 +21,22 @@ public class PatientClassificationViewModel : Screen
     private const byte _limit = 3;
     private DispatcherTimer _timer;
     private const byte Seconds = 30;
+    private string _anamnesis = @"Na oddělení JIP byl přivezen RZS 56letý pacient. V anamnéze uvedl náhlé svíravé bolesti za hrudní kostí s vystřelováním do levé končetiny a do krku, které neustávaly. Měl pocit úzkosti a strach ze smrti. Uváděl i dušnost. Tento stav začal v zaměstnání po dlouhém a konfliktním jednání. Pracuje jako soukromý podnikatel. Nikdy žádné potíže neměl, ale od 45let se léčí na vysoký TK pomocí farmakologické léčby. Pravidelně chodí na kontroly, nedodržuje žádnou dietu ani správnou životosprávu. Pravidelné cvičení ani sport neprovozuje. Občas jezdí na kole a hraje tenis. Hodně pracuje, až 12-14hod. denně. RZS stabilizovala stav podáním léků do periferní žilní kanyly, sledovala EKG a FF do příjezdu, podávala nemocnému kyslík. Po základním vyšetření a stabilizování stavu bylo rozhodnuto provést u nemocného PTCA(PCI).";
     private Diagnosis _selectedDiagnosis;
     private Department _selectedDepartment;
     private BindableCollection<Diet> _diets;
     private BindableCollection<Diagnosis> _diagnoses;
     private BindableCollection<Department> _departments;
+
+    public string Anamnesis
+    {
+        get => _anamnesis;
+        set
+        {
+            _anamnesis = value;
+            NotifyOfPropertyChange(() => Anamnesis);
+        }
+    }
 
     public double TimeLeft
     {
@@ -125,18 +139,33 @@ public class PatientClassificationViewModel : Screen
         }
     }
 
-    public PatientClassificationViewModel(DataContext context, SimpleContainer container, IEventAggregator eventAggregator)
+    public PatientClassificationViewModel(
+        DataContext context,
+        UploadRequest request,
+        SimpleContainer container,
+        IEventAggregator eventAggregator
+    )
     {
         _context = context;
+        _request = request;
         _container = container;
         _eventAggregator = eventAggregator;
     }
 
     public async Task SubmitAsync()
     {
-         await _eventAggregator.PublishOnUIThreadAsync(new MedicalScaleMessage());
-
         _timer.Stop();
+
+        await _eventAggregator.PublishOnUIThreadAsync(new MedicalScaleMessage());
+
+        await _request.UploadAsync(new Form
+        {
+            Anamnesis = Anamnesis,
+            Diet = SelectedDiet.Name,
+            Diagnosis = SelectedDiagnosis.Name,
+            Department = SelectedDepartment.Name,
+            Student = _container.GetInstance<Student>()
+        });
     }
 
     protected override async void OnViewLoaded(object view)

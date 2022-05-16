@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Caliburn.Micro;
 using System.Net.Http;
 using System.Text.Json;
 using Nis.WpfApp.Models;
@@ -7,11 +8,15 @@ namespace Nis.WpfApp.Requests;
 
 public class SignInRequest : BaseRequest
 {
+    private readonly SimpleContainer _container;
+
     public class AuthenticationResponse
     {
         public string Token { get; set; }
         public Student Student { get; set; }
     }
+
+    public SignInRequest(SimpleContainer container) => _container = container;
 
     public async Task<AuthenticationResponse> SignInAsync(string username, string password)
     {
@@ -22,20 +27,22 @@ public class SignInRequest : BaseRequest
 
         var response = await GetAsync<IEnumerable<IDictionary<string, object>>>(
             uri: $"{Endpoint}/students/{username}",
-            headers: new Dictionary<string, string> { { "token", token } }
+            headers: new Dictionary<string, string> { { "token", Headers["Authorization"] } }
         );
 
-        var students = response.Select(student => new Student
+        var student = response.Select(student => new Student
         {
             FirstName = student["firstname"].ToString(),
             LastName = student["lastname"].ToString(),
             ProfileImage = student["profileimageurl"].ToString()
-        });
+        }).Single();
+
+        _container.Instance(student);
 
         return await Task.FromResult(new AuthenticationResponse
         {
             Token = token,
-            Student = students.Single()
+            Student = student
         });
     }
 
@@ -47,7 +54,11 @@ public class SignInRequest : BaseRequest
             "application/json"
         ));
 
-        return response["token"];
+        var token = response["token"];
+
+        Headers["Authorization"] = token;
+        Authenticate(Headers["Authorization"]);
+
+        return token ?? string.Empty;
     }
 }
-
