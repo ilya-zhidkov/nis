@@ -11,7 +11,6 @@ namespace Nis.WpfApp.ViewModels;
 public class PatientClassificationViewModel : Screen
 {
     private readonly DataContext _context;
-    private readonly IWindowManager _window;
     private readonly UploadRequest _request;
     private readonly SimpleContainer _container;
     private readonly IEventAggregator _eventAggregator;
@@ -156,7 +155,7 @@ public class PatientClassificationViewModel : Screen
     {
         _timer.Stop();
 
-        await _eventAggregator.PublishOnUIThreadAsync(new MedicalScaleMessage());
+        await _eventAggregator.PublishOnUIThreadAsync("Activity");
 
         await _request.UploadAsync(new Form
         {

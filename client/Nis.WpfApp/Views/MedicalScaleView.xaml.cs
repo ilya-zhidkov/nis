@@ -6,8 +6,5 @@ public partial class MedicalScaleView
 {
     public MedicalScaleView() => InitializeComponent();
 
-    private void btn_end(object sender, RoutedEventArgs e)
-    {
-        Window.GetWindow(this)?.Close();
-    }
+    private void btn_end(object sender, RoutedEventArgs e) => Window.GetWindow(this)?.Close();
 }

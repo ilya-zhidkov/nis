@@ -5,40 +5,48 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     Title="Výukový Nemocniční Informační Systém"
-    xmlns:cm="http://caliburnmicro.com"
-    Height="900"
-    Width="1438"
-    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d"
+    Height="760"
+    Width="1280"
+    WindowStyle="None"
+    ResizeMode="NoResize"
     Background="Transparent"
     AllowsTransparency="True"
-    WindowStyle="None"
-    ResizeMode="NoResize">
-
+    WindowStartupLocation="CenterScreen"
+    >
     <Border CornerRadius="20" Background="White">
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="228" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="228" />
             </Grid.ColumnDefinitions>
-
             <Grid>
                 <StackPanel Orientation="Vertical" Margin="0,80,0,0">
-
-                    <TextBlock Text="VNIS" Margin="65,0,0,0" HorizontalAlignment="Left"
-                               VerticalAlignment="Center" FontSize="21" FontFamily="{StaticResource Poppins-Bold}">
+                    <TextBlock
+                        Text="VNIS"
+                        Margin="65,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontFamily="{StaticResource Poppins-Bold}"
+                    >
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{DynamicResource Primary100Foreground}" />
                         </TextBlock.Foreground>
                     </TextBlock>
-
-
-                    <StackPanel Orientation="Vertical" Margin="0,50,0,0">
-                        <Button x:Name="StartExam" Content="Začít test" FontFamily="{StaticResource Poppins-Regular}"
-                                FontSize="16" HorizontalAlignment="Center">
+                    <StackPanel
+                        Margin="0 50 0 0"
+                        Orientation="Vertical"
+                    >
+                        <Button
+                            FontSize="16"
+                            x:Name="StartExam"
+                            Content="Začít test"
+                            HorizontalAlignment="Center"
+                            FontFamily="{StaticResource Poppins-Regular}"
+                        >
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
                             </Button.BorderBrush>
@@ -51,63 +59,73 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-
             </Grid>
-
-            <!-- Content  -->
             <Grid Grid.Column="1" Background="#EFF2F8">
                 <ContentControl x:Name="ActiveItem" />
             </Grid>
-
             <StackPanel Grid.Column="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-
-                    <Button x:Name="ShutdownApplication" Grid.Column="1" VerticalAlignment="Center"
-                            HorizontalAlignment="Right" Margin="0 0 20 10"
-                            Height="25">
-                        <TextBlock Text="x" Margin="0,-3,0,0" />
+                    <Button
+                        Height="25"
+                        Grid.Column="1"
+                        Margin="0 0 20 10"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        x:Name="ShutdownApplication"
+                    >
+                        <TextBlock Text="x" Margin="0 -3 0 0" />
                     </Button>
-
-                    <!-- Logo of the university -->
-                    <Image Grid.Column="1" Grid.Row="1" Source="/Assets/Logo/fzs-logo.png" Width="200" Height="70"
-                           HorizontalAlignment="Left" VerticalAlignment="Center" />
-
-                    <!-- Avatar of the user  -->
-                    <Ellipse Grid.Column="0" Grid.Row="2" Height="36" Width="36" HorizontalAlignment="Center"
-                             Margin="20 0 0 0">
+                    <Image
+                        Width="200"
+                        Height="70"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Source="/Assets/Logo/fzs-logo.png"
+                    />
+                    <Ellipse
+                        Width="36"
+                        Height="36"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="20 0 0 0"
+                        HorizontalAlignment="Center"
+                    >
                         <Ellipse.Fill>
-                            <ImageBrush x:Name="ProfileIMage" ImageSource="{Binding ProfileImage}"
-                                        Stretch="UniformToFill" />
+                            <ImageBrush
+                                x:Name="ProfileImage"
+                                ImageSource="{Binding ProfileImage}"
+                                Stretch="UniformToFill"
+                            />
                         </Ellipse.Fill>
                     </Ellipse>
                     <TextBlock
                         Grid.Row="2"
-                        Grid.Column="1"
                         FontSize="14"
+                        Grid.Column="1"
                         x:Name="Username"
-                        Text="{Binding Username}"
-                        FontWeight="Regular"
-                        HorizontalAlignment="Left"
                         Margin="10 0 0 0"
+                        FontWeight="Regular"
+                        Text="{Binding Username}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
                         FontFamily="{StaticResource Poppins-Regular}"
-                        VerticalAlignment="Center">
+                    >
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{DynamicResource Accent700Foreground}" />
                         </TextBlock.Foreground>
                     </TextBlock>
                 </Grid>
-
-
             </StackPanel>
         </Grid>
     </Border>

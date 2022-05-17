@@ -1,24 +1,26 @@
 using Caliburn.Micro;
 using Nis.WpfApp.Models;
-using Nis.WpfApp.Messages;
 
 namespace Nis.WpfApp.ViewModels;
 
-public class ShellViewModel : Conductor<object>
-    , IHandle<MedicalScaleMessage>
+public class ShellViewModel : Conductor<object>, IHandle<string>
 {
     private string _username;
     private string _profileImage;
     private readonly Student _student;
-    private readonly IEventAggregator _eventAggregator;
     private readonly SimpleContainer _container;
+    private readonly IEventAggregator _eventAggregator;
 
-    public ShellViewModel(SimpleContainer container, Student student, IEventAggregator eventAggregator)
+    public ShellViewModel(
+        SimpleContainer container,
+        Student student,
+        IEventAggregator eventAggregator
+    )
     {
         _student = student;
+        _container = container;
         _eventAggregator = eventAggregator;
         _eventAggregator.SubscribeOnPublishedThread(this);
-        _container = container;
     }
 
     public string Username
@@ -42,9 +44,15 @@ public class ShellViewModel : Conductor<object>
     }
 
     public void ShutdownApplication() => TryCloseAsync();
+
     public void StartExam() => ActivateItemAsync(_container.GetInstance<PatientClassificationViewModel>());
 
-    public Task HandleAsync(MedicalScaleMessage message, CancellationToken cancellationToken)
-        =>
-            ActivateItemAsync(_container.GetInstance<MedicalScaleViewModel>(), cancellationToken);
+    public Task HandleAsync(string message, CancellationToken cancellationToken) => Task.FromResult(message switch
+    {
+        "Activity" => ActivateItemAsync(_container.GetInstance<ActivityViewModel>(), cancellationToken),
+        "Decubitus" => ActivateItemAsync(_container.GetInstance<DecubitusViewModel>(), cancellationToken),
+        "Malnutrition" => ActivateItemAsync(_container.GetInstance<MalnutritionViewModel>(), cancellationToken),
+        "Fall" => ActivateItemAsync(_container.GetInstance<FallViewModel>(), cancellationToken),
+        _ => throw new Exception("Unknown Message")
+    });
 }

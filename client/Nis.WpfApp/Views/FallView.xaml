@@ -1,0 +1,209 @@
+﻿<UserControl
+    x:Class="Nis.WpfApp.Views.FallView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Nis.WpfApp.Views"
+    mc:Ignorable="d"
+    d:DesignHeight="440"
+    d:DesignWidth="800"
+>
+    <Grid Margin="0 40 0 40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            FontSize="14"
+            Margin="20,0,0,0"
+            Content="Riziko pádu"
+            FontFamily="Arial Black"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+        />
+        <ScrollViewer
+            Grid.Row="1"
+            Width="760"
+            Margin="20 0 0 0"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+        >
+            <StackPanel>
+                <Grid Margin="20 20 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="150" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        FontSize="18"
+                        Grid.Column="0"
+                        Margin="0 0 0 0"
+                        Content="Aktivita"
+                        FontFamily="Arial Black"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                    />
+                    <Label
+                        Grid.Row="0"
+                        FontSize="18"
+                        Grid.Column="1"
+                        Margin="0 0 0 0"
+                        FontFamily="Arial Black"
+                        VerticalAlignment="Center"
+                        Content="Provedení aktivity"
+                        HorizontalAlignment="Center"
+                    />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        FontSize="18"
+                        Content="Bodové skóre"
+                        Margin="0,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="Arial Black"
+                        HorizontalAlignment="Center"
+                    />
+                    <TextBlock
+                        TextWrapping="WrapWithOverflow"
+                        Grid.Row="1"
+                        Text="Pohyb"
+                        FontSize="15"
+                        Grid.Column="0"
+                        Margin="20 20 20 0"
+                        VerticalAlignment="Top"
+                        FontFamily="Arial Black"
+                        HorizontalAlignment="Stretch"
+                        Typography.Capitals="Unicase"
+                    />
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                    >
+                        <CheckBox
+                            FontSize="15"
+                            Content="Neomezený"
+                            Margin="20 20 0 0"
+                            FontFamily="Arial Black"
+                            HorizontalAlignment="Left"
+                        />
+                        <CheckBox
+                            FontSize="15"
+                            Margin="20 10 0 0"
+                            FontFamily="Arial Black"
+                            Content="Používání pomůcek"
+                            HorizontalAlignment="Left"
+                        />
+                        <CheckBox
+                            FontSize="15"
+                            Margin="20 10 0 0"
+                            FontFamily="Arial Black"
+                            Content="Potřebuje pomoc"
+                            HorizontalAlignment="Left"
+                        />
+                        <CheckBox
+                            FontSize="15"
+                            Margin="20 10 0 0"
+                            FontFamily="Arial Black"
+                            Content="Neschopen přesunu"
+                            HorizontalAlignment="Left"
+                        />
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="2">
+                        <Label
+                            Content="0"
+                            FontSize="18"
+                            Margin="20 20 0 0"
+                            FontFamily="Arial Black"
+                            HorizontalAlignment="Center"
+                        />
+                        <Label
+                            Content="1"
+                            FontSize="18"
+                            Margin="20 0 0 0"
+                            FontFamily="Arial Black"
+                            HorizontalAlignment="Center"
+                        />
+                        <Label
+                            Content="1"
+                            FontFamily="Arial Black"
+                            FontSize="15"
+                            Margin="20 0 0 0"
+                            HorizontalAlignment="Center"
+                        />
+                        <Label
+                            Content="1"
+                            FontSize="15"
+                            Margin="20 0 0 0"
+                            FontFamily="Arial Black"
+                            HorizontalAlignment="Center"
+                        />
+                    </StackPanel>
+                </Grid>
+                <TextBlock
+                    Width="720"
+                    Height="170"
+                    FontSize="14"
+                    Margin="20,20,0,0"
+                    FontFamily="Arial"
+                    TextWrapping="Wrap"
+                    Text="Doplňující informace"
+                    HorizontalAlignment="Left"
+                />
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel
+            Grid.Row="2"
+            Margin="0 0 0 0"
+            Orientation="Horizontal"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+        >
+            <Button
+                Content="1"
+                Margin="0 0 10 0"
+                x:Name="Activity"
+            />
+            <Button
+                Content="2"
+                Margin="0 0 10 0"
+                x:Name="Decubitus"
+            />
+            <Button
+                Content="3"
+                Cursor="Hand"
+                Margin="0 0 10 0"
+                x:Name="Malnutrition"
+            />
+            <Button
+                Content="4"
+                Margin="0 0 0 0"
+                Background="Orange"
+            />
+        </StackPanel>
+        <Button
+            Grid.Row="2"
+            Width="100"
+            Height="40"
+            FontSize="18"
+            Cursor="Hand"
+            x:Name="Submit"
+            Content="Odeslat"
+            FontWeight="Bold"
+            Foreground="White"
+            Margin="0,0,25,0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+        />
+    </Grid>
+</UserControl>
