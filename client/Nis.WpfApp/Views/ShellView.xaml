@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
     Title="Výukový Nemocniční Informační Systém"
     mc:Ignorable="d"
     Height="760"
@@ -62,6 +63,7 @@
             </Grid>
             <Grid Grid.Column="1" Background="#EFF2F8">
                 <ContentControl x:Name="ActiveItem" />
+                <notifications:NotificationArea x:Name="WindowArea" Position="TopCenter" MaxItems="3"/>
             </Grid>
             <StackPanel Grid.Column="2">
                 <Grid>

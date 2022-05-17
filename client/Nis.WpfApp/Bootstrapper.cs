@@ -6,6 +6,7 @@ using Nis.WpfApp.ViewModels;
 using Nis.WpfApp.Conventions;
 using System.Windows.Controls;
 using Nis.Core.Persistence.Seeders;
+using Notification.Wpf;
 
 namespace Nis.WpfApp;
 
@@ -31,6 +32,7 @@ public class Bootstrapper : BootstrapperBase
         _container
             .Singleton<IWindowManager, WindowManager>()
             .Singleton<IEventAggregator, EventAggregator>()
+            .Singleton<INotificationManager, NotificationManager>()
             .RegisterRequests()
             .RegisterViewModels()
             .RegisterMappings()
