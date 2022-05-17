@@ -46,7 +46,7 @@ public class MedicalScalesSeeder : BaseSeeder
                     new()
                     {
                         Name =
-                            "Užívá léky ze skupiny: diuretik, \n antikonvulziv,\n antiparkinsonik,\n antihypertenziv,\n psychotropní léky nebo benzodiazepiny",
+                            "Užívá léky ze skupiny: \n - diuretik, \n - antikonvulziv,\n - antiparkinsonik,\n - antihypertenziv,\n - psychotropní léky nebo benzodiazepiny",
                         Score = 1
                     }
                 }
@@ -204,7 +204,7 @@ public class MedicalScalesSeeder : BaseSeeder
 
             new MedicalScale
             {
-                Name = "A. Jíte méně v posledních 3 měsících?",
+                Name = "Jíte méně v posledních 3 měsících?",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentScreening,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -215,7 +215,7 @@ public class MedicalScalesSeeder : BaseSeeder
             },
             new MedicalScale
             {
-                Name = "B. Zhubnul jste v posledních měsících? O kolik kilogramů?",
+                Name = "Zhubnul jste v posledních měsících? O kolik kilogramů?",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentScreening,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -227,7 +227,7 @@ public class MedicalScalesSeeder : BaseSeeder
             },
             new MedicalScale
             {
-                Name = "C. Stav hybnosti",
+                Name = "Stav hybnosti",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentScreening,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -238,7 +238,7 @@ public class MedicalScalesSeeder : BaseSeeder
             },
             new MedicalScale
             {
-                Name = "D. Prodělal jste v posledních 3 měsících nějaké akutní onemocnění nebo výrazný stres?",
+                Name = "Prodělal jste v posledních 3 měsících nějaké akutní onemocnění nebo výrazný stres?",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentScreening,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -248,15 +248,15 @@ public class MedicalScalesSeeder : BaseSeeder
             },
             new MedicalScale
             {
-                Name = "E. Neuropsychologický stav pacienta",
+                Name = "Neuropsychologický stav pacienta",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentScreening,
                 Activities = new List<MedicalScaleActivity>
                 {
                     new() { Name = "deprese nebo těžká demence", Score = 0 },
                     new()
                     {
-                        Name = @"mírná a střední demence(pacient je schopen komunikovat, může být dezorientovaný, ale
-                        není agresivní či neklidný, v noci převážně spí)",
+                        Name =
+                            @"mírná a střední demence (pacient je schopen komunikovat, může být dezorientovaný, ale není agresivní či neklidný, v noci převážně spí)",
                         Score = 1
                     },
                     new() { Name = "bez těchto problémů", Score = 2 },
@@ -264,7 +264,7 @@ public class MedicalScalesSeeder : BaseSeeder
             },
             new MedicalScale
             {
-                Name = "F. BMI – Body Mass Index",
+                Name = "BMI – Body Mass Index",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentScreening,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -281,7 +281,7 @@ public class MedicalScalesSeeder : BaseSeeder
 
             new MedicalScale
             {
-                Name = "G. Žije samostatně v domácím prostředí (není nikde dlouhodobě umístěn či hospitalizován)",
+                Name = "Žije samostatně v domácím prostředí (není nikde dlouhodobě umístěn či hospitalizován)",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -291,7 +291,7 @@ public class MedicalScalesSeeder : BaseSeeder
             },
             new MedicalScale
             {
-                Name = "H. Užívá více než tři druhy léků denně (dlouhodobá medikace)",
+                Name = "Užívá více než tři druhy léků denně (dlouhodobá medikace)",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -301,7 +301,7 @@ public class MedicalScalesSeeder : BaseSeeder
             },
             new MedicalScale
             {
-                Name = "I. Dekubity či jiné výrazné kožní defekty",
+                Name = "Dekubity či jiné výrazné kožní defekty",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -311,7 +311,7 @@ public class MedicalScalesSeeder : BaseSeeder
             },
             new MedicalScale
             {
-                Name = "J. Kolik plnohodnotných jídel sní pacient za den?",
+                Name = "Kolik plnohodnotných jídel sní pacient za den?",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -322,10 +322,7 @@ public class MedicalScalesSeeder : BaseSeeder
             },
             new MedicalScale
             {
-                Name =
-                    @"K. Zhodnoťte následující indikátory příjmu proteinů ""\n"" alespoň jedenkrát denně mléčný pokrm (mléko, sýr jogurt) ano – ne
-alespoň dvakrát v týdnu vejce nebo luštěniny ano - ne
-maso, ryba nebo drůbež každý den ano – ne",
+                Name = "Zhodnoťte následující indikátory příjmu proteinů \n alespoň jedenkrát denně mléčný pokrm (mléko, sýr jogurt) ano – ne \n alespoň dvakrát v týdnu vejce nebo luštěniny ano - ne \n maso, ryba nebo drůbež každý den ano – ne",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -336,7 +333,7 @@ maso, ryba nebo drůbež každý den ano – ne",
             },
             new MedicalScale
             {
-                Name = "L. Jí pacient alespoň dvě porce čerstvé zeleniny nebo ovoce za týden?",
+                Name = "Jí pacient alespoň dvě porce čerstvé zeleniny nebo ovoce za týden?",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -346,7 +343,7 @@ maso, ryba nebo drůbež každý den ano – ne",
             },
             new MedicalScale
             {
-                Name = "M. Kolik tekutin pacient vypije? (voda, džus, káva, čaj, mléko...)",
+                Name = "Kolik tekutin pacient vypije? (voda, džus, káva, čaj, mléko...)",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -357,7 +354,7 @@ maso, ryba nebo drůbež každý den ano – ne",
             },
             new MedicalScale
             {
-                Name = "N. Jak pacient jí:",
+                Name = "Jak pacient jí:",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -368,7 +365,7 @@ maso, ryba nebo drůbež každý den ano – ne",
             },
             new MedicalScale
             {
-                Name = "O. Jak sám posuzuje svůj nutriční stav",
+                Name = "Jak sám posuzuje svůj nutriční stav",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -379,7 +376,7 @@ maso, ryba nebo drůbež každý den ano – ne",
             },
             new MedicalScale
             {
-                Name = "P. Jak posuzuje pacient svůj zdravotní stav, když jej srovnává s většinou lidí svého věku?",
+                Name = "Jak posuzuje pacient svůj zdravotní stav, když jej srovnává s většinou lidí svého věku?",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -391,7 +388,7 @@ maso, ryba nebo drůbež každý den ano – ne",
             },
             new MedicalScale
             {
-                Name = "Q. Střední obvod paže v centimetrech",
+                Name = "Střední obvod paže v centimetrech",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
@@ -402,7 +399,7 @@ maso, ryba nebo drůbež každý den ano – ne",
             },
             new MedicalScale
             {
-                Name = "R. obvod lýtka",
+                Name = "obvod lýtka",
                 ScaleCategory = MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination,
                 Activities = new List<MedicalScaleActivity>
                 {
