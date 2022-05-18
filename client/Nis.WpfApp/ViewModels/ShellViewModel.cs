@@ -33,10 +33,11 @@ public class ShellViewModel : Conductor<object>, IHandle<string>
 
     public void ShutdownApplication() => TryCloseAsync();
 
-    public void StartExam() => ActivateItemAsync(_container.GetInstance<PatientClassificationViewModel>());
+    public void StartExam() => ActivateItemAsync(_container.GetInstance<ExamPickViewModel>());
 
     public Task HandleAsync(string message, CancellationToken cancellationToken) => Task.FromResult(message switch
     {
+        "Exam" => ActivateItemAsync(_container.GetInstance<PatientClassificationViewModel>(), cancellationToken),
         "Activity" => ActivateItemAsync(_container.GetInstance<ActivityViewModel>(), cancellationToken),
         "Decubitus" => ActivateItemAsync(_container.GetInstance<DecubitusViewModel>(), cancellationToken),
         "Malnutrition" => ActivateItemAsync(_container.GetInstance<MalnutritionViewModel>(), cancellationToken),
