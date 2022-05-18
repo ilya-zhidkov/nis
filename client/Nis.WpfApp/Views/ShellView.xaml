@@ -105,9 +105,8 @@
                     >
                         <Ellipse.Fill>
                             <ImageBrush
-                                x:Name="ProfileImage"
-                                ImageSource="{Binding ProfileImage}"
                                 Stretch="UniformToFill"
+                                ImageSource="{Binding Student.ProfileImage}"
                             />
                         </Ellipse.Fill>
                     </Ellipse>
@@ -115,14 +114,18 @@
                         Grid.Row="2"
                         FontSize="14"
                         Grid.Column="1"
-                        x:Name="Username"
                         Margin="10 0 0 0"
-                        FontWeight="Regular"
-                        Text="{Binding Username}"
+                        FontWeight="DemiBold"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         FontFamily="{StaticResource Poppins-Regular}"
                     >
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Student.FirstName"/>
+                                <Binding Path="Student.LastName"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{DynamicResource Accent700Foreground}" />
                         </TextBlock.Foreground>

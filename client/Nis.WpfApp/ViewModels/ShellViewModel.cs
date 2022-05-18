@@ -5,9 +5,7 @@ namespace Nis.WpfApp.ViewModels;
 
 public class ShellViewModel : Conductor<object>, IHandle<string>
 {
-    private string _username;
-    private string _profileImage;
-    private readonly Student _student;
+    private Student _student;
     private readonly SimpleContainer _container;
     private readonly IEventAggregator _eventAggregator;
 
@@ -23,23 +21,13 @@ public class ShellViewModel : Conductor<object>, IHandle<string>
         _eventAggregator.SubscribeOnPublishedThread(this);
     }
 
-    public string Username
+    public Student Student
     {
-        get => $"{_student.FirstName} {_student.LastName}";
+        get => _student;
         set
         {
-            _username = value;
-            NotifyOfPropertyChange(() => Username);
-        }
-    }
-
-    public string ProfileImage
-    {
-        get => _student.ProfileImage;
-        set
-        {
-            _profileImage = value;
-            NotifyOfPropertyChange(() => ProfileImage);
+            _student = value;
+            NotifyOfPropertyChange(() => Student);
         }
     }
 

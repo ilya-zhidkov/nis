@@ -34,7 +34,7 @@ public class SignInRequest : BaseRequest
         {
             FirstName = student["firstname"].ToString(),
             LastName = student["lastname"].ToString(),
-            ProfileImage = student["profileimageurl"].ToString()
+            ProfileImage = GetProfileImage(student["profileimageurl"].ToString())
         }).Single();
 
         _container.Instance(student);
@@ -60,5 +60,15 @@ public class SignInRequest : BaseRequest
         Authenticate(Headers["Authorization"]);
 
         return token ?? string.Empty;
+    }
+
+    private static string GetProfileImage(string url)
+    {
+        if (string.IsNullOrWhiteSpace(url))
+            return string.Empty;
+
+        var uri = new Uri(url);
+
+        return $"{uri.Scheme}://{uri.Host}/webservice/{uri.Segments[1]}{uri.Segments[2]}{uri.Segments[3]}{uri.Segments[4]}{uri.Segments[6]}?token={Headers["Authorization"]}";
     }
 }
