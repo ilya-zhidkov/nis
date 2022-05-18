@@ -5,6 +5,7 @@ using Nis.WpfApp.Requests;
 using Nis.Core.Persistence;
 using System.Windows.Threading;
 using Microsoft.EntityFrameworkCore;
+using Notification.Wpf;
 
 namespace Nis.WpfApp.ViewModels;
 
@@ -14,6 +15,7 @@ public class PatientClassificationViewModel : Screen
     private readonly UploadRequest _request;
     private readonly SimpleContainer _container;
     private readonly IEventAggregator _eventAggregator;
+    private readonly INotificationManager _notificationManager;
     private byte _attempts;
     private double _timeLeft;
     private Diet _selectedDiet;
@@ -45,6 +47,11 @@ public class PatientClassificationViewModel : Screen
             _timeLeft = value;
             NotifyOfPropertyChange(() => TimeLeft);
             NotifyOfPropertyChange(() => CanSubmit);
+            if (_timeLeft <= 0)
+            {
+                _notificationManager.Show("Test nesplněn", "Bohužel, test nebyl splněn v zadaném intervalu.",
+                    NotificationType.Warning, "WindowArea");
+            }
         }
     }
 
@@ -84,7 +91,7 @@ public class PatientClassificationViewModel : Screen
         set
         {
             _selectedDepartment = value;
-            
+
             if (_selectedDepartment.Name != "Kardiologie")
                 Attempts++;
 
@@ -142,13 +149,15 @@ public class PatientClassificationViewModel : Screen
         DataContext context,
         UploadRequest request,
         SimpleContainer container,
-        IEventAggregator eventAggregator
+        IEventAggregator eventAggregator,
+        INotificationManager notificationManager
     )
     {
         _context = context;
         _request = request;
         _container = container;
         _eventAggregator = eventAggregator;
+        _notificationManager = notificationManager;
     }
 
     public async Task SubmitAsync()
@@ -178,7 +187,7 @@ public class PatientClassificationViewModel : Screen
 
         StartTimer();
     }
-    
+
     private void StartTimer()
     {
         TimeLeft = Seconds;
