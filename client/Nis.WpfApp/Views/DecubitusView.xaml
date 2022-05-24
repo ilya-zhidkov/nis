@@ -4,190 +4,164 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Nis.WpfApp.Views"
+    xmlns:vm="clr-namespace:Nis.WpfApp.ViewModels"
+    xmlns:converters="clr-namespace:Nis.WpfApp.Converters"
     mc:Ignorable="d"
-    d:DesignHeight="440"
-    d:DesignWidth="800"
+    d:DesignHeight="Auto"
+    d:DesignWidth="Auto"
+    FontFamily="{StaticResource Poppins-Regular}"
 >
-    <Grid Margin="0 40 0 40">
+    <UserControl.Resources>
+        <converters:ToCapitalCaseConverter x:Key="ToCapitalCaseConverter" />
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Label
             Grid.Row="0"
-            FontSize="14"
-            Margin="20 0 0 0"
-            FontFamily="Arial Black"
+            FontSize="20"
+            FontWeight="Medium"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             Content="Riziko vzniku dekubitů"
         />
-        <ScrollViewer
-            Width="760"
-            Grid.Row="1"
-            Margin="20 0 0 0"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch"
-        >
-            <StackPanel>
-                <Grid
-                    Margin="20 20 0 0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="150" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        FontSize="18"
-                        Content="Předmět"
-                        Margin="0 0 0 0"
-                        FontFamily="Arial Black"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                    />
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        FontSize="18"
-                        Content="Posudek"
-                        Margin="0 0 0 0"
-                        FontFamily="Arial Black"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                    />
-                    <Label
-                        Grid.Row="0"
-                        FontSize="18"
-                        Grid.Column="2"
-                        Margin="0 0 0 0"
-                        Content="Bodové skóre"
-                        VerticalAlignment="Center"
-                        FontFamily="Arial Black"
-                        HorizontalAlignment="Center"
-                    />
-                    <TextBlock
-                        Grid.Row="1"
-                        FontSize="15"
-                        Grid.Column="0"
-                        Margin="20 20 20 0"
-                        VerticalAlignment="Top"
-                        Text="Schopnost spolupráce"
-                        FontFamily="Arial Black"
-                        TextWrapping="WrapWithOverflow"
-                        HorizontalAlignment="Stretch"
-                    />
-                    <StackPanel
-                        Grid.Row="1"
-                        Grid.Column="1"
-                    >
-                        <CheckBox
-                            FontSize="15"
-                            Content="úplná"
-                            Margin="20 20 0 0"
-                            FontFamily="Arial Black"
-                            HorizontalAlignment="Left"
-                        />
-                        <CheckBox
-                            Content="malá"
-                            FontFamily="Arial Black"
-                            FontSize="15"
-                            Margin="20 10 0 0"
-                            HorizontalAlignment="Left"
-                        />
-                        <CheckBox
-                            FontSize="15"
-                            Content="částečná"
-                            Margin="20 10 0 0"
-                            FontFamily="Arial Black"
-                            HorizontalAlignment="Left"
-                        />
-                        <CheckBox
-                            Content="žádná"
-                            FontSize="15"
-                            Margin="20 10 0 0"
-                            FontFamily="Arial Black"
-                            HorizontalAlignment="Left"
-                        />
-                    </StackPanel>
-                    <StackPanel
-                        Grid.Row="1"
-                        Grid.Column="2">
-                        <Label
-                            Content="4"
-                            FontSize="18"
-                            Margin="20 20 0 0"
-                            FontFamily="Arial Black"
-                            HorizontalAlignment="Center"
-                        />
-                        <Label
-                            Content="3"
-                            FontSize="18"
-                            Margin="20 0 0 0"
-                            FontFamily="Arial Black"
-                            HorizontalAlignment="Center"
-                        />
-                        <Label
-                            Content="2"
-                            FontSize="18"
-                            Margin="20 0 0 0"
-                            FontFamily="Arial Black"
-                            HorizontalAlignment="Center"
-                        />
-                        <Label
-                            Content="1"
-                            FontSize="18"
-                            Margin="20 0 0 0"
-                            FontFamily="Arial Black"
-                            HorizontalAlignment="Center"
-                        />
-                    </StackPanel>
-                </Grid>
-                <TextBlock
-                    Width="720"
-                    Height="170"
-                    FontSize="14"
-                    Margin="20,20,0,0"
-                    FontFamily="Arial"
-                    TextWrapping="Wrap"
-                    HorizontalAlignment="Left"
-                    Text="Doplňující informace"
-                />
-            </StackPanel>
-        </ScrollViewer>
+        <Grid Margin="0 10 0 10" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="106" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                FontSize="14"
+                Grid.Column="0"
+                Margin="0 0 0 4"
+                Content="Činnost"
+                FontWeight="DemiBold"
+            />
+            <Label
+                Grid.Row="0"
+                FontSize="14"
+                Grid.Column="1"
+                Margin="0 0 0 4"
+                FontWeight="DemiBold"
+                Content="Provedenní činnosti"
+            />
+            <Label
+                Grid.Row="0"
+                FontSize="14"
+                Grid.Column="2"
+                Margin="0 0 0 4"
+                Content="Bodové skóre"
+                FontWeight="DemiBold"
+                HorizontalContentAlignment="Center"
+            />
+            <ItemsControl
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                ItemsSource="{Binding Scales}"
+                d:DataContext="{d:DesignInstance vm:DecubitusViewModel}"
+            >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300" />
+                                    <ColumnDefinition Width="300" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Column="0"
+                                    Margin="2 0 0 0"
+                                    Content="{Binding Name, Converter={StaticResource ToCapitalCaseConverter}}"
+                                />
+                                <ItemsControl
+                                    Grid.Column="1"
+                                    ItemsSource="{Binding Activities}"
+                                >
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel
+                                                    Grid.Column="0"
+                                                    Orientation="Vertical"
+                                                >
+                                                    <CheckBox
+                                                        Margin="4 0 0 0"
+                                                        IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                    >
+                                                        <Label
+                                                            Margin="0 -4 0 0"
+                                                            Content="{Binding Name, Converter={StaticResource ToCapitalCaseConverter}}"
+                                                        />
+                                                    </CheckBox>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <ItemsControl
+                                    Grid.Column="2"
+                                    ItemsSource="{Binding Activities}"
+                                >
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label
+                                                Content="{Binding Score}"
+                                                HorizontalContentAlignment="Center"
+                                            />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+                            <Separator
+                                Margin="4"
+                                Background="{DynamicResource MaterialDesignDarkSeparatorBackground}"
+                            />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
         <StackPanel
             Grid.Row="2"
-            Margin="0 0 0 0"
             Orientation="Horizontal"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
         >
             <Button
                 Content="1"
-                Margin="0 0 10 0"
                 x:Name="Activity"
+                FontWeight="Bold"
+                Margin="0 0 10 0"
             />
             <Button
                 Content="2"
                 Margin="0 0 10 0"
+                x:Name="Decubitus"
                 Background="Orange"
             />
             <Button
                 Content="3"
+                Cursor="Hand"
                 Margin="0 0 10 0"
                 x:Name="Malnutrition"
             />
             <Button
                 Content="4"
                 x:Name="Fall"
-                Margin="0 0 0 0"
             />
         </StackPanel>
     </Grid>

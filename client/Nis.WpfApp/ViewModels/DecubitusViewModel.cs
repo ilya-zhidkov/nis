@@ -1,18 +1,52 @@
-﻿using Caliburn.Micro;
+﻿using AutoMapper;
+using Caliburn.Micro;
+using Nis.WpfApp.Models;
+using Nis.Core.Persistence;
+using Nis.Core.Models.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace Nis.WpfApp.ViewModels;
 
 public class DecubitusViewModel : Screen
 {
-    private readonly IEventAggregator _eventAggregator;
+    private readonly IMapper _mapper;
+    private readonly DataContext _context;
+    private readonly IEventAggregator _aggregator;
+    private BindableCollection<MedicalScale> _scales;
 
-    public DecubitusViewModel(IEventAggregator eventAggregator) => _eventAggregator = eventAggregator;
+    public BindableCollection<MedicalScale> Scales
+    {
+        get => _scales;
+        set
+        {
+            _scales = value;
+            NotifyOfPropertyChange(() => Scales);
+        }
+    }
 
-    public async Task Activity() => await _eventAggregator.PublishOnUIThreadAsync("Activity");
+    public DecubitusViewModel(
+        IMapper mapper,
+        DataContext context,
+        IEventAggregator aggregator
+    )
+    {
+        _mapper = mapper;
+        _context = context;
+        _aggregator = aggregator;
+    }
 
-    public async Task Decubitus() => await _eventAggregator.PublishOnUIThreadAsync("Decubitus");
+    public async Task Activity() => await _aggregator.PublishOnUIThreadAsync("Activity");
 
-    public async Task Malnutrition() => await _eventAggregator.PublishOnUIThreadAsync("Malnutrition");
+    public async Task Decubitus() => await _aggregator.PublishOnUIThreadAsync("Decubitus");
 
-    public async Task Fall() => await _eventAggregator.PublishOnUIThreadAsync("Fall");
+    public async Task Malnutrition() => await _aggregator.PublishOnUIThreadAsync("Malnutrition");
+
+    public async Task Fall() => await _aggregator.PublishOnUIThreadAsync("Fall");
+    
+    protected override async void OnViewLoaded(object view) => Scales = _mapper.Map<BindableCollection<MedicalScale>>(
+        await _context.MedicalScales
+            .Include(scale => scale.Activities)
+            .Where(scale => scale.ScaleCategory == MedicalScaleCategory.RiskOfDecubitus)
+            .ToListAsync()
+    );
 }
