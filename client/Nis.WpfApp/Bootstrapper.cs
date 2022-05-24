@@ -1,12 +1,12 @@
 ﻿using Caliburn.Micro;
 using System.Windows;
+using Notification.Wpf;
 using Nis.Core.Persistence;
 using Nis.WpfApp.Extensions;
 using Nis.WpfApp.ViewModels;
 using Nis.WpfApp.Conventions;
 using System.Windows.Controls;
 using Nis.Core.Persistence.Seeders;
-using Notification.Wpf;
 
 namespace Nis.WpfApp;
 

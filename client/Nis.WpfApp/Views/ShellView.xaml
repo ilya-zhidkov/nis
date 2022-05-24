@@ -15,13 +15,14 @@
     Background="Transparent"
     AllowsTransparency="True"
     WindowStartupLocation="CenterScreen"
+    FontFamily="{StaticResource Poppins-Regular}"
     >
     <Border CornerRadius="20" Background="White">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="228" />
+                <ColumnDefinition Width="220" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="228" />
+                <ColumnDefinition Width="220" />
             </Grid.ColumnDefinitions>
             <Grid>
                 <StackPanel Orientation="Vertical" Margin="0,80,0,0">
@@ -62,8 +63,18 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1" Background="#EFF2F8">
-                <ContentControl x:Name="ActiveItem" />
-                <notifications:NotificationArea x:Name="WindowArea" Position="TopCenter" MaxItems="3"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ContentControl
+                        Width="Auto"
+                        Margin="0 20 0 20"
+                        x:Name="ActiveItem"
+                    />
+                </ScrollViewer>
+                <notifications:NotificationArea
+                    MaxItems="3"
+                    x:Name="WindowArea"
+                    Position="TopCenter"
+                />
             </Grid>
             <StackPanel Grid.Column="2">
                 <Grid>

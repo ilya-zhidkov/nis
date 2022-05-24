@@ -25,7 +25,7 @@
             Grid.Row="2"
             Height="40"
             Width="230"
-            FontSize="18"
+            FontSize="14"
             Margin="20 0 0 20"
             x:Name="Diagnoses"
             DisplayMemberPath="Name"
@@ -38,7 +38,7 @@
             Grid.Row="2"
             Height="40"
             Width="230"
-            FontSize="18"
+            FontSize="14"
             Margin="5 0 0 20"
             x:Name="Departments"
             DisplayMemberPath="Name"
@@ -52,7 +52,7 @@
             Grid.Row="2"
             Width="230"
             Height="40"
-            FontSize="18"
+            FontSize="14"
             x:Name="Diets"
             Margin="0 0 20 20"
             DisplayMemberPath="Name"
@@ -64,7 +64,7 @@
         <StackPanel
             Grid.Row="0"
             Width="Auto"
-            Margin="0 60 60 0"
+            Margin="0 60 20 0"
             Orientation="Horizontal"
             VerticalAlignment="Center"
             HorizontalAlignment="Right"
@@ -99,7 +99,7 @@
         />
         <Label
             Grid.Row="2"
-            FontSize="18"
+            FontSize="16"
             FontWeight="Bold"
             Content="Oddělení"
             Margin="-144 0 0 70"
@@ -109,7 +109,7 @@
         />
         <Label
             Grid.Row="2"
-            FontSize="18"
+            FontSize="16"
             Content="Dieta"
             FontWeight="Bold"
             Margin="0 0 204 70"
@@ -119,18 +119,18 @@
         />
         <Label
             Grid.Row="2"
-            FontSize="18"
+            FontSize="16"
             Content="Diagnóza"
             FontWeight="Bold"
             Margin="16 0 0 70"
+            Visibility="Visible"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
-            Visibility="Visible"
         />
         <Label
             Grid.Row="0"
             FontSize="14"
-            Margin="150 60 0 0"
+            Margin="136 62 0 0"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             Content="{Binding TimeLeft, Converter={StaticResource NumberToStringConverter}}"
@@ -148,35 +148,35 @@
         <Label
             Grid.Row="0"
             FontSize="16"
+            FontWeight="Bold"
             Margin="20 60 0 0"
             Content="Zbývající čas:"
             VerticalAlignment="Center"
-            FontFamily="Arial Black"
             HorizontalAlignment="Left"
         />
-        <Label
+        <StackPanel
             Grid.Row="1"
-            FontSize="14"
-            Content="Anamnéza"
-            Margin="20 80 0 0"
-            VerticalAlignment="Top"
-            FontFamily="Arial Black"
+            Margin="20 40"
+            Orientation="Vertical"
             HorizontalAlignment="Left"
-        />
-        <TextBlock
-            Grid.Row="1"
-            Width="780"
-            Height="Auto"
-            FontSize="14"
-            LineHeight="25"
-            x:Name="Anamnesis"
-            FontFamily="Arial"
-            TextWrapping="Wrap"
-            Padding="2 0 2 0"
-            Margin="0 120 0 40"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            LineStackingStrategy="BlockLineHeight"
-        />
+        >
+            <Label
+                FontSize="16"
+                FontWeight="Bold"
+                Content="Anamnéza"
+                VerticalAlignment="Top"
+            />
+            <TextBlock
+                Width="780"
+                Height="Auto"
+                FontSize="14"
+                LineHeight="25"
+                Padding="4 0 4 0"
+                x:Name="Anamnesis"
+                TextWrapping="Wrap"
+                VerticalAlignment="Center"
+                LineStackingStrategy="BlockLineHeight"
+            />
+        </StackPanel>
     </Grid>
 </UserControl>
