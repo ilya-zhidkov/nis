@@ -13,8 +13,8 @@ public class DataContext : DbContext
     public DbSet<Patient> Patients { get; set; }
     public DbSet<Diagnosis> Diagnoses { get; set; }
     public DbSet<Department> Departments { get; set; }
-    public DbSet<MedicalScale> MedicalScales { get; set; }
-    public DbSet<MedicalScaleActivity> MedicalScaleActivities { get; set; }
+    public DbSet<Scale> Scales { get; set; }
+    public DbSet<ScaleActivity> ScaleActivities { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options) : base(options) { /* ... */ }
 
