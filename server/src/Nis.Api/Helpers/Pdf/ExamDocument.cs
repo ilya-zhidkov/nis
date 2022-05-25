@@ -96,7 +96,7 @@ public class ExamDocument : IDocument
             {
                 ComposeTable(x,
                     selectedMedicalScales: medicalScales.FindAll(scale =>
-                        scale.ScaleCategory == MedicalScaleCategory.ADL));
+                        scale.ScaleType == ScaleType.Activity));
             });
 
             ComposeTitleOfThePage(col, headerText: "Posouzení rizika vzniku dekubitů");
@@ -105,7 +105,7 @@ public class ExamDocument : IDocument
             {
                 ComposeTable(x,
                     selectedMedicalScales: medicalScales.FindAll(scale =>
-                        scale.ScaleCategory == MedicalScaleCategory.RiskOfDecubitus));
+                        scale.ScaleType == ScaleType.Decubitus));
             });
 
             ComposeTitleOfThePage(col, headerText: "Zjištění rizika pádu pacienta");
@@ -114,40 +114,28 @@ public class ExamDocument : IDocument
             {
                 ComposeTable(x,
                     selectedMedicalScales: medicalScales.FindAll(scale =>
-                        scale.ScaleCategory == MedicalScaleCategory.RiskOfFall));
+                        scale.ScaleType == ScaleType.RiskOfFall));
             });
 
 
-            ComposeTitleOfThePage(col, headerText: "Hodnocení nutričního stavu - Screening");
+            ComposeTitleOfThePage(col, headerText: "Hodnocení nutričního stavu");
 
             col.Item().Table(x =>
             {
                 ComposeTable(x,
                     selectedMedicalScales: medicalScales.FindAll(scale =>
-                        scale.ScaleCategory == MedicalScaleCategory.NutritionalStatusAssessmentScreening));
-            });
-
-
-            ComposeTitleOfThePage(col, headerText: "Hodnocení nutričního stavu - Doplňující vyšetření");
-
-            col.Item().Table(x =>
-            {
-                ComposeTable(x,
-                    selectedMedicalScales: medicalScales.FindAll(scale =>
-                        scale.ScaleCategory == MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination),
-                    customWidthOfTheActivityNameColumn: 250);
+                        scale.ScaleType == ScaleType.Malnutrition));
             });
         });
     }
 
     private void ComposeTitleOfThePage(ColumnDescriptor columnDescriptor, string headerText)
     {
-        columnDescriptor.Item().PageBreak();
         columnDescriptor.Item().AlignCenter().Text($"{headerText}").SemiBold().FontSize(20);
         columnDescriptor.Spacing(10);
     }
 
-    private void ComposeTable(TableDescriptor table, List<MedicalScale> selectedMedicalScales,
+    private void ComposeTable(TableDescriptor table, List<Scale> selectedMedicalScales,
         int customWidthOfTheActivityNameColumn = 150)
     {
         if (!selectedMedicalScales.Any()) return;
