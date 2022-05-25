@@ -8,16 +8,16 @@
     xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
     Title="Výukový Nemocniční Informační Systém"
     mc:Ignorable="d"
-    Height="760"
-    Width="1280"
+    MinHeight="760"
+    MinWidth="1280"
     WindowStyle="None"
-    ResizeMode="NoResize"
-    Background="Transparent"
     AllowsTransparency="True"
+    ResizeMode="CanResizeWithGrip"
+    Background="Transparent"
     WindowStartupLocation="CenterScreen"
     FontFamily="{StaticResource Poppins-Regular}"
-    >
-    <Border CornerRadius="20" Background="White">
+    xmlns:converters="clr-namespace:Nis.WpfApp.Converters">
+    <Border CornerRadius="20" Background="{Binding BackCol}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220" />
@@ -47,7 +47,51 @@
                             x:Name="StartExam"
                             Content="Začít test"
                             HorizontalAlignment="Center"
-                            FontFamily="{StaticResource Poppins-Regular}"
+                            FontFamily="{StaticResource Poppins-Regular}" Cursor="Hand"
+                        >
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
+                            </Button.BorderBrush>
+                            <Button.Foreground>
+                                <SolidColorBrush Color="{DynamicResource Accent200Foreground}" />
+                            </Button.Foreground>
+                            <Button.Background>
+                                <SolidColorBrush />
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Vertical"
+                    >
+                        <Button
+                            FontSize="16"
+                            x:Name="OpenInstructions"
+                            Content="Instrukce"
+                            HorizontalAlignment="Center"
+                            FontFamily="{StaticResource Poppins-Regular}" Cursor="Hand"
+                        >
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
+                            </Button.BorderBrush>
+                            <Button.Foreground>
+                                <SolidColorBrush Color="{DynamicResource Accent200Foreground}" />
+                            </Button.Foreground>
+                            <Button.Background>
+                                <SolidColorBrush />
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Vertical"
+                    >
+                        <Button
+                            FontSize="16"
+                            x:Name="OpenSettings"
+                            Content="Nastavení"
+                            HorizontalAlignment="Center"
+                            FontFamily="{StaticResource Poppins-Regular}" Cursor="Hand"
                         >
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
@@ -93,7 +137,7 @@
                         Margin="0 0 20 10"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
-                        x:Name="ShutdownApplication"
+                        x:Name="ShutdownApplication" Cursor="Hand"
                     >
                         <TextBlock Text="x" Margin="0 -3 0 0" />
                     </Button>

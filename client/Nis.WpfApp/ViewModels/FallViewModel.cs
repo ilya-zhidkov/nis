@@ -44,7 +44,11 @@ public class FallViewModel : Screen
 
     public async Task Fall() => await _aggregator.PublishOnUIThreadAsync("Fall");
 
-    public void Submit() => MessageBox.Show("Odesláno");
+    public void Submit()
+    {
+        MessageBox.Show("Odesláno");
+        _aggregator.PublishOnUIThreadAsync("Instructions");
+    }
 
     protected override async void OnViewLoaded(object view) => Scales = _mapper.Map<BindableCollection<MedicalScale>>(
         await _context.MedicalScales

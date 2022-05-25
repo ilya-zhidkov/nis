@@ -127,33 +127,30 @@
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
         />
-        <Label
+        <StackPanel
             Grid.Row="0"
-            FontSize="14"
-            Margin="136 62 0 0"
-            VerticalAlignment="Center"
+            VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
-            Content="{Binding TimeLeft, Converter={StaticResource NumberToStringConverter}}"
-        >
-            <Label.Resources>
-                <Style TargetType="Label">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=TimeLeft}" Value="0">
-                            <Setter Property="Foreground" Value="{StaticResource MaterialDesignValidationErrorBrush}" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Label.Resources>
-        </Label>
-        <Label
-            Grid.Row="0"
-            FontSize="16"
-            FontWeight="Bold"
-            Margin="20 60 0 0"
-            Content="Zbývající čas:"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Left"
-        />
+            Margin="20 0 0 10"
+            Orientation="Horizontal">
+            <Label
+                Grid.Row="0"
+                FontSize="16"
+                FontWeight="Bold"
+                Margin="0 0 20 10"
+                Content="Zbývající čas:"
+            />
+            <Label
+                FontSize="14"
+                Content="{Binding Minutes, Converter={StaticResource NumberToStringConverter}}"
+            />
+            <Label FontSize="14"
+                   Content=":"/>
+            <Label
+                FontSize="14"
+                Content="{Binding TimeLeft, Converter={StaticResource NumberToStringConverter}}"
+            />
+        </StackPanel>
         <StackPanel
             Grid.Row="1"
             Margin="20 40"
@@ -167,7 +164,7 @@
                 VerticalAlignment="Top"
             />
             <TextBlock
-                Width="780"
+                Width="Auto"
                 Height="Auto"
                 FontSize="14"
                 LineHeight="25"

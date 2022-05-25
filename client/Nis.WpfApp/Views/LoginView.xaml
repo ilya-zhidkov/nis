@@ -1,6 +1,8 @@
 ﻿<Window
     Width="450"
     Height="760"
+    MinWidth="450"
+    MinHeight="760"
     mc:Ignorable="d"
     Title="Přihlášení"
     WindowStartupLocation="CenterScreen"

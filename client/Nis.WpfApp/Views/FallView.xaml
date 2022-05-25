@@ -32,6 +32,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />
@@ -129,11 +130,21 @@
                             <Separator
                                 Margin="4"
                                 Background="{DynamicResource MaterialDesignDarkSeparatorBackground}"
-                            />
+                            />                            
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <TextBox TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     Width="Auto"
+                     Background="White"
+                     Height="200"
+                     Grid.Row="2"
+                     Grid.ColumnSpan="3" Cursor="Arrow"
+                     VerticalScrollBarVisibility="Visible">
+                Doplňující informace
+            </TextBox>
         </Grid>
         <StackPanel
             Grid.Row="2"
@@ -164,5 +175,14 @@
                 Background="Orange"
             />
         </StackPanel>
+            <Button
+                Width="Auto"
+                Grid.Row="2"
+                Content="Odeslat"
+                HorizontalAlignment="Right"
+                Margin="0 0 10 0"
+                VerticalAlignment="Center"
+                x:Name="Submit"
+            />
     </Grid>
 </UserControl>
