@@ -135,16 +135,6 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <TextBox TextWrapping="Wrap"
-                     AcceptsReturn="True"
-                     Width="Auto"
-                     Background="White"
-                     Height="200"
-                     Grid.Row="2"
-                     Grid.ColumnSpan="3" Cursor="Arrow"
-                     VerticalScrollBarVisibility="Visible">
-                Doplňující informace
-            </TextBox>
         </Grid>
         <StackPanel
             Grid.Row="2"

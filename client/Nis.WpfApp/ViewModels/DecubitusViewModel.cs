@@ -44,9 +44,9 @@ public class DecubitusViewModel : Screen
     public async Task Fall() => await _aggregator.PublishOnUIThreadAsync("Fall");
     
     protected override async void OnViewLoaded(object view) => Scales = _mapper.Map<BindableCollection<MedicalScale>>(
-        await _context.MedicalScales
+        await _context.Scales
             .Include(scale => scale.Activities)
-            .Where(scale => scale.ScaleCategory == MedicalScaleCategory.RiskOfDecubitus)
+            .Where(scale => scale.ScaleType == ScaleType.Decubitus)
             .ToListAsync()
     );
 }

@@ -71,7 +71,7 @@ public class PatientClassificationViewModel : Screen
             }
         }
     }
-
+    
     public byte Limit => _limit;
     public bool CanSubmit => SelectedDiet?.Name == "Tekutá" && Attempts < Limit && TimeLeft > 0;
     public bool CanDisplayDiets => SelectedDepartment?.Name == "Kardiologie" && TimeLeft > 0;

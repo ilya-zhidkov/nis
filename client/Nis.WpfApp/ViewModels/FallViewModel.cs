@@ -51,9 +51,9 @@ public class FallViewModel : Screen
     }
 
     protected override async void OnViewLoaded(object view) => Scales = _mapper.Map<BindableCollection<MedicalScale>>(
-        await _context.MedicalScales
+        await _context.Scales
             .Include(scale => scale.Activities)
-            .Where(scale => scale.ScaleCategory == MedicalScaleCategory.RiskOfFall)
+            .Where(scale => scale.ScaleType == ScaleType.RiskOfFall)
             .ToListAsync()
     );
 }

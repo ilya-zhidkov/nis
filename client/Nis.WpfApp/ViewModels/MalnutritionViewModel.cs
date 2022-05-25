@@ -46,13 +46,9 @@ public class MalnutritionViewModel : Screen
     protected override async void OnViewLoaded(object view)
     {
         Scales = _mapper.Map<BindableCollection<MedicalScale>>(
-            await _context.MedicalScales
+            await _context.Scales
                 .Include(scale => scale.Activities)
-                .Where(scale => scale.ScaleCategory == MedicalScaleCategory.NutritionalStatusAssessmentScreening)
-                .Union(_context.MedicalScales
-                    .Include(scale => scale.Activities)
-                    .Where(scale => scale.ScaleCategory == MedicalScaleCategory.NutritionalStatusAssessmentAdditionalExamination)
-                )
+                .Where(scale => scale.ScaleType == ScaleType.Malnutrition)
                 .ToListAsync()
         );
     }
