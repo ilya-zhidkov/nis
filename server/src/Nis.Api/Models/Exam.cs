@@ -11,5 +11,5 @@ public class Exam
     public string Anamnesis { get; set; }
     public string Department { get; set; }
     public Student Student { get; set; }
-    public IEnumerable<MedicalScale> MedicalScales { get; set; } = new List<MedicalScale>();
+    public IEnumerable<Scale> Scales { get; set; } = new List<Scale>();
 }

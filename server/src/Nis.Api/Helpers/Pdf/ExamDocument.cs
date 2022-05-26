@@ -87,7 +87,7 @@ public class ExamDocument : IDocument
                 table.Cell().Row(4).Column(2).Element(BlockTableValueStyle).Text($"{_exam.Diet}");
             });
 
-            var medicalScales = _exam.MedicalScales.ToList();
+            var medicalScales = _exam.Scales.ToList();
 
 
             ComposeTitleOfThePage(col, headerText: "Barthelův test základních všedních činností ADL");
