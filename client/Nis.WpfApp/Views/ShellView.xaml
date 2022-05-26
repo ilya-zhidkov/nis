@@ -16,7 +16,7 @@
     Background="Transparent"
     WindowStartupLocation="CenterScreen"
     FontFamily="{StaticResource Poppins-Regular}"
-    xmlns:converters="clr-namespace:Nis.WpfApp.Converters">
+>
     <Border CornerRadius="20" Background="{Binding BackCol}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -43,6 +43,7 @@
                         Orientation="Vertical"
                     >
                         <Button
+                            Width="120"
                             FontSize="16"
                             x:Name="StartExam"
                             Content="Začít test"
@@ -65,9 +66,10 @@
                         Orientation="Vertical"
                     >
                         <Button
+                            Width="120"
                             FontSize="16"
-                            x:Name="OpenInstructions"
                             Content="Instrukce"
+                            x:Name="OpenInstructions"
                             HorizontalAlignment="Center"
                             FontFamily="{StaticResource Poppins-Regular}" Cursor="Hand"
                         >
@@ -87,6 +89,7 @@
                         Orientation="Vertical"
                     >
                         <Button
+                            Width="120"
                             FontSize="16"
                             x:Name="OpenSettings"
                             Content="Nastavení"

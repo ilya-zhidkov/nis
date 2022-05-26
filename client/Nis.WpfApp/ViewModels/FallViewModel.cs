@@ -71,9 +71,9 @@ public class FallViewModel : Screen
 
         _form.Scales = _form.Scales.Concat(scales);
 
-        await _request.UploadAsync(_form);
-
         _notifications.Show("Test vyplněn!", "Vaše výsledky byly odeslány k vyhodnocení.", NotificationType.Success, "WindowArea");
+
+        await _request.UploadAsync(_form);
     }
 
     protected override async void OnViewLoaded(object view)
