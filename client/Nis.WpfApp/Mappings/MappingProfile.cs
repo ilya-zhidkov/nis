@@ -9,9 +9,9 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<Domain.Patient, Client.Patient>();
-        CreateMap<Domain.MedicalScales.MedicalScaleActivity, Client.MedicalScaleActivity>();
-        CreateMap<Domain.MedicalScales.MedicalScale, Client.MedicalScale>()
-            .ForMember(scale => scale.Type, options => options.MapFrom(scale => scale.ScaleCategory));
+        CreateMap<Domain.MedicalScales.ScaleActivity, Client.MedicalScaleActivity>();
+        CreateMap<Domain.MedicalScales.Scale, Client.MedicalScale>()
+            .ForMember(scale => scale.ScaleType, options => options.MapFrom(scale => scale.ScaleType));
     }
 }
 

@@ -68,7 +68,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
                 ItemsSource="{Binding Scales}"
-                d:DataContext="{d:DesignInstance vm:ActivityViewModel}"
+                d:DataContext="{d:DesignInstance vm:MalnutritionViewModel}"
             >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

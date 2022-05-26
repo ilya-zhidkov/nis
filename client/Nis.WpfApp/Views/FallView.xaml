@@ -32,7 +32,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />
@@ -69,7 +68,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="3"
                 ItemsSource="{Binding Scales}"
-                d:DataContext="{d:DesignInstance vm:ActivityViewModel}"
+                d:DataContext="{d:DesignInstance vm:FallViewModel}"
             >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -130,7 +129,7 @@
                             <Separator
                                 Margin="4"
                                 Background="{DynamicResource MaterialDesignDarkSeparatorBackground}"
-                            />                            
+                            />
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -165,14 +164,19 @@
                 Background="Orange"
             />
         </StackPanel>
-            <Button
-                Width="Auto"
-                Grid.Row="2"
-                Content="Odeslat"
-                HorizontalAlignment="Right"
-                Margin="0 0 10 0"
-                VerticalAlignment="Center"
-                x:Name="Submit"
-            />
+        <Button
+            Width="140"
+            Height="50"
+            Grid.Row="2"
+            FontSize="18"
+            Cursor="Hand"
+            x:Name="Submit"
+            FontWeight="Bold"
+            Content="Odeslat"
+            Foreground="White"
+            Margin="0 0 4 0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+        />
     </Grid>
 </UserControl>

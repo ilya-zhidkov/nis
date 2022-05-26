@@ -9,7 +9,7 @@ public class UploadRequest : BaseRequest
 {
     public async Task UploadAsync(Form form)
     {
-        await PostAsync<IDictionary<string, string>>(
+        await PostAsync<IDictionary<string, object>>(
             uri: $"{Endpoint}/exams",
             content: new StringContent(
                 JsonSerializer.Serialize(form),

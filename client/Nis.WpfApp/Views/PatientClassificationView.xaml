@@ -89,10 +89,10 @@
             Height="50"
             FontSize="18"
             Cursor="Hand"
-            x:Name="Submit"
-            Content="Odeslat"
+            x:Name="Proceed"
             FontWeight="Bold"
             Foreground="White"
+            Content="Pokračovat"
             Margin="0 20 20 20"
             VerticalAlignment="Center"
             HorizontalAlignment="Right"
@@ -132,20 +132,22 @@
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
             Margin="20 0 0 10"
-            Orientation="Horizontal">
+            Orientation="Horizontal"
+        >
             <Label
-                Grid.Row="0"
                 FontSize="16"
                 FontWeight="Bold"
-                Margin="0 0 20 10"
+                Margin="0 0 4 10"
                 Content="Zbývající čas:"
             />
             <Label
                 FontSize="14"
                 Content="{Binding Minutes, Converter={StaticResource NumberToStringConverter}}"
             />
-            <Label FontSize="14"
-                   Content=":"/>
+            <Label
+                FontSize="14"
+                Content=":"
+            />
             <Label
                 FontSize="14"
                 Content="{Binding TimeLeft, Converter={StaticResource NumberToStringConverter}}"

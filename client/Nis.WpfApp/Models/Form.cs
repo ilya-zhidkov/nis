@@ -8,4 +8,7 @@ public class Form
     public string Department { get; set; }
     public string Diet { get; set; }
     public Student Student { get; set; }
+    public IEnumerable<MedicalScale> Scales { get; set; }
+
+    public Form() => Scales = new List<MedicalScale>();
 }

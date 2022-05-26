@@ -1,21 +1,18 @@
 ﻿using Caliburn.Micro;
+using Notification.Wpf;
 using Nis.WpfApp.Models;
-using Nis.WpfApp.Messages;
-using Nis.WpfApp.Requests;
 using Nis.Core.Persistence;
 using System.Windows.Threading;
 using Microsoft.EntityFrameworkCore;
-using Notification.Wpf;
 
 namespace Nis.WpfApp.ViewModels;
 
 public class PatientClassificationViewModel : Screen
 {
     private readonly DataContext _context;
-    private readonly UploadRequest _request;
     private readonly SimpleContainer _container;
-    private readonly IEventAggregator _eventAggregator;
-    private readonly INotificationManager _notificationManager;
+    private readonly IEventAggregator _aggregator;
+    private readonly INotificationManager _notifications;
     private byte _attempts;
     private double _timeLeft;
     private double _miutes;
@@ -63,17 +60,15 @@ public class PatientClassificationViewModel : Screen
         {
             _miutes = value;
             NotifyOfPropertyChange(() => Minutes);
-            NotifyOfPropertyChange(() => CanSubmit);
+            NotifyOfPropertyChange(() => CanProceed);
+
             if (_miutes <= 0)
-            {
-                _notificationManager.Show("Test nesplněn", "Bohužel, test nebyl splněn v zadaném intervalu.",
-                    NotificationType.Warning, "WindowArea");
-            }
+                _notifications.Show("Test nesplněn", "Bohužel, test nebyl splněn v zadaném intervalu.", NotificationType.Warning, "WindowArea");
         }
     }
     
     public byte Limit => _limit;
-    public bool CanSubmit => SelectedDiet?.Name == "Tekutá" && Attempts < Limit && TimeLeft > 0;
+    public bool CanProceed => SelectedDiet?.Name == "Tekutá" && Attempts < Limit && TimeLeft > 0;
     public bool CanDisplayDiets => SelectedDepartment?.Name == "Kardiologie" && TimeLeft > 0;
     public bool CanDisplayDepartments => SelectedDiagnosis?.Name == "Infarkt myokardu" && TimeLeft > 0;
 
@@ -128,7 +123,7 @@ public class PatientClassificationViewModel : Screen
                 Attempts++;
 
             NotifyOfPropertyChange(() => SelectedDiet);
-            NotifyOfPropertyChange(() => CanSubmit);
+            NotifyOfPropertyChange(() => CanProceed);
         }
     }
 
@@ -164,26 +159,22 @@ public class PatientClassificationViewModel : Screen
 
     public PatientClassificationViewModel(
         DataContext context,
-        UploadRequest request,
         SimpleContainer container,
-        IEventAggregator eventAggregator,
-        INotificationManager notificationManager
+        IEventAggregator aggregator,
+        INotificationManager notifications
     )
     {
         _context = context;
-        _request = request;
         _container = container;
-        _eventAggregator = eventAggregator;
-        _notificationManager = notificationManager;
+        _aggregator = aggregator;
+        _notifications = notifications;
     }
 
-    public async Task SubmitAsync()
+    public async Task ProceedAsync()
     {
         _timer.Stop();
 
-        await _eventAggregator.PublishOnUIThreadAsync("Activity");
-
-        await _request.UploadAsync(new Form
+        _container.Instance(new Form
         {
             Anamnesis = Anamnesis,
             Diet = SelectedDiet.Name,
@@ -191,6 +182,8 @@ public class PatientClassificationViewModel : Screen
             Department = SelectedDepartment.Name,
             Student = _container.GetInstance<Student>()
         });
+
+        await _aggregator.PublishOnUIThreadAsync("Activity");
     }
 
     protected override async void OnViewLoaded(object view)
@@ -218,6 +211,7 @@ public class PatientClassificationViewModel : Screen
     private void timer_Tick(object sender, EventArgs e)
     {
         TimeLeft--;
+
         if (Minutes == 0 || Attempts >= Limit)
             _timer.Stop();
     }
