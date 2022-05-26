@@ -2,85 +2,37 @@
 
 Výukový **N**emocniční **I**nformační **S**ystém pro fakultu zdravotnických studií v Ústí nad Labem.
 
----
-
-## TABLE OF CONTENTS
-
-* [Requirements](#requirements)
-    + [Back End](#back-end)
-    + [Front End](#front-end)
-* [Setup](#setup)
-    + [Core](#core)
-    + [Web API](#web-api)
-    + [WPF](#wpf)
-    + [Tests](#tests)
+Web: [https://vnis.herokuapp.com](https://vnis.herokuapp.com/)
 
 ---
 
-## Requirements
+## Snímky
 
-### Back End
+![VNIS](/assets/screenshots/showcase.png)
 
-- .NET 6.0 SDK (https://dotnet.microsoft.com/download/dotnet-core/6.0)
-- SQLite (https://www.sqlite.org/download.html)
-- _(optional)_ dotnet-ef (https://docs.microsoft.com/en-us/ef/core/cli/dotnet)
+## :page_facing_up: Obsah
 
-### Front End
+* [:books: O Projektu](#books-o-projektu)
+* [:floppy_disk: Instalace](#floppy_disk-instalace)
+* [:envelope: Kontakt](#envelope-kontakt)
 
-- .NET 6.0 SDK (https://dotnet.microsoft.com/download/dotnet-core/6.0)
+## :books: O projektu
 
----
+Informační systém, který má ve zjednodušené formě svým vzhledem a funkcemi připravit studenty FZS do praxe.
 
-## Setup
+Momentálně je možné:
 
-### Core
+1. Autentifikace prostřednictvím Moodle.
+2. Klasifikace pacienta dle předepsané anamnézy.
+3. Posouzení možných rizik pacientů na základě hodnoticích škál.
+4. Vyhodnocení praktického testu do PDF formy.
+5. Pohodlné nahrání vypracování přímo z prostředí aplikace.
+___
 
-1. Apply existing database migrations
+## :floppy_disk: Instalace
 
-    ```bash
-    Nis.Core> dotnet ef database update
-    ```
+### Dokumentace je dostupná na [wiki stránce](https://github.com/ilya-zhidkov/nis/wiki/)  :books:
 
-2. Locate database on disk
+## :envelope: Kontakt
 
-    ```bash
-   # Change directory to user's folder
-   > cd C:\Users\<username>\AppData\Roaming
-   
-   # Enter into SQLite environment
-   > C:\Users\<username>\AppData\Roaming sqlite3
-   
-   # Preview database schema in SQLite
-   sqlite> .open nis.db
-   ```
-
-### Web API
-
-1. Listen for changes on https://localhost:5001
-
-    ```bash
-    Nis.Api> dotnet watch run
-    ```
-
-2. Inspect Swagger Open API Specification
-
-    ```bash
-    https://localhost:5001/swagger
-    ```
-
-### WPF
-
-1. Set **Nis.WpfApp** as a startup project (if not already).
-2. Press `F5` to run in debug mode or `Ctrl + F5` to start without debugging.
-
-### Tests
-
-   ```bash
-   # Switch to test environment
-   tests> setx ASPNETCORE_ENVIRONMENT "Test"
-   
-   # IMPORTANT! Reload the command-line window.
-   
-   # Check if the environment variable has been set.
-   tests> set ASPNETCORE_ENVIRONMENT
-   ```
+* [Ilya Zhidkov](https://github.com/ilya-zhidkov/), email: zidkov.ilja@gmail.com
