@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "309ca07b-9602-4a91-b023-78123d63067b",
+		"name": "NIS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3486304"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "patients",
+					"item": [
+						{
+							"name": "patients",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/patients",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"patients"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "students",
+					"item": [
+						{
+							"name": "students",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=core_enrol_get_enrolled_users&courseid={{courseid}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"webservice",
+										"rest",
+										"server.php"
+									],
+									"query": [
+										{
+											"key": "wstoken",
+											"value": "{{token}}"
+										},
+										{
+											"key": "moodlewsrestformat",
+											"value": "json"
+										},
+										{
+											"key": "wsfunction",
+											"value": "core_enrol_get_enrolled_users"
+										},
+										{
+											"key": "courseid",
+											"value": "{{courseid}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "students/{username}",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=core_user_get_users_by_field&field=username&values[0]={{username}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"webservice",
+										"rest",
+										"server.php"
+									],
+									"query": [
+										{
+											"key": "wstoken",
+											"value": "{{token}}"
+										},
+										{
+											"key": "moodlewsrestformat",
+											"value": "json"
+										},
+										{
+											"key": "wsfunction",
+											"value": "core_user_get_users_by_field"
+										},
+										{
+											"key": "field",
+											"value": "username"
+										},
+										{
+											"key": "values[0]",
+											"value": "{{username}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "courses",
+					"item": [
+						{
+							"name": "courses",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=core_course_get_courses",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"webservice",
+										"rest",
+										"server.php"
+									],
+									"query": [
+										{
+											"key": "wstoken",
+											"value": "{{token}}"
+										},
+										{
+											"key": "moodlewsrestformat",
+											"value": "json"
+										},
+										{
+											"key": "wsfunction",
+											"value": "core_course_get_courses"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "submissions",
+					"item": [
+						{
+							"name": "submissions/{assignmentId}",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=mod_assign_get_submissions&assignmentids[0]=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"webservice",
+										"rest",
+										"server.php"
+									],
+									"query": [
+										{
+											"key": "wstoken",
+											"value": "{{token}}"
+										},
+										{
+											"key": "moodlewsrestformat",
+											"value": "json"
+										},
+										{
+											"key": "wsfunction",
+											"value": "mod_assign_get_submissions"
+										},
+										{
+											"key": "assignmentids[0]",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=core_webservice_get_site_info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"webservice",
+								"rest",
+								"server.php"
+							],
+							"query": [
+								{
+									"key": "wstoken",
+									"value": "{{token}}"
+								},
+								{
+									"key": "moodlewsrestformat",
+									"value": "json"
+								},
+								{
+									"key": "wsfunction",
+									"value": "core_webservice_get_site_info"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "authentication",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/login/token.php?username={{username}}&password={{password}}&service=moodle_mobile_app",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"login",
+										"token.php"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{username}}"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}"
+										},
+										{
+											"key": "service",
+											"value": "moodle_mobile_app"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "submissions",
+					"item": [
+						{
+							"name": "upload",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Jakub Vydra",
+											"type": "file",
+											"src": "/C:/Users/ilyaz/Downloads/Jakub Vydra.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/webservice/upload.php?token={{token}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"webservice",
+										"upload.php"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "save",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&wsfunction=mod_assign_save_submission&moodlewsrestformat=json&assignmentid=1&plugindata[onlinetext_editor][text]=Odevzdání&plugindata[onlinetext_editor][format]=1&plugindata[onlinetext_editor][itemid]=0&plugindata[files_filemanager]=673441896",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"webservice",
+										"rest",
+										"server.php"
+									],
+									"query": [
+										{
+											"key": "wstoken",
+											"value": "{{token}}"
+										},
+										{
+											"key": "wsfunction",
+											"value": "mod_assign_save_submission"
+										},
+										{
+											"key": "moodlewsrestformat",
+											"value": "json"
+										},
+										{
+											"key": "assignmentid",
+											"value": "1"
+										},
+										{
+											"key": "plugindata[onlinetext_editor][text]",
+											"value": "Odevzdání"
+										},
+										{
+											"key": "plugindata[onlinetext_editor][format]",
+											"value": "1"
+										},
+										{
+											"key": "plugindata[onlinetext_editor][itemid]",
+											"value": "0"
+										},
+										{
+											"key": "plugindata[files_filemanager]",
+											"value": "673441896"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "exams",
+					"item": [
+						{
+							"name": "completion",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"diet\": \"string\",\r\n  \"passed\": true,\r\n  \"diagnosis\": \"string\",\r\n  \"anamnesis\": \"string\",\r\n  \"department\": \"string\",\r\n  \"student\": {\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\"\r\n  },\r\n  \"scales\": [\r\n    {\r\n      \"name\": \"string\",\r\n      \"scaleType\": 1,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 10,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"string\",\r\n      \"scaleType\": 2,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 5,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"string\",\r\n      \"scaleType\": 3,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 0,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"string\",\r\n      \"scaleType\": 4,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 15,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"string\",\r\n      \"activities\": [\r\n        {\r\n          \"score\": 5,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/exams",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"exams"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://nis.moodlecloud.com",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "courseid",
+			"value": "4",
+			"type": "string"
+		}
+	]
+}
