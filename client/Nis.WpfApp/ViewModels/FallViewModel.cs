@@ -9,9 +9,10 @@ using ScaleType = Nis.Core.Models.Enums.ScaleType;
 
 namespace Nis.WpfApp.ViewModels;
 
-public class FallViewModel : Screen
+public class FallViewModel : Screen, IHandle<MedicalScaleActivity>
 {
     private Form _form;
+    private byte _points;
     private readonly IMapper _mapper;
     private readonly DataContext _context;
     private readonly UploadRequest _request;
@@ -19,6 +20,16 @@ public class FallViewModel : Screen
     private readonly IEventAggregator _aggregator;
     private BindableCollection<MedicalScale> _scales;
     private readonly INotificationManager _notifications;
+
+    public byte Points
+    {
+        get => _points;
+        set
+        {
+            _points = value;
+            NotifyOfPropertyChange(() => Points);
+        }
+    }
 
     public BindableCollection<MedicalScale> Scales
     {
@@ -86,5 +97,28 @@ public class FallViewModel : Screen
                 .Where(scale => scale.ScaleType == ScaleType.RiskOfFall)
                 .ToListAsync()
         );
+    }
+
+    public async Task HandleAsync(MedicalScaleActivity message, CancellationToken cancellationToken)
+    {
+        var (_, score, isChecked) = message;
+
+        Points = isChecked ? Points += score : Points -= score;
+
+        await Task.FromResult(Points);
+    }
+
+    protected override Task OnActivateAsync(CancellationToken cancellationToken)
+    {
+        _aggregator.SubscribeOnPublishedThread(this);
+
+        return base.OnActivateAsync(cancellationToken);
+    }
+
+    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+    {
+        _aggregator.Unsubscribe(this);
+
+        return base.OnDeactivateAsync(close, cancellationToken);
     }
 }

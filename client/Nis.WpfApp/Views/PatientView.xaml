@@ -15,7 +15,7 @@
                 <DataTemplate>
                     <TextBlock>
                         <TextBlock.Text>
-                            <MultiBinding  StringFormat="{}{0} {1}">
+                            <MultiBinding StringFormat="{}{0} {1}">
                                 <Binding Path="FirstName" />
                                 <Binding Path="LastName" />
                             </MultiBinding>

@@ -17,7 +17,10 @@
     WindowStartupLocation="CenterScreen"
     FontFamily="{StaticResource Poppins-Regular}"
 >
-    <Border CornerRadius="20" Background="{Binding BackCol}">
+    <Border
+        CornerRadius="20"
+        Background="{Binding BackCol}"
+    >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220" />
@@ -25,13 +28,16 @@
                 <ColumnDefinition Width="220" />
             </Grid.ColumnDefinitions>
             <Grid>
-                <StackPanel Orientation="Vertical" Margin="0,80,0,0">
+                <StackPanel
+                    Orientation="Vertical"
+                    Margin="0 80 0 0"
+                >
                     <TextBlock
                         Text="VNIS"
-                        Margin="65,0,0,0"
+                        FontSize="20"
+                        Margin="65 0 0 0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        FontSize="20"
                         FontFamily="{StaticResource Poppins-Bold}"
                     >
                         <TextBlock.Foreground>
@@ -45,10 +51,11 @@
                         <Button
                             Width="120"
                             FontSize="16"
+                            Cursor="Hand"
                             x:Name="StartExam"
                             Content="Začít test"
                             HorizontalAlignment="Center"
-                            FontFamily="{StaticResource Poppins-Regular}" Cursor="Hand"
+                            FontFamily="{StaticResource Poppins-Regular}" 
                         >
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
@@ -68,10 +75,11 @@
                         <Button
                             Width="120"
                             FontSize="16"
+                            Cursor="Hand"
                             Content="Instrukce"
                             x:Name="OpenInstructions"
                             HorizontalAlignment="Center"
-                            FontFamily="{StaticResource Poppins-Regular}" Cursor="Hand"
+                            FontFamily="{StaticResource Poppins-Regular}"
                         >
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
@@ -91,10 +99,11 @@
                         <Button
                             Width="120"
                             FontSize="16"
-                            x:Name="OpenSettings"
+                            Cursor="Hand"
                             Content="Nastavení"
+                            x:Name="OpenSettings"
                             HorizontalAlignment="Center"
-                            FontFamily="{StaticResource Poppins-Regular}" Cursor="Hand"
+                            FontFamily="{StaticResource Poppins-Regular}"
                         >
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource MaterialDesignShadow}" />
@@ -136,11 +145,12 @@
                     </Grid.RowDefinitions>
                     <Button
                         Height="25"
+                        Cursor="Hand"
                         Grid.Column="1"
                         Margin="0 0 20 10"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
-                        x:Name="ShutdownApplication" Cursor="Hand"
+                        x:Name="ShutdownApplication"
                     >
                         <TextBlock Text="x" Margin="0 -3 0 0" />
                     </Button>

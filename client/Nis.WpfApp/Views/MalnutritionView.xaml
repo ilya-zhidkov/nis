@@ -136,6 +136,13 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
+        <TextBlock
+            Grid.Row="2"
+            Margin="6 0 0 0"
+            VerticalAlignment="Center"
+            Text="{Binding Points, StringFormat='{}Počet bodů: {0}'}"
+            d:DataContext="{d:DesignInstance vm:MalnutritionViewModel}"
+        />
         <StackPanel
             Grid.Row="2"
             Orientation="Horizontal"

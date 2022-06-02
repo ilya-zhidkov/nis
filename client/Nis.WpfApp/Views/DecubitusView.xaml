@@ -135,6 +135,13 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
+        <TextBlock
+            Grid.Row="2"
+            Margin="6 0 0 0"
+            VerticalAlignment="Center"
+            d:DataContext="{d:DesignInstance vm:DecubitusViewModel}"
+            Text="{Binding Points, StringFormat='{}Počet bodů: {0}'}"
+        />
         <StackPanel
             Grid.Row="2"
             Orientation="Horizontal"

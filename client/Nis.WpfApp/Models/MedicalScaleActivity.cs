@@ -7,6 +7,7 @@ public class MedicalScaleActivity : PropertyChangedBase
     private byte _score;
     private string _name;
     private bool _isChecked;
+    private readonly IEventAggregator _aggregator;
 
     public byte Score
     {
@@ -35,6 +36,16 @@ public class MedicalScaleActivity : PropertyChangedBase
         {
             _isChecked = value;
             NotifyOfPropertyChange(() => IsChecked);
+            _aggregator.PublishOnUIThreadAsync(this);
         }
+    }
+
+    public MedicalScaleActivity() => _aggregator = IoC.Get<IEventAggregator>();
+
+    public void Deconstruct(out string name, out byte score, out bool isChecked)
+    {
+        name = Name;
+        score = Score;
+        isChecked = IsChecked;
     }
 }
