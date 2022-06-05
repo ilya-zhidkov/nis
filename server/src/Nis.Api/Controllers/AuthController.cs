@@ -23,14 +23,11 @@ public class AuthController : BaseApiController
         var (username, password) = body;
         var (url, _, service, _, _) = _options;
 
-        var response = await _http.GetAsync(
-            $"{url}/login/token.php?username={username}&password={password}&service={service}"
-        );
+        var response = await _http.GetAsync($"{url}/login/token.php?username={username}&password={password}&service={service}");
+        var result = JsonSerializer.Deserialize<IDictionary<string, string>>(await response.Content.ReadAsStringAsync())!;
 
-        var result = JsonSerializer.Deserialize<IDictionary<string, string>>(await response.Content.ReadAsStringAsync());
-
-        return result!.ContainsKey("error")
-            ? BadRequest(new { message = "Neplatné přihlašovací údaje"})
+        return result.ContainsKey("error")
+            ? Unauthorized(new { message = result["error"] })
             : Ok(result);
     }
 }
