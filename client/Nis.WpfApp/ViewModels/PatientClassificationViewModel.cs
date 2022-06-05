@@ -7,26 +7,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Nis.WpfApp.ViewModels;
 
-public class PatientClassificationViewModel : Screen
+public class PatientClassificationViewModel : Screen, IHandle<Assignment>
 {
-    private readonly DataContext _context;
-    private readonly SimpleContainer _container;
-    private readonly IEventAggregator _aggregator;
-    private readonly INotificationManager _notifications;
-    private byte _attempts;
-    private double _timeLeft;
+    private byte _mistakes;
     private double _miutes;
+    private double _timeLeft;
+    private string _anamnesis;
+    private int MMinutes = 10;
     private Diet _selectedDiet;
-    private const byte _limit = 3;
     private DispatcherTimer _timer;
     private const byte Seconds = 59;
-    private int MMinutes = 10;
-    private string _anamnesis = @"Na oddělení JIP byl přivezen RZS 56letý pacient. V anamnéze uvedl náhlé svíravé bolesti za hrudní kostí s vystřelováním do levé končetiny a do krku, které neustávaly. Měl pocit úzkosti a strach ze smrti. Uváděl i dušnost. Tento stav začal v zaměstnání po dlouhém a konfliktním jednání. Pracuje jako soukromý podnikatel. Nikdy žádné potíže neměl, ale od 45let se léčí na vysoký TK pomocí farmakologické léčby. Pravidelně chodí na kontroly, nedodržuje žádnou dietu ani správnou životosprávu. Pravidelné cvičení ani sport neprovozuje. Občas jezdí na kole a hraje tenis. Hodně pracuje, až 12-14hod. denně. RZS stabilizovala stav podáním léků do periferní žilní kanyly, sledovala EKG a FF do příjezdu, podávala nemocnému kyslík. Po základním vyšetření a stabilizování stavu bylo rozhodnuto provést u nemocného PTCA(PCI).";
     private Diagnosis _selectedDiagnosis;
+    private readonly DataContext _context;
     private Department _selectedDepartment;
     private BindableCollection<Diet> _diets;
+    private readonly SimpleContainer _container;
+    private readonly IEventAggregator _aggregator;
     private BindableCollection<Diagnosis> _diagnoses;
     private BindableCollection<Department> _departments;
+    private readonly INotificationManager _notifications;
 
     public string Anamnesis
     {
@@ -45,6 +44,7 @@ public class PatientClassificationViewModel : Screen
         {
             _timeLeft = value;
             NotifyOfPropertyChange(() => TimeLeft);
+
             if (_timeLeft <= 0)
             {
                 TimeLeft = Seconds;
@@ -66,19 +66,19 @@ public class PatientClassificationViewModel : Screen
                 _notifications.Show("Test nesplněn", "Bohužel, test nebyl splněn v zadaném intervalu.", NotificationType.Warning, "WindowArea");
         }
     }
-    
-    public byte Limit => _limit;
-    public bool CanProceed => SelectedDiet?.Name == "Tekutá" && Attempts < Limit && TimeLeft > 0;
+
+    public byte Limit => 3;
+    public bool CanProceed => SelectedDiet?.Name == "Tekutá" && Mistakes < Limit && TimeLeft > 0;
     public bool CanDisplayDiets => SelectedDepartment?.Name == "Kardiologie" && TimeLeft > 0;
     public bool CanDisplayDepartments => SelectedDiagnosis?.Name == "Infarkt myokardu" && TimeLeft > 0;
 
-    public byte Attempts
+    public byte Mistakes
     {
-        get => _attempts;
+        get => _mistakes;
         set
         {
-            _attempts = value;
-            NotifyOfPropertyChange(() => Attempts);
+            _mistakes = value;
+            NotifyOfPropertyChange(() => Mistakes);
         }
     }
 
@@ -90,7 +90,7 @@ public class PatientClassificationViewModel : Screen
             _selectedDiagnosis = value;
 
             if (_selectedDiagnosis.Name != "Infarkt myokardu")
-                Attempts++;
+                Mistakes++;
 
             NotifyOfPropertyChange(() => SelectedDiagnosis);
             NotifyOfPropertyChange(() => CanDisplayDepartments);
@@ -105,7 +105,7 @@ public class PatientClassificationViewModel : Screen
             _selectedDepartment = value;
 
             if (_selectedDepartment.Name != "Kardiologie")
-                Attempts++;
+                Mistakes++;
 
             NotifyOfPropertyChange(() => SelectedDepartment);
             NotifyOfPropertyChange(() => CanDisplayDiets);
@@ -120,7 +120,7 @@ public class PatientClassificationViewModel : Screen
             _selectedDiet = value;
 
             if (_selectedDiet.Name != "Tekutá")
-                Attempts++;
+                Mistakes++;
 
             NotifyOfPropertyChange(() => SelectedDiet);
             NotifyOfPropertyChange(() => CanProceed);
@@ -186,6 +186,22 @@ public class PatientClassificationViewModel : Screen
         await _aggregator.PublishOnUIThreadAsync("Activity");
     }
 
+    public async Task HandleAsync(Assignment message, CancellationToken cancellationToken) => await Task.FromResult(Anamnesis = message.Intro);
+
+    protected override Task OnActivateAsync(CancellationToken cancellationToken)
+    {
+        _aggregator.SubscribeOnPublishedThread(this);
+
+        return base.OnActivateAsync(cancellationToken);
+    }
+
+    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+    {
+        _aggregator.Unsubscribe(this);
+
+        return base.OnDeactivateAsync(close, cancellationToken);
+    }
+
     protected override async void OnViewLoaded(object view)
     {
         Diagnoses = new BindableCollection<Diagnosis>((await _context.Diagnoses.ToListAsync())
@@ -212,7 +228,7 @@ public class PatientClassificationViewModel : Screen
     {
         TimeLeft--;
 
-        if (Minutes == 0 || Attempts >= Limit)
+        if (Minutes == 0 || Mistakes >= Limit)
             _timer.Stop();
     }
 }

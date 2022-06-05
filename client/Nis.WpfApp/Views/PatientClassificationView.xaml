@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Nis.WpfApp.Views"
     xmlns:converters="clr-namespace:Nis.WpfApp.Converters"
+    xmlns:viewModels="clr-namespace:Nis.WpfApp.ViewModels"
     x:Class="Nis.WpfApp.Views.PatientClassificationView"
     mc:Ignorable="d"
     d:DesignHeight="Auto"
@@ -14,7 +15,7 @@
         <converters:NumberToStringConverter x:Key="NumberToStringConverter" />
         <converters:BooleanToDisabilityConverter x:Key="BooleanToDisabilityConverter" />
     </UserControl.Resources>
-    <Grid>
+    <Grid d:DataContext="{d:DesignInstance viewModels:PatientClassificationViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -74,13 +75,13 @@
                     <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="FontSize" Value="14" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=Attempts}" Value="3">
+                        <DataTrigger Binding="{Binding Mistakes}" Value="3">
                             <Setter Property="Foreground" Value="{StaticResource MaterialDesignValidationErrorBrush}" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </StackPanel.Resources>
-            <TextBlock Text="{Binding Attempts, StringFormat='{}Počet chyb: {0}'}" />
+            <TextBlock Text="{Binding Mistakes, StringFormat='{}Počet chyb: {0}'}" />
             <TextBlock Text="{Binding Limit, StringFormat='{} / {0}'}" />
         </StackPanel>
         <Button

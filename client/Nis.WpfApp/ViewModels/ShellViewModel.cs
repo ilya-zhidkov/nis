@@ -7,21 +7,19 @@ public class ShellViewModel : Conductor<object>, IHandle<string>
 {
     private Student _student;
     private readonly SimpleContainer _container;
-    private readonly IEventAggregator _eventAggregator;
+    private readonly IEventAggregator _aggregator;
     private string _backCol;
 
     public ShellViewModel(
         SimpleContainer container,
         Student student,
-        IEventAggregator eventAggregator
+        IEventAggregator aggregator
     )
     {
         BackCol = "White";
         _student = student;
         _container = container;
-        _eventAggregator = eventAggregator;
-        _eventAggregator.SubscribeOnPublishedThread(this);
-        ActivateItemAsync(_container.GetInstance<InstructionsViewModel>());
+        _aggregator = aggregator;
     }
 
     public string BackCol
@@ -46,17 +44,33 @@ public class ShellViewModel : Conductor<object>, IHandle<string>
 
     public void ShutdownApplication() => TryCloseAsync();
 
-    public void StartExam() => ActivateItemAsync(_container.GetInstance<ExamPickViewModel>());
-    public void OpenInstructions() => ActivateItemAsync(_container.GetInstance<InstructionsViewModel>());
+    public void StartExam() => ActivateItemAsync(_container.GetInstance<AnamnesesViewModel>());
+
     public void OpenSettings() => ActivateItemAsync(_container.GetInstance<OpenSettingsViewModel>());
-    public Task HandleAsync(string message, CancellationToken cancellationToken) => Task.FromResult(message switch
+
+    public async Task HandleAsync(string message, CancellationToken cancellationToken) => await Task.FromResult(message switch
     {
         "Exam" => ActivateItemAsync(_container.GetInstance<PatientClassificationViewModel>(), cancellationToken),
         "Activity" => ActivateItemAsync(_container.GetInstance<ActivityViewModel>(), cancellationToken),
         "Decubitus" => ActivateItemAsync(_container.GetInstance<DecubitusViewModel>(), cancellationToken),
         "Malnutrition" => ActivateItemAsync(_container.GetInstance<MalnutritionViewModel>(), cancellationToken),
         "Fall" => ActivateItemAsync(_container.GetInstance<FallViewModel>(), cancellationToken),
-        "Instructions" => ActivateItemAsync(_container.GetInstance<InstructionsViewModel>(), cancellationToken),
         _ => throw new Exception("Unknown Message")
     });
+
+    protected override Task OnActivateAsync(CancellationToken cancellationToken)
+    {
+        _aggregator.SubscribeOnPublishedThread(this);
+
+        ActivateItemAsync(_container.GetInstance<AnamnesesViewModel>(), cancellationToken);
+
+        return base.OnActivateAsync(cancellationToken);
+    }
+
+    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+    {
+        _aggregator.Unsubscribe(this);
+
+        return base.OnDeactivateAsync(close, cancellationToken);
+    }
 }
