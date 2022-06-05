@@ -10,31 +10,6 @@
 			"name": "GET",
 			"item": [
 				{
-					"name": "patients",
-					"item": [
-						{
-							"name": "patients",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:5001/api/patients",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "5001",
-									"path": [
-										"api",
-										"patients"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "students",
 					"item": [
 						{
@@ -43,7 +18,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=core_enrol_get_enrolled_users&courseid={{courseid}}",
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat={{format}}&wsfunction=core_enrol_get_enrolled_users&courseid={{courseid}}",
 									"host": [
 										"{{url}}"
 									],
@@ -59,7 +34,7 @@
 										},
 										{
 											"key": "moodlewsrestformat",
-											"value": "json"
+											"value": "{{format}}"
 										},
 										{
 											"key": "wsfunction",
@@ -80,7 +55,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=core_user_get_users_by_field&field=username&values[0]={{username}}",
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat={{format}}&wsfunction=core_user_get_users_by_field&field=username&values[0]={{username}}",
 									"host": [
 										"{{url}}"
 									],
@@ -96,7 +71,7 @@
 										},
 										{
 											"key": "moodlewsrestformat",
-											"value": "json"
+											"value": "{{format}}"
 										},
 										{
 											"key": "wsfunction",
@@ -126,7 +101,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=core_course_get_courses",
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat={{format}}&wsfunction=core_course_get_courses",
 									"host": [
 										"{{url}}"
 									],
@@ -142,11 +117,48 @@
 										},
 										{
 											"key": "moodlewsrestformat",
-											"value": "json"
+											"value": "{{format}}"
 										},
 										{
 											"key": "wsfunction",
 											"value": "core_course_get_courses"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "courses/{id}",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat={{format}}&courseids[0]=5&wsfunction=mod_assign_get_assignments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"webservice",
+										"rest",
+										"server.php"
+									],
+									"query": [
+										{
+											"key": "wstoken",
+											"value": "{{token}}"
+										},
+										{
+											"key": "moodlewsrestformat",
+											"value": "{{format}}"
+										},
+										{
+											"key": "courseids[0]",
+											"value": "5"
+										},
+										{
+											"key": "wsfunction",
+											"value": "mod_assign_get_assignments"
 										}
 									]
 								}
@@ -164,7 +176,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=mod_assign_get_submissions&assignmentids[0]=1",
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat={{format}}&wsfunction=mod_assign_get_submissions&assignmentids[0]=1",
 									"host": [
 										"{{url}}"
 									],
@@ -180,7 +192,7 @@
 										},
 										{
 											"key": "moodlewsrestformat",
-											"value": "json"
+											"value": "{{format}}"
 										},
 										{
 											"key": "wsfunction",
@@ -216,7 +228,7 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat=json&wsfunction=core_webservice_get_site_info",
+							"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat={{format}}&wsfunction=core_webservice_get_site_info",
 							"host": [
 								"{{url}}"
 							],
@@ -232,7 +244,7 @@
 								},
 								{
 									"key": "moodlewsrestformat",
-									"value": "json"
+									"value": "{{format}}"
 								},
 								{
 									"key": "wsfunction",
@@ -332,7 +344,7 @@
 									"formdata": []
 								},
 								"url": {
-									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&wsfunction=mod_assign_save_submission&moodlewsrestformat=json&assignmentid=1&plugindata[onlinetext_editor][text]=Odevzdání&plugindata[onlinetext_editor][format]=1&plugindata[onlinetext_editor][itemid]=0&plugindata[files_filemanager]=673441896",
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&wsfunction=mod_assign_save_submission&moodlewsrestformat={{format}}&assignmentid=1&plugindata[onlinetext_editor][text]=Odevzdání&plugindata[onlinetext_editor][format]=1&plugindata[onlinetext_editor][itemid]=0&plugindata[files_filemanager]=673441896",
 									"host": [
 										"{{url}}"
 									],
@@ -352,7 +364,7 @@
 										},
 										{
 											"key": "moodlewsrestformat",
-											"value": "json"
+											"value": "{{format}}"
 										},
 										{
 											"key": "assignmentid",
@@ -467,7 +479,12 @@
 		},
 		{
 			"key": "courseid",
-			"value": "4",
+			"value": "5",
+			"type": "string"
+		},
+		{
+			"key": "format",
+			"value": "json",
 			"type": "string"
 		}
 	]
