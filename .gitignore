@@ -1,5 +1,5 @@
 # Media
-server/src/Nis.Api/wwwroot/pdf/*
+server/Nis.Api/wwwroot/pdf/*
 
 # NuGet
 packages/

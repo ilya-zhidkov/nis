@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\server\src\Nis.Core\Nis.Core.csproj" />
+      <ProjectReference Include="..\..\server\Nis.Core\Nis.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
