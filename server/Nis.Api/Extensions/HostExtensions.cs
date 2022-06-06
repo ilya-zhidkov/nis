@@ -14,7 +14,6 @@ public static class HostExtensions
         {
             var context = services.GetRequiredService<DataContext>();
             context.Database.EnsureCreated();
-            new PatientSeeder().Seed(context);
             new DepartmentSeeder().Seed(context);
             new DiagnosisSeeder().Seed(context);
             new DietSeeder().Seed(context);

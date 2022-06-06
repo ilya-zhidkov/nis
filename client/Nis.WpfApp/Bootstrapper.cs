@@ -53,7 +53,6 @@ public class Bootstrapper : BootstrapperBase
     {
         var context = _container.GetInstance<DataContext>();
         context.Database.EnsureCreated();
-        new PatientSeeder().Seed(context);
         new DepartmentSeeder().Seed(context);
         new DiagnosisSeeder().Seed(context);
         new DietSeeder().Seed(context);
