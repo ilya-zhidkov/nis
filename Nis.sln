@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{E3EEE7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B832ADC9-9EF6-4C4F-8C6C-20579B46A9AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nis.Core.UnitTests", "tests\Nis.Core.UnitTests\Nis.Core.UnitTests.csproj", "{50D504BD-B15A-4339-A552-68E70D16746E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nis.WpfApp.UnitTests", "tests\Nis.WpfApp.UnitTests\Nis.WpfApp.UnitTests.csproj", "{50D504BD-B15A-4339-A552-68E70D16746E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
