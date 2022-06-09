@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Notification.Wpf;
 using Nis.WpfApp.Models;
+using Nis.WpfApp.Requests;
 using Nis.Core.Persistence;
 using System.Windows.Threading;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace Nis.WpfApp.ViewModels;
 
 public class PatientClassificationViewModel : Screen, IHandle<Assignment>
 {
+    private Form _form;
     private byte _mistakes;
     private double _miutes;
     private double _timeLeft;
@@ -20,6 +22,7 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
     private Diagnosis _selectedDiagnosis;
     private readonly DataContext _context;
     private Department _selectedDepartment;
+    private readonly UploadRequest _request;
     private BindableCollection<Diet> _diets;
     private readonly SimpleContainer _container;
     private readonly IEventAggregator _aggregator;
@@ -47,6 +50,8 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
 
             if (_timeLeft <= 0)
             {
+                ProceedAsync().ConfigureAwait(false);
+
                 TimeLeft = Seconds;
                 Minutes--;
             }
@@ -61,9 +66,6 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
             _miutes = value;
             NotifyOfPropertyChange(() => Minutes);
             NotifyOfPropertyChange(() => CanProceed);
-
-            if (_miutes <= 0)
-                _notifications.Show("Test nesplněn", "Bohužel, test nebyl splněn v zadaném intervalu.", NotificationType.Warning, "WindowArea");
         }
     }
 
@@ -78,6 +80,10 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
         set
         {
             _mistakes = value;
+
+            if (_mistakes >= Limit)
+                ProceedAsync().ConfigureAwait(false);
+            
             NotifyOfPropertyChange(() => Mistakes);
         }
     }
@@ -159,12 +165,14 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
 
     public PatientClassificationViewModel(
         DataContext context,
+        UploadRequest request,
         SimpleContainer container,
         IEventAggregator aggregator,
         INotificationManager notifications
     )
     {
         _context = context;
+        _request = request;
         _container = container;
         _aggregator = aggregator;
         _notifications = notifications;
@@ -174,16 +182,28 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
     {
         _timer.Stop();
 
-        _container.Instance(new Form
+        var passed = Mistakes < Limit && TimeLeft > 0;
+
+        _form ??= new Form
         {
+            Passed = passed,
             Anamnesis = Anamnesis,
             Diet = SelectedDiet.Name,
             Diagnosis = SelectedDiagnosis.Name,
             Department = SelectedDepartment.Name,
             Student = _container.GetInstance<Student>()
-        });
+        };
 
-        await _aggregator.PublishOnUIThreadAsync("Activity");
+        if (passed)
+        {
+            _container.Instance(_form);
+            await _aggregator.PublishOnUIThreadAsync("Activity");
+        }
+        else
+        {
+            _notifications.Show("Test přerušen", "Bohužel, kvůli počtu chyb nebo absenci času Vás nemůžeme připustit k vyplnění zdravotních škál.", NotificationType.Warning, "WindowArea");
+            await _request.UploadAsync(_form);
+        }
     }
 
     public async Task HandleAsync(Assignment message, CancellationToken cancellationToken) => await Task.FromResult(Anamnesis = message.Intro);
@@ -204,6 +224,8 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
 
     protected override async void OnViewLoaded(object view)
     {
+        _form = _container.GetInstance<Form>();
+
         Diagnoses = new BindableCollection<Diagnosis>((await _context.Diagnoses.ToListAsync())
             .Select(diagnosis => new Diagnosis { Name = diagnosis.Name }));
         Departments = new BindableCollection<Department>((await _context.Departments.ToListAsync())

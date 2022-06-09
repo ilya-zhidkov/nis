@@ -2,7 +2,7 @@
 
 public class Form
 {
-    public bool Passed { get; set; } = true;
+    public bool Passed { get; set; }
     public string Anamnesis { get; set; }
     public string Diagnosis { get; set; }
     public string Department { get; set; }
