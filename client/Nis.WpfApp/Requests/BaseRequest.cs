@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using Nis.WpfApp.Extensions;
 using System.Net.Http.Headers;
+using Nis.WpfApp.Configuration;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Nis.WpfApp.Requests;
@@ -10,7 +11,7 @@ public abstract class BaseRequest
 {
     private static HttpClient _http;
     protected static readonly Dictionary<string, string> Headers = new();
-    protected readonly string Endpoint = App.Configuration["Api:Endpoint"];
+    protected readonly string Endpoint = Settings.Configuration["Api:Endpoint"];
 
     protected BaseRequest()
     {

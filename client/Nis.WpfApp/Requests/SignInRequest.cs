@@ -3,6 +3,7 @@ using Caliburn.Micro;
 using System.Net.Http;
 using System.Text.Json;
 using Nis.WpfApp.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Nis.WpfApp.Requests;
 
@@ -48,18 +49,25 @@ public class SignInRequest : BaseRequest
 
     private async Task<string> GetTokenAsync(string username, string password)
     {
-        var response = await PostAsync<Dictionary<string, string>>(uri: $"{Endpoint}/auth/login", new StringContent(
-            JsonSerializer.Serialize(new { username, password }),
-            Encoding.UTF8,
-            "application/json"
-        ));
+        try
+        {
+            var response = await PostAsync<Dictionary<string, string>>(uri: $"{Endpoint}/auth/login", new StringContent(
+                JsonSerializer.Serialize(new { username, password }),
+                Encoding.UTF8,
+                Application.Json
+            ));
 
-        var token = response["token"];
+            var token = response["token"];
 
-        Headers["Authorization"] = token;
-        Authenticate(Headers["Authorization"]);
+            Headers["Authorization"] = token;
+            Authenticate(Headers["Authorization"]);
 
-        return token ?? string.Empty;
+            return token;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 
     private static string GetProfileImage(string url)
