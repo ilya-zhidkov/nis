@@ -35,7 +35,7 @@ public class StudentsController : BaseApiController
         {
             var error = JsonSerializer.Deserialize<IDictionary<string, string>>(content);
 
-            return BadRequest(new { message = error?["message"] ?? exception.Message });
+            return Unauthorized(new { message = error?["message"] ?? exception.Message });
         }
     }
 
@@ -58,7 +58,7 @@ public class StudentsController : BaseApiController
         {
             var error = JsonSerializer.Deserialize<IDictionary<string, string>>(content);
 
-            return BadRequest(new { message = error?["message"] ?? exception.Message });
+            return Unauthorized(new { message = error?["message"] ?? exception.Message });
         }
     }
 }

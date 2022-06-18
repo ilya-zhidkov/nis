@@ -24,4 +24,8 @@
       <Folder Include="wwwroot\pdf\" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="Nis.Api.IntegrationTests" />
+    </ItemGroup>
+
 </Project>
