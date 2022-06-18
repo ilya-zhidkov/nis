@@ -3,7 +3,7 @@ using Bogus.DataSets;
 using Caliburn.Micro;
 using FluentAssertions;
 using Nis.WpfApp.Requests;
-using Nis.WpfApp.Configuration;
+using Nis.Core.Configuration;
 
 namespace Nis.WpfApp.IntegrationTests.Requests;
 

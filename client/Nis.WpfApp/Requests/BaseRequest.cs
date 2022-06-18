@@ -1,8 +1,8 @@
 ﻿using System.Net.Http;
 using System.Net.Http.Json;
 using Nis.WpfApp.Extensions;
+using Nis.Core.Configuration;
 using System.Net.Http.Headers;
-using Nis.WpfApp.Configuration;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Nis.WpfApp.Requests;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Nis.WpfApp.Configuration;
+namespace Nis.Core.Configuration;
 
 public static class Settings
 {

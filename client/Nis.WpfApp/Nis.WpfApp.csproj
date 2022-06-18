@@ -13,8 +13,6 @@
       <PackageReference Include="Caliburn.Micro" Version="4.0.173" />
       <PackageReference Include="Caliburn.Micro.Core" Version="4.0.173" />
       <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
       <PackageReference Include="Notification.Wpf" Version="6.1.0.5" />
     </ItemGroup>
 
