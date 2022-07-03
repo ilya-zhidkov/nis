@@ -12,7 +12,6 @@
     d:DesignWidth="Auto"
 >
     <UserControl.Resources>
-        <converters:NumberToStringConverter x:Key="NumberToStringConverter" />
         <converters:BooleanToDisabilityConverter x:Key="BooleanToDisabilityConverter" />
     </UserControl.Resources>
     <Grid d:DataContext="{d:DesignInstance viewModels:PatientClassificationViewModel}">
@@ -143,15 +142,8 @@
             />
             <Label
                 FontSize="14"
-                Content="{Binding Minutes, Converter={StaticResource NumberToStringConverter}}"
-            />
-            <Label
-                FontSize="14"
-                Content=":"
-            />
-            <Label
-                FontSize="14"
-                Content="{Binding TimeLeft, Converter={StaticResource NumberToStringConverter}}"
+                Content="{Binding TimeLeft}"
+                ContentStringFormat="{}{0:mm}:{0:ss}"
             />
         </StackPanel>
         <StackPanel

@@ -3,7 +3,6 @@ using Notification.Wpf;
 using Nis.WpfApp.Models;
 using Nis.WpfApp.Requests;
 using Nis.Core.Persistence;
-using System.Windows.Threading;
 using Microsoft.EntityFrameworkCore;
 
 namespace Nis.WpfApp.ViewModels;
@@ -12,14 +11,11 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
 {
     private Form _form;
     private byte _mistakes;
-    private double _miutes;
-    private double _timeLeft;
     private string _anamnesis;
-    private int MMinutes = 10;
     private Diet _selectedDiet;
-    private DispatcherTimer _timer;
-    private const byte Seconds = 59;
+    private TimeSpan _timeLeft;
     private Diagnosis _selectedDiagnosis;
+    private readonly Countdown _countdown;
     private readonly DataContext _context;
     private Department _selectedDepartment;
     private readonly UploadRequest _request;
@@ -40,39 +36,21 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
         }
     }
 
-    public double TimeLeft
+    public TimeSpan TimeLeft
     {
         get => _timeLeft;
         set
         {
             _timeLeft = value;
             NotifyOfPropertyChange(() => TimeLeft);
-
-            if (_timeLeft <= 0)
-            {
-                ProceedAsync().ConfigureAwait(false);
-
-                TimeLeft = Seconds;
-                Minutes--;
-            }
-        }
-    }
-
-    public double Minutes
-    {
-        get => _miutes;
-        set
-        {
-            _miutes = value;
-            NotifyOfPropertyChange(() => Minutes);
             NotifyOfPropertyChange(() => CanProceed);
         }
     }
 
     public byte Limit => 3;
-    public bool CanProceed => SelectedDiet?.Name == "Tekutá" && Mistakes < Limit && TimeLeft > 0;
-    public bool CanDisplayDiets => SelectedDepartment?.Name == "Kardiologie" && TimeLeft > 0;
-    public bool CanDisplayDepartments => SelectedDiagnosis?.Name == "Infarkt myokardu" && TimeLeft > 0;
+    public bool CanProceed => SelectedDiet?.Name == "Tekutá" && Mistakes < Limit && TimeLeft > TimeSpan.Zero;
+    public bool CanDisplayDiets => SelectedDepartment?.Name == "Kardiologie" && TimeLeft > TimeSpan.Zero;
+    public bool CanDisplayDepartments => SelectedDiagnosis?.Name == "Infarkt myokardu" && TimeLeft > TimeSpan.Zero;
 
     public byte Mistakes
     {
@@ -83,7 +61,7 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
 
             if (_mistakes >= Limit)
                 ProceedAsync().ConfigureAwait(false);
-            
+
             NotifyOfPropertyChange(() => Mistakes);
         }
     }
@@ -176,13 +154,14 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
         _container = container;
         _aggregator = aggregator;
         _notifications = notifications;
+        _countdown = new Countdown(TimeSpan.FromMinutes(10));
     }
 
     public async Task ProceedAsync()
     {
-        _timer.Stop();
+        _countdown.Stop();
 
-        var passed = Mistakes < Limit && TimeLeft > 0;
+        var passed = Mistakes < Limit && TimeLeft > TimeSpan.Zero;
 
         _form ??= new Form
         {
@@ -226,31 +205,31 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
     {
         _form = _container.GetInstance<Form>();
 
+        TimeLeft = _countdown.Interval;
+        StartTimer();
+
         Diagnoses = new BindableCollection<Diagnosis>((await _context.Diagnoses.ToListAsync())
             .Select(diagnosis => new Diagnosis { Name = diagnosis.Name }));
         Departments = new BindableCollection<Department>((await _context.Departments.ToListAsync())
             .Select(department => new Department { Name = department.Name }));
         Diets = new BindableCollection<Diet>((await _context.Diets.ToListAsync())
             .Select(diet => new Diet { Name = diet.Name }));
-
-        StartTimer();
     }
 
     private void StartTimer()
     {
-        Minutes = MMinutes;
-        TimeLeft = 0;
+        var time = _countdown.Interval;
 
-        _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1000) };
-        _timer.Tick += timer_Tick;
-        _timer.Start();
-    }
+        _countdown.Tick += (sender, args) =>
+        {
+            TimeLeft = time;
 
-    private void timer_Tick(object sender, EventArgs e)
-    {
-        TimeLeft--;
+            if (time <= TimeSpan.Zero)
+                ProceedAsync().ConfigureAwait(false);
 
-        if (Minutes == 0 || Mistakes >= Limit)
-            _timer.Stop();
+            time = time.Subtract(TimeSpan.FromSeconds(1));
+        };
+
+        _countdown.Start();
     }
 }

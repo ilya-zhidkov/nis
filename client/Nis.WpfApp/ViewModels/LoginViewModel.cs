@@ -11,7 +11,7 @@ public class LoginViewModel : Screen
     private readonly SignInRequest _request;
     private readonly IWindowManager _window;
     private readonly SimpleContainer _container;
-    private readonly IEventAggregator _eventAggregator;
+    private readonly IEventAggregator _aggregator;
 
     public string UserName
     {
@@ -54,13 +54,13 @@ public class LoginViewModel : Screen
         SignInRequest request,
         IWindowManager window,
         SimpleContainer container,
-        IEventAggregator eventAggregator
+        IEventAggregator aggregator
     )
     {
         _window = window;
         _request = request;
         _container = container;
-        _eventAggregator = eventAggregator;
+        _aggregator = aggregator;
     }
 
     public async Task LoginAsync()
@@ -68,7 +68,7 @@ public class LoginViewModel : Screen
         try
         {
             var response = await _request.SignInAsync(UserName, Password);
-            await _window.ShowWindowAsync(new ShellViewModel(_container, response.Student, _eventAggregator));
+            await _window.ShowWindowAsync(new ShellViewModel(_container, response.Student, _aggregator));
             await TryCloseAsync();
         }
         catch (Exception exception)
