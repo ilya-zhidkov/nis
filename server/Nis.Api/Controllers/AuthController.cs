@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Nis.Api.Controllers;
 
-public class AuthController : BaseApiController
+public sealed class AuthController : BaseApiController
 {
     private readonly HttpClient _http;
     private readonly MoodleOptions _options;
@@ -16,8 +16,15 @@ public class AuthController : BaseApiController
         _http = http;
         _options = options.Value;
     }
-    
+
+    /// <summary>
+    /// Authenticates user based on the existing credentials.
+    /// </summary>
+    /// <param name="body">JSON encoded request body.</param>
+    /// <returns>Authentication token.</returns>
     [HttpPost, Route("login")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Login([FromBody] LoginRequest body)
     {
         var (username, password) = body;

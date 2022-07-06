@@ -3,7 +3,7 @@ using Nis.Core.Models.MedicalScales;
 
 namespace Nis.Api.Models;
 
-public class Exam
+public sealed class Exam
 {
     public string Diet { get; set; }
     public bool Passed { get; set; }

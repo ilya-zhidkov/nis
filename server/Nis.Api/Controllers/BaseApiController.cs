@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Nis.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class BaseApiController : ControllerBase
+[Produces(Application.Json)]
+public abstract class BaseApiController : ControllerBase
 {
     // ...
 }

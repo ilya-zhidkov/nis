@@ -2,7 +2,7 @@
 
 namespace Nis.Api.Models.Requests;
 
-public class LoginRequest
+public sealed class LoginRequest
 {
     public string Username { get; set; }
 

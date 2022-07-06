@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Nis.Api.Controllers;
 
-public class StudentsController : BaseApiController
+public sealed class StudentsController : BaseApiController
 {
     private readonly HttpClient _http;
     private readonly MoodleOptions _options;
@@ -16,7 +16,14 @@ public class StudentsController : BaseApiController
         _options = options.Value;
     }
 
+    /// <summary>
+    /// Retrieves a collection of publicly available Moodle students.
+    /// </summary>
+    /// <param name="token">Authentication token.</param>
+    /// <returns>Collection of Moodle students.</returns>
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Index([FromHeader] string token)
     {
         var (url, courseId, _, _, format) = _options;
@@ -39,7 +46,15 @@ public class StudentsController : BaseApiController
         }
     }
 
+    /// <summary>
+    /// Gets a single publicly available Moodle student by its username.
+    /// </summary>
+    /// <param name="token">Authentication token.</param>
+    /// <param name="username" example="admin"></param>
+    /// <returns>Single publicly available Moodle student.</returns>
     [HttpGet("{username}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Show([FromHeader] string token, string username)
     {
         var (url, _, _, _, format) = _options;
