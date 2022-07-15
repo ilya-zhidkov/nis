@@ -76,18 +76,6 @@ public class ActivityViewModel : Screen, IHandle<MedicalScaleActivity>
 
     public async Task Fall() => await _aggregator.PublishOnUIThreadAsync("Fall");
 
-    protected override async void OnViewLoaded(object view)
-    {
-        _form = _container.GetInstance<Form>();
-
-        Scales = _mapper.Map<BindableCollection<MedicalScale>>(
-            await _context.Scales
-                .Include(scale => scale.Activities)
-                .Where(scale => scale.ScaleType == ScaleType.Activity)
-                .ToListAsync()
-        );
-    }
-
     public async Task HandleAsync(MedicalScaleActivity message, CancellationToken cancellationToken)
     {
         var (_, score, isChecked) = message;
@@ -96,6 +84,20 @@ public class ActivityViewModel : Screen, IHandle<MedicalScaleActivity>
 
         await Task.FromResult(Points);
     }
+
+    protected override async Task<Task> OnInitializeAsync(CancellationToken cancellationToken)
+    {
+        Scales = _mapper.Map<BindableCollection<MedicalScale>>(
+            await _context.Scales
+                .Include(scale => scale.Activities)
+                .Where(scale => scale.ScaleType == ScaleType.Activity)
+                .ToListAsync(cancellationToken)
+        );
+
+        return base.OnInitializeAsync(cancellationToken);
+    }
+
+    protected override void OnViewLoaded(object view) => _form = _container.GetInstance<Form>();
 
     protected override Task OnActivateAsync(CancellationToken cancellationToken)
     {

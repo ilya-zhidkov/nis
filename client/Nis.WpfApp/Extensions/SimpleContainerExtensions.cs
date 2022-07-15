@@ -2,8 +2,8 @@
 using Caliburn.Micro;
 using Nis.WpfApp.Mappings;
 using Nis.Core.Extensions;
-using Nis.Core.Persistence;
 using Nis.WpfApp.Requests;
+using Nis.Core.Persistence;
 
 namespace Nis.WpfApp.Extensions;
 
@@ -51,7 +51,7 @@ public static class SimpleContainerExtensions
             .GetTypes()
             .Where(type => type.IsClass && type.Name.EndsWith("ViewModel"))
             .ToList()
-            .ForEach(vm => container.RegisterPerRequest(
+            .ForEach(vm => container.RegisterSingleton(
                 service: vm,
                 key: vm.ToString(),
                 implementation: vm
