@@ -134,7 +134,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat={{format}}&courseids[0]=5&wsfunction=mod_assign_get_assignments",
+									"raw": "{{url}}/webservice/rest/server.php?wstoken={{token}}&moodlewsrestformat={{format}}&courseids[0]={{courseid}}&wsfunction=mod_assign_get_assignments",
 									"host": [
 										"{{url}}"
 									],
@@ -154,7 +154,7 @@
 										},
 										{
 											"key": "courseids[0]",
-											"value": "5"
+											"value": "{{courseid}}"
 										},
 										{
 											"key": "wsfunction",
@@ -409,7 +409,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"diet\": \"string\",\r\n  \"passed\": true,\r\n  \"diagnosis\": \"string\",\r\n  \"anamnesis\": \"string\",\r\n  \"department\": \"string\",\r\n  \"student\": {\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\"\r\n  },\r\n  \"scales\": [\r\n    {\r\n      \"name\": \"string\",\r\n      \"scaleType\": 1,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 10,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"string\",\r\n      \"scaleType\": 2,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 5,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"string\",\r\n      \"scaleType\": 3,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 0,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"string\",\r\n      \"scaleType\": 4,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 15,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"string\",\r\n      \"activities\": [\r\n        {\r\n          \"score\": 5,\r\n          \"name\": \"string\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+									"raw": "{\r\n  \"diet\": \"Tekutá\",\r\n  \"passed\": true,\r\n  \"diagnosis\": \"Infarkt myokardu\",\r\n  \"anamnesis\": \"Lorem ipsum dolor sit amet.\",\r\n  \"department\": \"Kardiologie\",\r\n  \"student\": {\r\n    \"firstName\": \"Ilya\",\r\n    \"lastName\": \"Zhidkov\"\r\n  },\r\n  \"scales\": [\r\n    {\r\n      \"name\": \"Najedení, napití\",\r\n      \"scaleType\": 1,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 10,\r\n          \"name\": \"Samostatně bez pomoci\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"Fyzický stav\",\r\n      \"scaleType\": 2,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 4,\r\n          \"name\": \"dobrý\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"Kolik plnohodnotných jídel sní pacient za den?\",\r\n      \"scaleType\": 3,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 3,\r\n          \"name\": \"tři\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"Věk\",\r\n      \"scaleType\": 4,\r\n      \"activities\": [\r\n        {\r\n          \"score\": 1,\r\n          \"name\": \"75 a výše\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -479,7 +479,7 @@
 		},
 		{
 			"key": "courseid",
-			"value": "5",
+			"value": "6",
 			"type": "string"
 		},
 		{
