@@ -1,3 +1,6 @@
+# Sensitive information
+appsettings.Production.json
+
 # Media
 server/api/wwwroot/pdf/*
 
