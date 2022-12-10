@@ -2,8 +2,6 @@
 
 Výukový **N**emocniční **I**nformační **S**ystém pro fakultu zdravotnických studií v Ústí nad Labem.
 
-Web: [https://vnis.herokuapp.com](https://vnis.herokuapp.com/)
-
 ---
 
 ## Snímky
