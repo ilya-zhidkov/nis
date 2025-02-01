@@ -7,9 +7,9 @@ using Nis.Core.Persistence;
 
 namespace Nis.WpfApp.Extensions;
 
-public static class SimpleContainerExtensions
+internal static class SimpleContainerExtensions
 {
-    public static SimpleContainer RegisterRequests(this SimpleContainer container)
+    internal static SimpleContainer RegisterRequests(this SimpleContainer container)
     {
         typeof(BaseRequest).Assembly
             .GetTypes()
@@ -27,7 +27,7 @@ public static class SimpleContainerExtensions
         return container;
     }
 
-    public static SimpleContainer RegisterMappings(this SimpleContainer container)
+    internal static SimpleContainer RegisterMappings(this SimpleContainer container)
     {
         container.Instance(
             new MapperConfiguration(configuration => configuration.AddProfile<MappingProfile>()).CreateMapper()
@@ -36,7 +36,7 @@ public static class SimpleContainerExtensions
         return container;
     }
 
-    public static SimpleContainer RegisterDatabase(this SimpleContainer container)
+    internal static SimpleContainer RegisterDatabase(this SimpleContainer container)
     {
         container.Instance(
             new DataContext(DatabaseExtensions.ConnectToDatabase(DatabaseExtensions.ConnectionString))
@@ -45,7 +45,7 @@ public static class SimpleContainerExtensions
         return container;
     }
 
-    public static SimpleContainer RegisterViewModels(this SimpleContainer container)
+    internal static SimpleContainer RegisterViewModels(this SimpleContainer container)
     {
         typeof(Bootstrapper).Assembly
             .GetTypes()

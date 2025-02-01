@@ -1,5 +1,4 @@
-﻿using Xunit;
-using System.Text;
+﻿using System.Text;
 using System.Net.Mime;
 using System.Text.Json;
 using Nis.Core.Configuration;
@@ -15,14 +14,10 @@ public abstract class BaseIntegrationTest : IClassFixture<BaseIntegrationTest.Fi
     {
         var factory = new WebApplicationFactory<Program>();
 
-        Http = factory.CreateClient(new WebApplicationFactoryClientOptions
-        {
-            AllowAutoRedirect = false,
-            BaseAddress = new Uri(Settings.Configuration["Api:Endpoint"])
-        });
+        Http = factory.CreateClient(new() { AllowAutoRedirect = false, BaseAddress = new(Settings.Configuration["Api:Endpoint"]!) });
     }
 
-    protected async Task<string> GetTokenAsync(string username, string password)
+    protected async Task<string> GetTokenAsync(string? username, string? password)
     {
         var request = new HttpRequestMessage(HttpMethod.Post, $"{Http.BaseAddress}/auth/login")
         {
@@ -31,7 +26,7 @@ public abstract class BaseIntegrationTest : IClassFixture<BaseIntegrationTest.Fi
 
         var response = await Http.SendAsync(request);
 
-        return (await response.Content.ReadFromJsonAsync<IDictionary<string, string>>())?["token"];
+        return (await response.Content.ReadFromJsonAsync<IDictionary<string, string>>())?["token"]!;
     }
 
     private class Fixture : WebApplicationFactory<Program>

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Caliburn.Micro;
 using Nis.WpfApp.Models;
 using Nis.Core.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -7,15 +6,16 @@ using ScaleType = Nis.Core.Models.Enums.ScaleType;
 
 namespace Nis.WpfApp.ViewModels;
 
+[UsedImplicitly]
 public class ActivityViewModel : Screen, IHandle<MedicalScaleActivity>
 {
-    private Form _form;
     private byte _points;
+    private Form _form = null!;
     private readonly IMapper _mapper;
     private readonly DataContext _context;
     private readonly SimpleContainer _container;
     private readonly IEventAggregator _aggregator;
-    private BindableCollection<MedicalScale> _scales;
+    private BindableCollection<MedicalScale> _scales = [];
 
     public byte Points
     {
@@ -76,7 +76,7 @@ public class ActivityViewModel : Screen, IHandle<MedicalScaleActivity>
 
     public async Task Fall() => await _aggregator.PublishOnUIThreadAsync("Fall");
 
-    public async Task HandleAsync(MedicalScaleActivity message, CancellationToken cancellationToken)
+    public async Task HandleAsync(MedicalScaleActivity message, CancellationToken cancellation)
     {
         var (_, score, isChecked) = message;
 
@@ -85,31 +85,31 @@ public class ActivityViewModel : Screen, IHandle<MedicalScaleActivity>
         await Task.FromResult(Points);
     }
 
-    protected override async Task<Task> OnInitializeAsync(CancellationToken cancellationToken)
+    protected override async Task<Task> OnInitializeAsync(CancellationToken cancellation)
     {
         Scales = _mapper.Map<BindableCollection<MedicalScale>>(
             await _context.Scales
                 .Include(scale => scale.Activities)
                 .Where(scale => scale.ScaleType == ScaleType.Activity)
-                .ToListAsync(cancellationToken)
+                .ToListAsync(cancellation)
         );
 
-        return base.OnInitializeAsync(cancellationToken);
+        return base.OnInitializeAsync(cancellation);
     }
 
     protected override void OnViewLoaded(object view) => _form = _container.GetInstance<Form>();
 
-    protected override Task OnActivateAsync(CancellationToken cancellationToken)
+    protected override Task OnActivateAsync(CancellationToken cancellation)
     {
         _aggregator.SubscribeOnPublishedThread(this);
 
-        return base.OnActivateAsync(cancellationToken);
+        return base.OnActivateAsync(cancellation);
     }
 
-    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellation)
     {
         _aggregator.Unsubscribe(this);
 
-        return base.OnDeactivateAsync(close, cancellationToken);
+        return base.OnDeactivateAsync(close, cancellation);
     }
 }

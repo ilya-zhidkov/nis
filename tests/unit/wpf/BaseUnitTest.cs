@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Nis.WpfApp.UnitTests;
+﻿namespace Nis.WpfApp.UnitTests;
 
 public abstract class BaseUnitTest : IClassFixture<BaseUnitTest.Fixture>
 {

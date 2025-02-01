@@ -1,8 +1,7 @@
 ﻿namespace Nis.WpfApp.Models;
 
-public class Course
+[UsedImplicitly]
+public sealed class Course
 {
-    public IEnumerable<Assignment> Assignments { get; set; }
-
-    public Course() => Assignments = new List<Assignment>();
+    public IEnumerable<Assignment> Assignments { get; init; } = (List<Assignment>) [];
 }

@@ -1,6 +1,6 @@
 ﻿namespace Nis.WpfApp.Models;
 
-public class Department
+public sealed class Department
 {
-    public string Name { get; set; }
+    public required string Name { get; set; }
 }

@@ -2,12 +2,12 @@
 
 namespace Nis.WpfApp.Models;
 
-public class MedicalScaleActivity : PropertyChangedBase
+public sealed class MedicalScaleActivity : PropertyChangedBase
 {
     private byte _score;
-    private string _name;
     private bool _isChecked;
-    private readonly IEventAggregator _aggregator;
+    private string _name = null!;
+    private readonly IEventAggregator _aggregator = IoC.Get<IEventAggregator>();
 
     public byte Score
     {
@@ -39,8 +39,6 @@ public class MedicalScaleActivity : PropertyChangedBase
             _aggregator.PublishOnUIThreadAsync(this);
         }
     }
-
-    public MedicalScaleActivity() => _aggregator = IoC.Get<IEventAggregator>();
 
     public void Deconstruct(out string name, out byte score, out bool isChecked)
     {

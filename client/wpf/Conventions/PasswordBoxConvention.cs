@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace Nis.WpfApp.Conventions;
 
-public static class PasswordBoxConvention
+internal static class PasswordBoxConvention
 {
     public static readonly DependencyProperty BoundPasswordProperty =
         DependencyProperty.RegisterAttached(
@@ -33,10 +33,7 @@ public static class PasswordBoxConvention
         control.SetValue(BoundPasswordProperty, value);
     }
 
-    private static void OnBoundPasswordChanged(
-        DependencyObject control,
-        DependencyPropertyChangedEventArgs arguments
-    )
+    private static void OnBoundPasswordChanged(DependencyObject control, DependencyPropertyChangedEventArgs arguments)
     {
         if (control is not PasswordBox input)
             return;
@@ -46,10 +43,10 @@ public static class PasswordBoxConvention
 
     private static void PasswordChanged(object sender, RoutedEventArgs arguments)
     {
-        var input = sender as PasswordBox;
+        var input = (sender as PasswordBox)!;
 
-        SetBoundPassword(input, input?.Password);
+        SetBoundPassword(input, input.Password);
 
-        input?.GetType().GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic)?.Invoke(input, new object[] { input.Password.Length, 0 });
+        input?.GetType().GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic)?.Invoke(input, [input.Password.Length, 0]);
     }
 }

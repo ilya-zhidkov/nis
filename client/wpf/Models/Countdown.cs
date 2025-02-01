@@ -2,20 +2,13 @@
 
 namespace Nis.WpfApp.Models;
 
-public sealed class Countdown
+public sealed class Countdown(TimeSpan interval)
 {
-    private readonly DispatcherTimer _timer;
+    private readonly DispatcherTimer _timer = new() { Interval = TimeSpan.FromSeconds(1) };
 
-    public event EventHandler Tick;
+    public event EventHandler? Tick;
     public bool IsRunning => _timer.IsEnabled;
-    public TimeSpan Interval { get; private set; }
-
-    public Countdown(TimeSpan interval)
-    {
-        Interval = interval;
-
-        _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-    }
+    public TimeSpan Interval { get; private set; } = interval;
 
     public void Start()
     {

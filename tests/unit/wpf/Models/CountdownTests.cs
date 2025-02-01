@@ -1,14 +1,11 @@
-﻿using Xunit;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Nis.WpfApp.Models;
 
 namespace Nis.WpfApp.UnitTests.Models;
 
 public class CountdownTests : BaseUnitTest
 {
-    private readonly Countdown _countdown;
-
-    public CountdownTests() => _countdown = new Countdown(TimeSpan.FromSeconds(5));
+    private readonly Countdown _countdown = new(TimeSpan.FromSeconds(5));
 
     [Fact]
     public void it_should_throw_if_countdown_has_not_started() => _countdown.Invoking(countdown => countdown.Stop())

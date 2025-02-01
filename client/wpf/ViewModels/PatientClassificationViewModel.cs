@@ -1,5 +1,4 @@
-﻿using Caliburn.Micro;
-using Notification.Wpf;
+﻿using Notification.Wpf;
 using Nis.WpfApp.Models;
 using Nis.WpfApp.Requests;
 using Nis.Core.Persistence;
@@ -7,26 +6,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Nis.WpfApp.ViewModels;
 
-public class PatientClassificationViewModel : Screen, IHandle<Assignment>
+[UsedImplicitly]
+internal class PatientClassificationViewModel(
+    DataContext context,
+    UploadRequest request,
+    SimpleContainer container,
+    IEventAggregator aggregator,
+    INotificationManager notifications
+) : Screen, IHandle<Assignment>
 {
-    private Form _form;
+    private Form? _form;
     private byte _mistakes;
-    private string _anamnesis;
-    private Diet _selectedDiet;
     private TimeSpan _timeLeft;
-    private Diagnosis _selectedDiagnosis;
-    private readonly Countdown _countdown;
-    private readonly DataContext _context;
-    private Department _selectedDepartment;
-    private readonly UploadRequest _request;
-    private BindableCollection<Diet> _diets;
-    private readonly SimpleContainer _container;
-    private readonly IEventAggregator _aggregator;
-    private BindableCollection<Diagnosis> _diagnoses;
-    private BindableCollection<Department> _departments;
-    private readonly INotificationManager _notifications;
+    private string? _anamnesis;
+    private Diet? _selectedDiet;
+    private BindableCollection<Diet> _diets = [];
+    private Diagnosis? _selectedDiagnosis;
+    private Department? _selectedDepartment;
+    private BindableCollection<Diagnosis> _diagnoses = [];
+    private BindableCollection<Department> _departments = [];
+    private readonly Countdown _countdown = new(TimeSpan.FromMinutes(10));
 
-    public string Anamnesis
+    public string? Anamnesis
     {
         get => _anamnesis;
         set
@@ -66,14 +67,14 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
         }
     }
 
-    public Diagnosis SelectedDiagnosis
+    public Diagnosis? SelectedDiagnosis
     {
         get => _selectedDiagnosis;
         set
         {
             _selectedDiagnosis = value;
 
-            if (_selectedDiagnosis.Name != "Infarkt myokardu")
+            if (_selectedDiagnosis?.Name != "Infarkt myokardu")
                 Mistakes++;
 
             NotifyOfPropertyChange(() => SelectedDiagnosis);
@@ -81,14 +82,14 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
         }
     }
 
-    public Department SelectedDepartment
+    public Department? SelectedDepartment
     {
         get => _selectedDepartment;
         set
         {
             _selectedDepartment = value;
 
-            if (_selectedDepartment.Name != "Kardiologie")
+            if (_selectedDepartment?.Name != "Kardiologie")
                 Mistakes++;
 
             NotifyOfPropertyChange(() => SelectedDepartment);
@@ -96,14 +97,14 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
         }
     }
 
-    public Diet SelectedDiet
+    public Diet? SelectedDiet
     {
         get => _selectedDiet;
         set
         {
             _selectedDiet = value;
 
-            if (_selectedDiet.Name != "Tekutá")
+            if (_selectedDiet?.Name != "Tekutá")
                 Mistakes++;
 
             NotifyOfPropertyChange(() => SelectedDiet);
@@ -141,79 +142,60 @@ public class PatientClassificationViewModel : Screen, IHandle<Assignment>
         }
     }
 
-    public PatientClassificationViewModel(
-        DataContext context,
-        UploadRequest request,
-        SimpleContainer container,
-        IEventAggregator aggregator,
-        INotificationManager notifications
-    )
-    {
-        _context = context;
-        _request = request;
-        _container = container;
-        _aggregator = aggregator;
-        _notifications = notifications;
-        _countdown = new Countdown(TimeSpan.FromMinutes(10));
-    }
-
     public async Task ProceedAsync()
     {
         _countdown.Stop();
 
         var passed = Mistakes < Limit && TimeLeft > TimeSpan.Zero;
 
-        _form ??= new Form
+        _form ??= new()
         {
             Passed = passed,
             Anamnesis = Anamnesis,
-            Diet = SelectedDiet.Name,
-            Diagnosis = SelectedDiagnosis.Name,
-            Department = SelectedDepartment.Name,
-            Student = _container.GetInstance<Student>()
+            Diet = SelectedDiet?.Name!,
+            Diagnosis = SelectedDiagnosis?.Name!,
+            Department = SelectedDepartment?.Name!,
+            Student = container.GetInstance<Student>()
         };
 
         if (passed)
         {
-            _container.Instance(_form);
-            await _aggregator.PublishOnUIThreadAsync("Activity");
+            container.Instance(_form);
+            await aggregator.PublishOnUIThreadAsync("Activity");
         }
         else
         {
-            _notifications.Show("Test přerušen", "Bohužel, kvůli počtu chyb nebo absenci času Vás nemůžeme připustit k vyplnění zdravotních škál.", NotificationType.Warning, "WindowArea");
-            await _request.UploadAsync(_form);
+            notifications.Show("Test přerušen", "Bohužel, kvůli počtu chyb nebo absenci času Vás nemůžeme připustit k vyplnění zdravotních škál.", NotificationType.Warning, "WindowArea");
+            await request.UploadAsync(_form);
         }
     }
 
-    public async Task HandleAsync(Assignment message, CancellationToken cancellationToken) => await Task.FromResult(Anamnesis = message.Intro);
+    public async Task HandleAsync(Assignment message, CancellationToken cancellation) => await Task.FromResult(Anamnesis = message.Intro);
 
     protected override Task OnActivateAsync(CancellationToken cancellationToken)
     {
-        _aggregator.SubscribeOnPublishedThread(this);
+        aggregator.SubscribeOnPublishedThread(this);
 
         return base.OnActivateAsync(cancellationToken);
     }
 
-    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellation)
     {
-        _aggregator.Unsubscribe(this);
+        aggregator.Unsubscribe(this);
 
-        return base.OnDeactivateAsync(close, cancellationToken);
+        return base.OnDeactivateAsync(close, cancellation);
     }
 
     protected override async void OnViewLoaded(object view)
     {
-        _form = _container.GetInstance<Form>();
+        _form = container.GetInstance<Form>();
 
         TimeLeft = _countdown.Interval;
         StartTimer();
 
-        Diagnoses = new BindableCollection<Diagnosis>((await _context.Diagnoses.ToListAsync())
-            .Select(diagnosis => new Diagnosis { Name = diagnosis.Name }));
-        Departments = new BindableCollection<Department>((await _context.Departments.ToListAsync())
-            .Select(department => new Department { Name = department.Name }));
-        Diets = new BindableCollection<Diet>((await _context.Diets.ToListAsync())
-            .Select(diet => new Diet { Name = diet.Name }));
+        Diagnoses = new((await context.Diagnoses.ToListAsync()).Select(diagnosis => new Diagnosis { Name = diagnosis.Name }));
+        Departments = new((await context.Departments.ToListAsync()).Select(department => new Department { Name = department.Name }));
+        Diets = new((await context.Diets.ToListAsync()).Select(diet => new Diet { Name = diet.Name }));
     }
 
     private void StartTimer()

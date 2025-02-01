@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Caliburn.Micro;
 using Notification.Wpf;
 using Nis.WpfApp.Models;
 using Nis.WpfApp.Requests;
@@ -9,17 +8,19 @@ using ScaleType = Nis.Core.Models.Enums.ScaleType;
 
 namespace Nis.WpfApp.ViewModels;
 
-public class FallViewModel : Screen, IHandle<MedicalScaleActivity>
+[UsedImplicitly]
+public class FallViewModel(
+    IMapper mapper,
+    DataContext context,
+    UploadRequest request,
+    SimpleContainer container,
+    IEventAggregator aggregator,
+    INotificationManager notifications
+) : Screen, IHandle<MedicalScaleActivity>
 {
-    private Form _form;
     private byte _points;
-    private readonly IMapper _mapper;
-    private readonly DataContext _context;
-    private readonly UploadRequest _request;
-    private readonly SimpleContainer _container;
-    private readonly IEventAggregator _aggregator;
-    private BindableCollection<MedicalScale> _scales;
-    private readonly INotificationManager _notifications;
+    private Form _form = null!;
+    private BindableCollection<MedicalScale> _scales = [];
 
     public byte Points
     {
@@ -41,30 +42,13 @@ public class FallViewModel : Screen, IHandle<MedicalScaleActivity>
         }
     }
 
-    public FallViewModel(
-        IMapper mapper,
-        DataContext context,
-        UploadRequest request,
-        SimpleContainer container,
-        IEventAggregator aggregator,
-        INotificationManager notifications
-    )
-    {
-        _mapper = mapper;
-        _context = context;
-        _request = request;
-        _container = container;
-        _aggregator = aggregator;
-        _notifications = notifications;
-    }
+    public async Task ActivityAsync() => await aggregator.PublishOnUIThreadAsync("Activity");
 
-    public async Task ActivityAsync() => await _aggregator.PublishOnUIThreadAsync("Activity");
+    public async Task DecubitusAsync() => await aggregator.PublishOnUIThreadAsync("Decubitus");
 
-    public async Task DecubitusAsync() => await _aggregator.PublishOnUIThreadAsync("Decubitus");
+    public async Task MalnutritionAsync() => await aggregator.PublishOnUIThreadAsync("Malnutrition");
 
-    public async Task MalnutritionAsync() => await _aggregator.PublishOnUIThreadAsync("Malnutrition");
-
-    public async Task FallAsync() => await _aggregator.PublishOnUIThreadAsync("Fall");
+    public async Task FallAsync() => await aggregator.PublishOnUIThreadAsync("Fall");
 
     public async Task SubmitAsync()
     {
@@ -77,14 +61,16 @@ public class FallViewModel : Screen, IHandle<MedicalScaleActivity>
             foreach (var activity in scale.Activities.Where(activity => activity.IsChecked))
                 activities.Add(activity);
 
-            scales.Add(new MedicalScale { Name = scale.Name, ScaleType = WpfApp.Models.ScaleType.RiskOfFall, Activities = activities });
+            scales.Add(new MedicalScale
+                { Name = scale.Name, ScaleType = WpfApp.Models.ScaleType.RiskOfFall, Activities = activities });
         }
 
         _form.Scales = _form.Scales.Concat(scales);
 
-        _notifications.Show("Test vyplněn!", "Vaše výsledky byly odeslány k vyhodnocení.", NotificationType.Success, "WindowArea");
+        notifications.Show("Test vyplněn!", "Vaše výsledky byly odeslány k vyhodnocení.", NotificationType.Success,
+            "WindowArea");
 
-        await _request.UploadAsync(_form);
+        await request.UploadAsync(_form);
     }
 
     public async Task HandleAsync(MedicalScaleActivity message, CancellationToken cancellationToken)
@@ -98,8 +84,8 @@ public class FallViewModel : Screen, IHandle<MedicalScaleActivity>
 
     protected override async Task<Task> OnInitializeAsync(CancellationToken cancellationToken)
     {
-        Scales = _mapper.Map<BindableCollection<MedicalScale>>(
-            await _context.Scales
+        Scales = mapper.Map<BindableCollection<MedicalScale>>(
+            await context.Scales
                 .Include(scale => scale.Activities)
                 .Where(scale => scale.ScaleType == ScaleType.RiskOfFall)
                 .ToListAsync(cancellationToken)
@@ -108,18 +94,18 @@ public class FallViewModel : Screen, IHandle<MedicalScaleActivity>
         return base.OnInitializeAsync(cancellationToken);
     }
 
-    protected override void OnViewLoaded(object view) => _form = _container.GetInstance<Form>();
+    protected override void OnViewLoaded(object view) => _form = container.GetInstance<Form>();
 
     protected override Task OnActivateAsync(CancellationToken cancellationToken)
     {
-        _aggregator.SubscribeOnPublishedThread(this);
+        aggregator.SubscribeOnPublishedThread(this);
 
         return base.OnActivateAsync(cancellationToken);
     }
 
     protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
     {
-        _aggregator.Unsubscribe(this);
+        aggregator.Unsubscribe(this);
 
         return base.OnDeactivateAsync(close, cancellationToken);
     }

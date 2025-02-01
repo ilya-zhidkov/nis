@@ -1,5 +1,4 @@
-﻿using Xunit;
-using System.Net;
+﻿using System.Net;
 using FluentAssertions;
 using Nis.Core.Configuration;
 

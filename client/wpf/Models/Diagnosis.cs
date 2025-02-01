@@ -1,7 +1,7 @@
 ﻿namespace Nis.WpfApp.Models;
 
-public class Diagnosis
+public sealed class Diagnosis
 {
-    public string Name { get; set; }
+    public required string Name { get; set; }
 }
 

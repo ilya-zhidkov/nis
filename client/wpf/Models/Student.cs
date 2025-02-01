@@ -1,8 +1,8 @@
 ﻿namespace Nis.WpfApp.Models;
 
-public class Student
+public sealed class Student
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string ProfileImage { get; set; }
+    public required string FirstName { get; set; }
+    public required string LastName { get; set; }
+    public string? ProfileImage { get; set; }
 }

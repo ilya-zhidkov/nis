@@ -4,7 +4,7 @@ using Client = Nis.WpfApp.Models;
 
 namespace Nis.WpfApp.Mappings;
 
-public class MappingProfile : Profile
+public sealed class MappingProfile : Profile
 {
     public MappingProfile()
     {

@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Caliburn.Micro;
 using System.Net.Http;
 using System.Text.Json;
 using Nis.WpfApp.Models;
@@ -7,19 +6,15 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Nis.WpfApp.Requests;
 
-public class SignInRequest : BaseRequest
+public class SignInRequest(SimpleContainer container) : BaseRequest
 {
-    private readonly SimpleContainer _container;
-
     public class AuthenticationResponse
     {
-        public string Token { get; set; }
-        public Student Student { get; set; }
+        public string? Token { get; init; }
+        public Student? Student { get; init; }
     }
 
-    public SignInRequest(SimpleContainer container) => _container = container;
-
-    public async Task<AuthenticationResponse> SignInAsync(string username, string password)
+    public async Task<AuthenticationResponse?> SignInAsync(string? username, string? password)
     {
         var token = await GetTokenAsync(username, password);
 
@@ -28,17 +23,17 @@ public class SignInRequest : BaseRequest
 
         var response = await GetAsync<IEnumerable<IDictionary<string, object>>>(
             uri: $"{Endpoint}/students/{username}",
-            headers: new Dictionary<string, string> { { "token", Headers["Authorization"] } }
+            headers: new Dictionary<string, string?> { { "token", Headers["Authorization"] } }!
         );
 
-        var student = response.Select(student => new Student
+        var student = response?.Select(student => new Student
         {
-            FirstName = student["firstname"].ToString(),
-            LastName = student["lastname"].ToString(),
-            ProfileImage = GetProfileImage(student["profileimageurl"].ToString())
+            FirstName = student["firstname"].ToString()!,
+            LastName = student["lastname"].ToString()!,
+            ProfileImage = GetProfileImage(student["profileimageurl"].ToString()!)
         }).Single();
 
-        _container.Instance(student);
+        container.Instance(student);
 
         return await Task.FromResult(new AuthenticationResponse
         {
@@ -47,7 +42,7 @@ public class SignInRequest : BaseRequest
         });
     }
 
-    private async Task<string> GetTokenAsync(string username, string password)
+    private async Task<string?> GetTokenAsync(string? username, string? password)
     {
         try
         {
@@ -57,7 +52,7 @@ public class SignInRequest : BaseRequest
                 Application.Json
             ));
 
-            var token = response["token"];
+            var token = response?["token"];
 
             Headers["Authorization"] = token;
             Authenticate(Headers["Authorization"]);

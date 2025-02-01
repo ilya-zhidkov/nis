@@ -2,13 +2,14 @@
 
 namespace Nis.WpfApp.Models;
 
-public class Assignment
+[UsedImplicitly]
+public sealed class Assignment
 {
-    private string _intro;
+    private string? _intro;
 
-    public string Intro
+    public required string? Intro
     {
-        get => _intro.Sanitize();
+        get => _intro?.Sanitize();
         set => _intro = value;
     }
 }

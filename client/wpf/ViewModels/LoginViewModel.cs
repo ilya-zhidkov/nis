@@ -1,19 +1,20 @@
-﻿using Caliburn.Micro;
-using Nis.WpfApp.Requests;
+﻿using Nis.WpfApp.Requests;
 
 namespace Nis.WpfApp.ViewModels;
 
-public class LoginViewModel : Screen
+[UsedImplicitly]
+public class LoginViewModel(
+    SignInRequest request,
+    IWindowManager window,
+    SimpleContainer container,
+    IEventAggregator aggregator
+) : Screen
 {
-    private string _error;
-    private string _userName;
-    private string _password;
-    private readonly SignInRequest _request;
-    private readonly IWindowManager _window;
-    private readonly SimpleContainer _container;
-    private readonly IEventAggregator _aggregator;
+    private string? _error;
+    private string? _userName;
+    private string? _password;
 
-    public string UserName
+    public string? UserName
     {
         get => _userName;
         set
@@ -24,7 +25,7 @@ public class LoginViewModel : Screen
         }
     }
 
-    public string Password
+    public string? Password
     {
         get => _password;
         set
@@ -37,7 +38,7 @@ public class LoginViewModel : Screen
 
     public bool CanLogin => UserName?.Length > 0 && Password?.Length > 0;
 
-    public string Error
+    public string? Error
     {
         get => _error;
         set
@@ -50,25 +51,12 @@ public class LoginViewModel : Screen
 
     public bool HasErrors => Error?.Length > 0;
 
-    public LoginViewModel(
-        SignInRequest request,
-        IWindowManager window,
-        SimpleContainer container,
-        IEventAggregator aggregator
-    )
-    {
-        _window = window;
-        _request = request;
-        _container = container;
-        _aggregator = aggregator;
-    }
-
     public async Task LoginAsync()
     {
         try
         {
-            var response = await _request.SignInAsync(UserName, Password);
-            await _window.ShowWindowAsync(new ShellViewModel(_container, response.Student, _aggregator));
+            var response = await request.SignInAsync(UserName, Password);
+            await window.ShowWindowAsync(new ShellViewModel(container, response?.Student, aggregator));
             await TryCloseAsync();
         }
         catch (Exception exception)

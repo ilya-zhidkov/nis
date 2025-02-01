@@ -1,5 +1,4 @@
-﻿using Caliburn.Micro;
-using System.Windows;
+﻿using System.Windows;
 using Notification.Wpf;
 using Nis.Core.Persistence;
 using Nis.WpfApp.Extensions;
@@ -41,7 +40,7 @@ public class Bootstrapper : BootstrapperBase
         SeedDatabase();
     }
 
-    protected override void OnStartup(object sender, StartupEventArgs e) => DisplayRootViewForAsync<LoginViewModel>();
+    protected override void OnStartup(object sender, StartupEventArgs arguments) => DisplayRootViewForAsync<LoginViewModel>();
 
     protected override object GetInstance(Type service, string key) => _container.GetInstance(service, key);
 

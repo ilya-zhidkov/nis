@@ -1,17 +1,16 @@
-﻿using Caliburn.Micro;
-using Nis.WpfApp.Models;
+﻿using Nis.WpfApp.Models;
 using Nis.WpfApp.Requests;
+using Nis.Core.Configuration;
 
 namespace Nis.WpfApp.ViewModels;
 
-public class AnamnesesViewModel : Screen
+[UsedImplicitly]
+public class AnamnesesViewModel(CourseRequest request, IEventAggregator aggregator) : Screen
 {
-    private Assignment _assignment;
-    private readonly CourseRequest _request;
-    private readonly IEventAggregator _aggregator;
-    private BindableCollection<Assignment> _assignments;
+    private Assignment? _assignment;
+    private BindableCollection<Assignment>? _assignments = [];
 
-    public Assignment Assignment
+    public Assignment? Assignment
     {
         get => _assignment;
         set
@@ -24,7 +23,7 @@ public class AnamnesesViewModel : Screen
 
     public bool CanStartExam => Assignment is not null;
 
-    public BindableCollection<Assignment> Assignments
+    public BindableCollection<Assignment>? Assignments
     {
         get => _assignments;
         set
@@ -34,16 +33,10 @@ public class AnamnesesViewModel : Screen
         }
     }
 
-    public AnamnesesViewModel(CourseRequest request, IEventAggregator aggregator)
-    {
-        _request = request;
-        _aggregator = aggregator;
-    }
-
     public async Task ActivityAsync()
     {
-        await _aggregator.PublishOnUIThreadAsync("Exam");
-        await _aggregator.PublishOnUIThreadAsync(Assignment);
+        await aggregator.PublishOnUIThreadAsync("Exam");
+        await aggregator.PublishOnUIThreadAsync(Assignment);
     }
 
     protected override async void OnViewLoaded(object view)
@@ -53,5 +46,5 @@ public class AnamnesesViewModel : Screen
         base.OnViewLoaded(view);
     }
 
-    private async Task FetchAssignmentsAsync() => Assignments = new BindableCollection<Assignment>((await _request.GetCourseAsync(id: 6))?.Assignments);
+    private async Task FetchAssignmentsAsync() => Assignments = new((await request.GetCourseAsync(id: Convert.ToInt16(Settings.Configuration["Moodle:CourseId"])))?.Assignments);
 }

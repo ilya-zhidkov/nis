@@ -2,7 +2,7 @@
 appsettings.Production.json
 
 # Media
-server/api/wwwroot/pdf/*
+client/api/wwwroot/pdf/*
 
 # NuGet
 packages/

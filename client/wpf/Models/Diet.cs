@@ -1,7 +1,7 @@
 ﻿namespace Nis.WpfApp.Models;
 
-public class Diet
+public sealed class Diet
 {
-    public string Name { get; set; }
+    public required string Name { get; set; }
 }
 

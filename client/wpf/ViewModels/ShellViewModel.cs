@@ -1,18 +1,17 @@
-using Caliburn.Micro;
 using Nis.WpfApp.Models;
 
 namespace Nis.WpfApp.ViewModels;
 
 public class ShellViewModel : Conductor<object>, IHandle<string>
 {
-    private Student _student;
+    private Student? _student;
+    private string _backCol = null!;
     private readonly SimpleContainer _container;
     private readonly IEventAggregator _aggregator;
-    private string _backCol;
 
     public ShellViewModel(
         SimpleContainer container,
-        Student student,
+        Student? student,
         IEventAggregator aggregator
     )
     {
@@ -32,7 +31,7 @@ public class ShellViewModel : Conductor<object>, IHandle<string>
         }
     }
 
-    public Student Student
+    public Student? Student
     {
         get => _student;
         set
@@ -46,31 +45,29 @@ public class ShellViewModel : Conductor<object>, IHandle<string>
 
     public void StartExam() => ActivateItemAsync(_container.GetInstance<AnamnesesViewModel>());
 
-    public void OpenSettings() => ActivateItemAsync(_container.GetInstance<OpenSettingsViewModel>());
-
-    public async Task HandleAsync(string message, CancellationToken cancellationToken) => await Task.FromResult(message switch
+    public async Task HandleAsync(string message, CancellationToken cancellation) => await Task.FromResult(message switch
     {
-        "Exam" => ActivateItemAsync(_container.GetInstance<PatientClassificationViewModel>(), cancellationToken),
-        "Activity" => ActivateItemAsync(_container.GetInstance<ActivityViewModel>(), cancellationToken),
-        "Decubitus" => ActivateItemAsync(_container.GetInstance<DecubitusViewModel>(), cancellationToken),
-        "Malnutrition" => ActivateItemAsync(_container.GetInstance<MalnutritionViewModel>(), cancellationToken),
-        "Fall" => ActivateItemAsync(_container.GetInstance<FallViewModel>(), cancellationToken),
-        _ => throw new Exception("Unknown Message")
+        "Exam" => ActivateItemAsync(_container.GetInstance<PatientClassificationViewModel>(), cancellation),
+        "Activity" => ActivateItemAsync(_container.GetInstance<ActivityViewModel>(), cancellation),
+        "Decubitus" => ActivateItemAsync(_container.GetInstance<DecubitusViewModel>(), cancellation),
+        "Malnutrition" => ActivateItemAsync(_container.GetInstance<MalnutritionViewModel>(), cancellation),
+        "Fall" => ActivateItemAsync(_container.GetInstance<FallViewModel>(), cancellation),
+        _ => throw new("Unknown Message")
     });
 
-    protected override Task OnActivateAsync(CancellationToken cancellationToken)
+    protected override Task OnActivateAsync(CancellationToken cancellation)
     {
         _aggregator.SubscribeOnPublishedThread(this);
 
-        ActivateItemAsync(_container.GetInstance<AnamnesesViewModel>(), cancellationToken);
+        ActivateItemAsync(_container.GetInstance<AnamnesesViewModel>(), cancellation);
 
-        return base.OnActivateAsync(cancellationToken);
+        return base.OnActivateAsync(cancellation);
     }
 
-    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellation)
     {
         _aggregator.Unsubscribe(this);
 
-        return base.OnDeactivateAsync(close, cancellationToken);
+        return base.OnDeactivateAsync(close, cancellation);
     }
 }

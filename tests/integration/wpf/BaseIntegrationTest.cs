@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Nis.WpfApp.IntegrationTests;
+﻿namespace Nis.WpfApp.IntegrationTests;
 
 public abstract class BaseIntegrationTest : IClassFixture<BaseIntegrationTest.Fixture>
 {

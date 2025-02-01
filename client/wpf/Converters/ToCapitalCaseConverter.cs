@@ -4,9 +4,9 @@ using Nis.WpfApp.Extensions;
 
 namespace Nis.WpfApp.Converters;
 
-public class ToCapitalCaseConverter : IValueConverter
+internal class ToCapitalCaseConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value is not string input || string.IsNullOrWhiteSpace(input) ? string.Empty : input.Capitalize();
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => value is not string input || string.IsNullOrWhiteSpace(input) ? string.Empty : input.Capitalize();
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => throw new NotImplementedException();
 }
