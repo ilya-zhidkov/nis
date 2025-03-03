@@ -25,4 +25,7 @@
     <ItemGroup>
         <Using Include="Xunit" />
     </ItemGroup>
+    <ItemGroup>
+      <None Remove="Assets\Samples\Exam.json" />
+    </ItemGroup>
 </Project>

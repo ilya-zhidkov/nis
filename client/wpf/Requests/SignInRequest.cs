@@ -14,7 +14,7 @@ public class SignInRequest(SimpleContainer container) : BaseRequest
         public Student? Student { get; init; }
     }
 
-    public async Task<AuthenticationResponse?> SignInAsync(string? username, string? password)
+    public async Task<AuthenticationResponse?> SignInAsync(string username, string password)
     {
         var token = await GetTokenAsync(username, password);
 
@@ -23,7 +23,7 @@ public class SignInRequest(SimpleContainer container) : BaseRequest
 
         var response = await GetAsync<IEnumerable<IDictionary<string, object>>>(
             uri: $"{Endpoint}/students/{username}",
-            headers: new Dictionary<string, string?> { { "token", Headers["Authorization"] } }!
+            headers: new Dictionary<string, string> { { "Authorization", Headers["Authorization"] } }
         );
 
         var student = response?.Select(student => new Student
@@ -42,17 +42,20 @@ public class SignInRequest(SimpleContainer container) : BaseRequest
         });
     }
 
-    private async Task<string?> GetTokenAsync(string? username, string? password)
+    private async Task<string?> GetTokenAsync(string username, string password)
     {
         try
         {
-            var response = await PostAsync<Dictionary<string, string>>(uri: $"{Endpoint}/auth/login", new StringContent(
+            var response = await PostAsync<Dictionary<string, string>>(uri: $"{Endpoint}/authentication/login", new StringContent(
                 JsonSerializer.Serialize(new { username, password }),
                 Encoding.UTF8,
                 Application.Json
             ));
 
             var token = response?["token"];
+
+            if (string.IsNullOrWhiteSpace(token))
+                return null;
 
             Headers["Authorization"] = token;
             Authenticate(Headers["Authorization"]);

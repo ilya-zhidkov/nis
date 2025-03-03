@@ -46,5 +46,5 @@ public class AnamnesesViewModel(CourseRequest request, IEventAggregator aggregat
         base.OnViewLoaded(view);
     }
 
-    private async Task FetchAssignmentsAsync() => Assignments = new((await request.GetCourseAsync(id: Convert.ToInt16(Settings.Configuration["Moodle:CourseId"])))?.Assignments);
+    private async Task FetchAssignmentsAsync() => Assignments = new((await request.GetCourseAsync(id: Convert.ToUInt16(Settings.Configuration["Moodle:CourseId"])))?.Assignments);
 }

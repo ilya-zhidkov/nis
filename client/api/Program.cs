@@ -4,15 +4,18 @@ using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
+var configuration = builder.Configuration;
 
 services.AddControllers();
 services.AddHttpClient();
 services
     .Configure<RouteOptions>(options => options.LowercaseUrls = true)
-    .Configure<MoodleOptions>(builder.Configuration.GetSection("Moodle"))
+    .Configure<MoodleOptions>(configuration.GetSection("Moodle"))
     .AddDatabase()
-    .AddSwagger(builder.Configuration)
-    .AddDirectoryBrowser();
+    .AddSwagger(configuration)
+    .AddDirectoryBrowser()
+    .AddAuthentication()
+    .AddMoodle();
 
 var application = builder.Build();
 
@@ -28,6 +31,8 @@ application
     .UseStaticFiles(new StaticFileOptions { FileProvider = provider })
     .UseDirectoryBrowser(new DirectoryBrowserOptions { FileProvider = provider })
     .UseRouting()
+    .UseAuthentication()
+    .UseAuthorization()
     .UseEndpoints(endpoints => endpoints.MapControllers());
 
 application.Seed().Run();

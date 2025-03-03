@@ -1,0 +1,53 @@
+{
+    "diet": "Tekutá",
+    "passed": true,
+    "diagnosis": "Infarkt myokardu",
+    "anamnesis": "Na oddělení JIP byl přivezen RZS 56letý pacient...",
+    "department": "Kardiologie",
+    "student": {
+        "firstName": "Ilya",
+        "lastName": "Zhidkov"
+    },
+    "scales": [
+        {
+            "name": "Najedení, napití",
+            "scaleType": 1,
+            "activities": [
+                {
+                    "score": 10,
+                    "name": "Samostatně bez pomoci"
+                }
+            ]
+        },
+        {
+            "name": "Fyzický stav",
+            "scaleType": 2,
+            "activities": [
+                {
+                    "score": 4,
+                    "name": "dobrý"
+                }
+            ]
+        },
+        {
+            "name": "Kolik plnohodnotných jídel sní pacient za den?",
+            "scaleType": 3,
+            "activities": [
+                {
+                    "score": 3,
+                    "name": "tři"
+                }
+            ]
+        },
+        {
+            "name": "Věk",
+            "scaleType": 4,
+            "activities": [
+                {
+                    "score": 1,
+                    "name": "75 a výše"
+                }
+            ]
+        }
+    ]
+}

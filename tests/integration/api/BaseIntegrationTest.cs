@@ -17,9 +17,9 @@ public abstract class BaseIntegrationTest : IClassFixture<BaseIntegrationTest.Fi
         Http = factory.CreateClient(new() { AllowAutoRedirect = false, BaseAddress = new(Settings.Configuration["Api:Endpoint"]!) });
     }
 
-    protected async Task<string> GetTokenAsync(string? username, string? password)
+    protected async Task<string> GetTokenAsync(string username, string password)
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, $"{Http.BaseAddress}/auth/login")
+        var request = new HttpRequestMessage(HttpMethod.Post, $"{Http.BaseAddress}/authentication/login")
         {
             Content = new StringContent(JsonSerializer.Serialize(new { username, password }), Encoding.UTF8, MediaTypeNames.Application.Json)
         };

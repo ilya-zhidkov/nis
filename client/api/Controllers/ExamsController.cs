@@ -6,11 +6,14 @@ using Nis.Api.Helpers.Pdf;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using static System.Net.Mime.MediaTypeNames;
+using Nis.Api.Authentication.Moodle.Policies.Handlers;
 
 namespace Nis.Api.Controllers;
 
+[Authorize(Policy = nameof(RequireMoodleAccount))]
 public sealed class ExamsController(
     HttpClient http,
     IOptions<MoodleOptions> options,
@@ -22,24 +25,14 @@ public sealed class ExamsController(
     /// <summary>
     /// Gets a file attachment of the submission by the file name.
     /// </summary>
-    /// <param name="token">Authentication token.</param>
     /// <param name="fileName" example="Ilya-Zhidkov.pdf">File name that matches the student's name.</param>
     /// <returns>PDF file of the submission.</returns>
     [HttpGet("{fileName}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Show([FromHeader] string token, string fileName)
+    public async Task<IActionResult> Show(string fileName)
     {
-        var (url, _, _, _, format) = _options;
-
-        var response = await http.GetAsync($"{url}/webservice/rest/server.php?wstoken={token}&moodlewsrestformat={format}&wsfunction=core_webservice_get_site_info");
-
-        var result = JsonSerializer.Deserialize<IDictionary<string, object>>(await response.Content.ReadAsStringAsync())!;
-
-        if (result.ContainsKey("exception"))
-            return Unauthorized(new { message = "Neplatné přihlašovací údaje." });
-
         var path = Path.Combine($"{environment.WebRootPath}", "pdf", fileName);
 
         return !System.IO.File.Exists(path)
@@ -50,7 +43,6 @@ public sealed class ExamsController(
     /// <summary>
     /// Uploads an exam to Moodle and stores it as an assignment attachment.
     /// </summary>
-    /// <param name="token">Authentication token.</param>
     /// <param name="body">JSON encoded request body.</param>
     /// <returns>Downloadable link of an exam in PDF form.</returns>
     /// <remarks>
@@ -61,7 +53,7 @@ public sealed class ExamsController(
     ///       "diet": "Tekutá",
     ///       "passed": true,
     ///       "diagnosis": "Infarkt myokardu",
-    ///       "anamnesis": "Lorem ipsum dolor sit amet.",
+    ///       "anamnesis": "Na oddělení JIP byl přivezen RZS 56letý pacient...",
     ///       "department": "Kardiologie",
     ///       "student": {
     ///         "firstName": "Ilya",
@@ -115,10 +107,10 @@ public sealed class ExamsController(
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Store([FromHeader] string token, [FromBody] Exam body)
+    public async Task<IActionResult> Store([FromBody] Exam body)
     {
         var (firstName, lastName) = body.Student;
-        var fileName = $"{firstName}-{lastName}.pdf";
+        var fileName = $"{firstName}-{lastName}.pdf".ToLower();
         var path = Path.Combine($"{environment.WebRootPath}", "pdf", fileName);
 
         var document = new ExamDocument(body);
@@ -127,15 +119,15 @@ public sealed class ExamsController(
         var form = new MultipartFormDataContent();
         var bytes = new ByteArrayContent(await System.IO.File.ReadAllBytesAsync(path));
         bytes.Headers.ContentType = MediaTypeHeaderValue.Parse(Application.Pdf);
-        form.Add(bytes, $"{firstName} {lastName}", fileName);
+        form.Add(bytes, name: $"{firstName} {lastName}", fileName);
 
         var (url, _, _, _, format) = _options;
 
-        var response = await http.PostAsync($"{url}/webservice/upload.php?token={token}", form);
+        var response = await http.PostAsync($"{url}/webservice/upload.php?token={Request.Headers.Authorization}", form);
         var metadata = JsonSerializer.Deserialize<IEnumerable<IDictionary<string, object>>>(await response.Content.ReadAsStringAsync())?.Single();
 
         await http.PostAsync(
-            $"{url}/webservice/rest/server.php?wstoken={token}&wsfunction=mod_assign_save_submission&moodlewsrestformat={format}&assignmentid=1&plugindata[onlinetext_editor][text]={body.Anamnesis}&plugindata[onlinetext_editor][format]=1&plugindata[onlinetext_editor][itemid]=0&plugindata[files_filemanager]={metadata?["itemid"]}",
+            $"{url}/webservice/rest/server.php?wstoken={Request.Headers.Authorization}&wsfunction=mod_assign_save_submission&moodlewsrestformat={format}&assignmentid=1&plugindata[onlinetext_editor][text]={body.Anamnesis}&plugindata[onlinetext_editor][format]=1&plugindata[onlinetext_editor][itemid]=0&plugindata[files_filemanager]={metadata?["itemid"]}",
             content: null
         );
 

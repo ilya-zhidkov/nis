@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using FluentAssertions;
 using Nis.Core.Configuration;
+using Microsoft.Net.Http.Headers;
 
 namespace Nis.Api.IntegrationTests.Controllers;
 
@@ -9,8 +10,8 @@ public class StudentsControllerTests : BaseIntegrationTest
     [Fact]
     public async Task it_should_get_all_students()
     {
-        var token = await GetTokenAsync(Settings.Configuration["Moodle:Credentials:Username"], Settings.Configuration["Moodle:Credentials:Password"]);
-        var request = new HttpRequestMessage(HttpMethod.Get, $"{Http.BaseAddress}/students") { Headers = { { "token", token } } };
+        var token = await GetTokenAsync(Settings.Configuration["Moodle:Credentials:Username"]!, Settings.Configuration["Moodle:Credentials:Password"]!);
+        var request = new HttpRequestMessage(HttpMethod.Get, $"{Http.BaseAddress}/students") { Headers = { { HeaderNames.Authorization, token } } };
 
         var response = await Http.SendAsync(request);
         response.StatusCode.Should().Be(HttpStatusCode.OK);

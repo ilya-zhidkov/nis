@@ -1,4 +1,8 @@
-﻿namespace Nis.Api.Extensions;
+﻿using Microsoft.OpenApi.Models;
+using Microsoft.Net.Http.Headers;
+using Nis.Api.Authentication.Moodle;
+
+namespace Nis.Api.Extensions;
 
 public static class SwaggerExtensions
 {
@@ -6,6 +10,27 @@ public static class SwaggerExtensions
     {
         services.AddSwaggerGen(options =>
         {
+            options.AddSecurityDefinition(MoodleDefaults.AuthenticationScheme, new()
+            {
+                In = ParameterLocation.Header,
+                Name = HeaderNames.Authorization,
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = MoodleDefaults.AuthenticationScheme
+            });
+            options.AddSecurityRequirement(new()
+            {
+                {
+                    new()
+                    {
+                        Reference = new()
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = MoodleDefaults.AuthenticationScheme
+                        }
+                    },
+                    []
+                }
+            });
             options.SwaggerDoc(
                 "v1",
                 new()

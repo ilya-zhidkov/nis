@@ -18,7 +18,7 @@ public class UploadRequest : BaseRequest
                 Encoding.UTF8,
                 Application.Json
             ),
-            headers: new Dictionary<string, string?> { { "token", Headers["Authorization"] } }!
+            headers: new Dictionary<string, string?> { { "Authorization", Headers["Authorization"] } }!
         );
     }
 }

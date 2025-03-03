@@ -9,7 +9,7 @@ namespace Nis.WpfApp.Requests;
 public abstract class BaseRequest
 {
     private static HttpClient _http = null!;
-    protected static readonly Dictionary<string, string?> Headers = new();
+    protected static readonly Dictionary<string, string> Headers = new();
     protected readonly string Endpoint = Settings.Configuration["Api:Endpoint"]!;
 
     protected BaseRequest()
@@ -17,7 +17,7 @@ public abstract class BaseRequest
         _http = new() { BaseAddress = new(Endpoint) };
         _http.DefaultRequestHeaders.Accept.Clear();
         _http.DefaultRequestHeaders.Accept.Add(new(Application.Json));
-        _http.DefaultRequestHeaders.ToDictionary(header => header.Key, header => header.Value.First()).Merge(Headers!);
+        _http.DefaultRequestHeaders.ToDictionary(header => header.Key, header => header.Value.First()).Merge(Headers);
     }
 
     protected static async Task<TResult?> GetAsync<TResult>(string uri, IDictionary<string, string>? headers = null)
@@ -56,4 +56,3 @@ public abstract class BaseRequest
             _http.DefaultRequestHeaders.Add("Authorization", token);
     }
 }
-
