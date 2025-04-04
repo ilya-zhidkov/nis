@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using FluentAssertions;
 using Nis.Core.Configuration;
 using Microsoft.Net.Http.Headers;
 
@@ -10,23 +9,26 @@ public class StudentsControllerTests : BaseIntegrationTest
     [Fact]
     public async Task it_should_get_all_students()
     {
-        var token = await GetTokenAsync(Settings.Configuration["Moodle:Credentials:Username"]!, Settings.Configuration["Moodle:Credentials:Password"]!);
-        var request = new HttpRequestMessage(HttpMethod.Get, $"{Http.BaseAddress}/students") { Headers = { { HeaderNames.Authorization, token } } };
+        var response = await Http.SendAsync(new(HttpMethod.Get, $"{Http.BaseAddress}/students")
+        {
+            Headers =
+            {
+                {
+                    HeaderNames.Authorization,
+                    await GetTokenAsync(Settings.Configuration["Moodle:Credentials:Username"]!, Settings.Configuration["Moodle:Credentials:Password"]!)
+                }
+            }
+        });
 
-        var response = await Http.SendAsync(request);
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-        var students = await response.Content.ReadFromJsonAsync<IEnumerable<IDictionary<string, object>>>();
-        students.Should().NotBeNull();
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.NotNull(await response.Content.ReadFromJsonAsync<IEnumerable<IDictionary<string, object>>>());
     }
 
     [Theory]
     [InlineData("students")]
     [InlineData("students/username")]
-    public async Task it_should_return_unauthorized_if_authorization_header_was_not_supplied(string segment)
-    {
-        var request = new HttpRequestMessage(HttpMethod.Get, $"{Http.BaseAddress}/{segment}");
-        var response = await Http.SendAsync(request);
-        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-    }
+    public async Task it_should_return_unauthorized_if_authorization_header_was_not_supplied(string segment) => Assert.Equal(
+        HttpStatusCode.Unauthorized,
+        (await Http.SendAsync(request: new(HttpMethod.Get, $"{Http.BaseAddress}/{segment}"))).StatusCode
+    );
 }
