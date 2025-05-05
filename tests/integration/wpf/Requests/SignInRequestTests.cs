@@ -1,13 +1,11 @@
-﻿using Bogus.DataSets;
-using Caliburn.Micro;
-using Nis.WpfApp.Requests;
+﻿using Nis.WpfApp.Requests;
 using Nis.Core.Configuration;
 
 namespace Nis.WpfApp.IntegrationTests.Requests;
 
-public class SignInRequestTests : BaseIntegrationTest
+public sealed class SignInRequestTests : BaseIntegrationTest
 {
-    private readonly SignInRequest _request = new(new SimpleContainer());
+    private readonly SignInRequest _request = new(container: new());
 
     [Fact]
     public async Task it_should_return_authentication_response_if_credentials_are_valid() =>
@@ -16,8 +14,9 @@ public class SignInRequestTests : BaseIntegrationTest
             Settings.Configuration["Moodle:Credentials:Password"]!)
         );
 
-    [Fact]
-    public async Task it_should_return_null_if_credentials_are_not_valid() => Assert.Null(
-        await _request.SignInAsync(new Internet().UserName(), new Internet().Password())
-    );
+    [Theory]
+    [InlineData("", "")]
+    [InlineData(" ", " ")]
+    [InlineData(null, null)]
+    public async Task it_should_return_null_if_credentials_are_not_valid(string? username, string? password) => Assert.Null(await _request.SignInAsync(username!, password!));
 }
